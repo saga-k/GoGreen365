@@ -20,27 +20,34 @@ const router = createRouter({
     {
       path: '/forgotPassword',
       name: 'forgotPassword',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/ForgotPassword.vue'),
     },
     {
       path: '/onboarding',
       name: 'onboarding',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/Onboarding.vue'),
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/Dashboard.vue'),
     },
+    {
+      path: '/challenge',
+      name: 'challenge',
+      component: () => import('../views/Challenge.vue'),
+    },
+    {
+      path: '/archive',
+      name: 'archive',
+      component: () => import('../views/Archive.vue'),
+    },
+    {
+      path: '/points',
+      name: 'points',
+      component: () => import('../views/Points.vue'),
+    },
+
   
   ],
 })
