@@ -24,7 +24,7 @@
     </div>
 
     <!-- Go to create account page -->
-    <RouterLink to="/createAccount"> Skapa nytt konto </RouterLink>
+    <RouterLink to="createAccount"> Skapa nytt konto </RouterLink>
   </div>
 </template>
 
