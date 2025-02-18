@@ -5,5 +5,5 @@ import Navbar from '@/components/Navbar.vue';
 
 <template>
   <h1>Dagens utmaning</h1>
-  <Navbar></Navbar>
+  <Navbar page="challenge"></Navbar>
 </template>

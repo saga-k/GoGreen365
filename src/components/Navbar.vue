@@ -1,27 +1,36 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+
+const props = defineProps({
+  page: {
+    required: true,
+    type: String
+  }
+})
+
+
 </script>
 
 <template>
   <nav>
-    <RouterLink class="link" to="dashboard">
+    <RouterLink class="link" to="dashboard" :class="{ isActive: props.page === 'dashboard' }">
       <img src="../assets/icons/profile-card.svg">
-      <p>Profil</p>
+      <p class="p-small">Profil</p>
     </RouterLink>
 
-    <RouterLink class="link" to="challenge">
+    <RouterLink class="link" to="challenge" :class="{ isActive: props.page === 'challenge' }">
       <img src="../assets/icons/badge-check.svg">
-      <p>Utmaning</p>
+      <p class="p-small">Utmaning</p>
     </RouterLink>
 
-    <RouterLink class="link" to="archive">
+    <RouterLink class="link" to="archive" :class="{ isActive: props.page === 'archive' }">
       <img src="../assets/icons/calendar-week.svg">
-      <p>Arkiv</p>
+      <p class="p-small">Arkiv</p>
     </RouterLink>
 
-    <RouterLink class="link" to="points">
+    <RouterLink class="link" to="points" :class="{ isActive: props.page === 'points' }">
       <img src="../assets/icons/gift-box.svg">
-      <p>Påäng</p>
+      <p class="p-small">Påäng</p>
     </RouterLink>
   </nav>
 
@@ -39,5 +48,11 @@ nav {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  text-decoration: none;
+}
+
+.isActive {
+  text-decoration: underline;
+  font-weight: 700 !important;
 }
 </style>

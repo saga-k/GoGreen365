@@ -5,5 +5,5 @@ import Navbar from '@/components/Navbar.vue';
 
 <template>
   <h1>dashboard</h1>
-  <Navbar></Navbar>
+  <Navbar page="dashboard"></Navbar>
 </template>
