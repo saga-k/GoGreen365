@@ -1,5 +1,4 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
   <!-- Välkommen -->
@@ -20,7 +19,7 @@
 
       <!-- Go to dashbord when click -->
       <button>
-        <router-link to="dashboard">Logga in</router-link>
+        <router-link to="dashboard">Gå vidare</router-link>
       </button>
     </div>
 
