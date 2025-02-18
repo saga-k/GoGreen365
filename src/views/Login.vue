@@ -1,12 +1,6 @@
 <script setup></script>
 
 <template>
-  <router-link to="dashboard">Lägg in login-knapp här</router-link>
-
-  <RouterLink to="forgotPassword">Lägg in länk till glömt lösenord här</RouterLink>
-
-  <RouterLink to="createAccount">Lägg in länk till createAccount här</RouterLink>
-
   <!-- Välkommen -->
   <div class="login-app">
     <h1>Välkommen!</h1>
@@ -18,7 +12,19 @@
       <input v-model="email" type="email" placeholder="Ange e-post" />
 
       <label for="password">Lösenord</label>
+      <input v-model="password" type="password" placeholder="Ange lösenord" />
+
+      <!-- Link to forgot password page -->
+      <RouterLink to="forgotPassword">Glömt lösenord?</RouterLink>
+
+      <!-- Go to dashbord when click -->
+      <button>
+        <router-link to="dashboard">Logga in</router-link>
+      </button>
     </div>
+
+    <!-- Go to create account page -->
+    <RouterLink to="/createAccount"> Skapa nytt konto </RouterLink>
   </div>
 </template>
 
