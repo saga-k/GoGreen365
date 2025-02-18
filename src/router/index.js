@@ -25,7 +25,7 @@ const router = createRouter({
     {
       path: '/onboarding',
       name: 'onboarding',
-      component: () => import('../views/Onboarding.vue'),
+      component: () => import('../views/OnBoarding.vue'),
     },
     {
       path: '/dashboard',
@@ -48,7 +48,7 @@ const router = createRouter({
       component: () => import('../views/Points.vue'),
     },
 
-  
+
   ],
 })
 
