@@ -24,11 +24,11 @@ export const useUserStore = defineStore('userStore',{
     
      addUser(user) {
       const newUser = {
-        id: this.users.length+1,
+        id: String(this.users.length+1),
         ...user,
       }
       this.users.push(newUser)
-      console.log(this.users)
+      console.log('this.users', this.users)
       this.postUser(newUser)
       },
 
@@ -40,13 +40,39 @@ export const useUserStore = defineStore('userStore',{
         },
         body: 
         JSON.stringify(newUser)
-        })
+        });
       const data = await promise.json();
-      console.log(data)
+      console.log(data);
     },
+
     getUserByID(id){
-      let foundUser = this.users.find(user => user.id === id)
-      return foundUser
-      }
+      let foundUser = this.users.find(user => user.id === id);
+      return foundUser;
+    },
+
+    addEcoPoints(id, points){
+      let user = this.users.find(user => user.id === id);
+      console.log('user', user)
+      let userPoints = Number(user.ecoPoints)
+      console.log(userPoints)
+      user.ecoPoints += points;
+      console.log('users after points:',this.users);
+      this.updateUserInBe(user, id);
+    }, 
+    
+    async updateUserInBe(user, id) {
+
+      const promise = await fetch(`http://localhost:3000/users/${id}`, {
+        method: 'PUT',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user),
+      })
+
+      const data = await promise.json();
+      console.log('post succesful', data);
+
+    }
   }
 })

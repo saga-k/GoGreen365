@@ -1,20 +1,29 @@
 {
   "users": [
     {
-      "id": 1,
-      "firstName": "Kate",
-      "lastName": "Lastname",
-      "mail": "kate@gmail.com",
-      "password": "Password123",
+      "id": "1",
+      "firstName": null,
+      "lastName": null,
+      "mail": null,
+      "password": "123456",
+      "ecoPoints": 18,
+      "completedTasks": []
+    },
+    {
+      "id": "2",
+      "firstName": "saga",
+      "lastName": "gada",
+      "mail": "faga",
+      "password": "gada",
       "ecoPoints": 0,
       "completedTasks": []
     },
     {
-      "id": 2,
-      "firstname": "saga",
-      "lastname": "saga",
-      "email": "saga",
-      "password": "saga",
+      "id": "3",
+      "firstName": "testt",
+      "lastName": "test",
+      "mail": "test",
+      "password": "test",
       "ecoPoints": 0,
       "completedTasks": []
     }
