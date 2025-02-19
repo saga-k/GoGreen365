@@ -4,5 +4,5 @@ import Navbar from '@/components/Navbar.vue';
 
 <template>
   <h1>Påäng</h1>
-  <Navbar></Navbar>
+  <Navbar page="points"></Navbar>
 </template>

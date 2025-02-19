@@ -6,5 +6,5 @@ import Login from './Login.vue'
 <template>
   <h1>dashboard</h1>
   <Login />
-  <Navbar></Navbar>
+  <Navbar page="dashboard"></Navbar>
 </template>
