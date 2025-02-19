@@ -28,4 +28,17 @@
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* Base style */
+.login-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #fef7ee;
+  font-family: 'Comfortaa', serif;
+}
+
+
+</style>
