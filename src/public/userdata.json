@@ -6,25 +6,17 @@
       "lastName": "Lastname",
       "mail": "kate@gmail.com",
       "password": "Password123",
-      "completedTasks": [
-        {
-          "testTask": null
-        }
-      ]
+      "ecoPoints": 0,
+      "completedTasks": []
     },
     {
       "id": 2,
-      "firstname": "1",
-      "lastname": "2",
-      "email": "4",
-      "password": "5"
-    },
-    {
-      "id": 3,
-      "firstname": "test",
-      "lastname": "test",
-      "email": "test",
-      "password": "test"
+      "firstname": "saga",
+      "lastname": "saga",
+      "email": "saga",
+      "password": "saga",
+      "ecoPoints": 0,
+      "completedTasks": []
     }
   ]
 }

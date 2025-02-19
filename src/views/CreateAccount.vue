@@ -1,18 +1,20 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore'
-import { ref, onMounted } from 'vue'
-
-onMounted(() => {
-  userStore.fetchUsers()
-})
+import { ref, onMounted, nextTick } from 'vue'
 
 const userStore = useUserStore()
+
+onMounted(() => {
+  userStore.fetchUsers();
+})
 
 let testUser = {
   firstname: null,
   lastname: null,
   email: null,
-  password: null
+  password: null,
+  ecoPoints: 0,
+  completedTasks: []
 }
 
 function addTestUser() {
@@ -29,6 +31,5 @@ function addTestUser() {
   <input id='email' type="text" placeholder="email" v-model="testUser.email">
   <input id='password' type="text" placeholder="password" v-model="testUser.password">
   <button @click="addTestUser">AddUser</button>
-
 
 </template>

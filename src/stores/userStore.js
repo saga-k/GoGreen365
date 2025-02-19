@@ -25,7 +25,7 @@ export const useUserStore = defineStore('userStore',{
      addUser(user) {
       const newUser = {
         id: this.users.length+1,
-        ...user
+        ...user,
       }
       this.users.push(newUser)
       console.log(this.users)
@@ -43,6 +43,10 @@ export const useUserStore = defineStore('userStore',{
         })
       const data = await promise.json();
       console.log(data)
-    }
+    },
+    getUserByID(id){
+      let foundUser = this.users.find(user => user.id === id)
+      return foundUser
+      }
   }
 })
