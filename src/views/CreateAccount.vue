@@ -21,10 +21,6 @@ function addTestUser() {
   userStore.addUser(testUser)
 }
 
-function testAddPoints() {
-  userStore.addEcoPoints("1", 6)
-}
-
 </script>
 
 <template>
@@ -35,6 +31,5 @@ function testAddPoints() {
   <input id='email' type="text" placeholder="email" v-model="testUser.mail">
   <input id='password' type="text" placeholder="password" v-model="testUser.password">
   <button @click="addTestUser">AddUser</button>
-  <button @click="testAddPoints">Testbutton</button>
 
 </template>
