@@ -2,9 +2,9 @@
   "users": [
     {
       "id": "1",
-      "firstName": null,
-      "lastName": null,
-      "mail": null,
+      "firstName": "kate",
+      "lastName": "Lastname",
+      "mail": "kate@gmail.coms",
       "password": "123456",
       "ecoPoints": 18,
       "completedTasks": []
