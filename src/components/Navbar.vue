@@ -1,46 +1,55 @@
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router'
 
 const props = defineProps({
   page: {
     required: true,
-    type: String
-  }
+    type: String,
+  },
 })
-
-
 </script>
 
 <template>
-  <nav>
+  <nav class="navbar">
     <RouterLink class="link" to="dashboard" :class="{ isActive: props.page === 'dashboard' }">
-      <img src="../assets/icons/profile-card.svg">
+      <img src="../assets/icons/profile-card.svg" />
       <p class="p-small">Profil</p>
     </RouterLink>
 
     <RouterLink class="link" to="challenge" :class="{ isActive: props.page === 'challenge' }">
-      <img src="../assets/icons/badge-check.svg">
+      <img src="../assets/icons/badge-check.svg" />
       <p class="p-small">Utmaning</p>
     </RouterLink>
 
     <RouterLink class="link" to="archive" :class="{ isActive: props.page === 'archive' }">
-      <img src="../assets/icons/calendar-week.svg">
+      <img src="../assets/icons/calendar-week.svg" />
       <p class="p-small">Arkiv</p>
     </RouterLink>
 
     <RouterLink class="link" to="points" :class="{ isActive: props.page === 'points' }">
-      <img src="../assets/icons/gift-box.svg">
+      <img src="../assets/icons/gift-box.svg" />
       <p class="p-small">Påäng</p>
     </RouterLink>
   </nav>
-
 </template>
 
 <style scoped>
-nav {
+/* nav {
   background-color: var(--background-color);
   display: flex;
   justify-content: space-around;
+} */
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-color, #fff);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .link {
