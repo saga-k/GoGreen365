@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Kate",
+      "lastName": "Lastname",
+      "mail": "kate@gmail.com",
+      "password": "Password123",
+      "completedTasks": [
+        {
+          "testTask": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "firstname": "1",
+      "lastname": "2",
+      "email": "4",
+      "password": "5"
+    }
+  ]
+}

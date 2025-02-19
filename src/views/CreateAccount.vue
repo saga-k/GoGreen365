@@ -12,7 +12,6 @@ let testUser = {
 
 function addTestUser() {
   userStore.addUser(testUser)
-  console.log('Users:', userStore.users)
 }
 
 </script>

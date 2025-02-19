@@ -2,30 +2,44 @@ import { defineStore} from "pinia";
 
 export const useUserStore = defineStore('userStore',{
 state: () => ({
-  users:[{
-    id: 1,
-    firstName: 'Kate',
-    lastName: 'Lastname',
-    mail: 'kate@gmail.com',
-    password: 'Password123',
-
-    completedTasks: [{
-      id: '1',
-      date: '1/2/2025',
-      title: 'Bring your own shopping bag',
-      description: 'Lorem ipsum dolor sit amet',
-    }]
-  }]
+  users:[]
 }),
 
 actions:{
-  addUser(user){
-    const newUser = {
-      id: this.users.length+1,
-      ...user
+  async addUser(user) {
+    try{
+      const promise = await fetch('http://localhost:3000/users');
+      if(!promise.ok){
+        throw new Error('fetch error');
+      }
+      const users = await promise.json();
+      this.users = users
+      console.log('this.users:',this.users)
+
+      const newUser = {
+        id: this.users.length+1,
+        ...user
+      }
+      this.users.push(newUser)
+      console.log(this.users)
+      this.postUser(newUser)
     }
-    this.users.push(newUser)
+    catch(error){
+      console.error(error)
+    }
+  },
+  
+  async postUser(newUser){
+    const promise = await fetch('http://localhost:3000/users',{
+      method: 'POST',
+      headers:{
+      'Content-Type': 'application/json'
+      },
+      body: 
+      JSON.stringify(newUser)
+      })
+    const data = await promise.json();
+    console.log(data)
   }
 }
-
 })

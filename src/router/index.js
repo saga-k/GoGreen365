@@ -25,7 +25,7 @@ const router = createRouter({
     {
       path: '/onboarding',
       name: 'onboarding',
-      component: () => import('../views/OnBoarding.vue'),
+      component: () => import('../views/Onboarding.vue'),
     },
     {
       path: '/dashboard',
