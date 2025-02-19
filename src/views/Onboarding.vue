@@ -1,5 +1,4 @@
 <script setup>
-import Navbar from '@/components/Navbar.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -41,9 +40,6 @@ const goToDashboard = () => {
 
     <!-- 'Gå vidare' Button -->
     <button @click="goToDashboard" class="continue-button">Gå vidare</button>
-
-    <!-- Navbar -->
-    <Navbar />
   </div>
 </template>
 
