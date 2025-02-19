@@ -3,6 +3,7 @@
 <template>
   <!-- Välkommen -->
   <div class="login-app">
+    <img src="@/assets/images/happy-earth.png" alt="Happy Earth" class="earth-image" />
     <h1>Välkommen!</h1>
     <p>Tack för att du vill vara med och rädda planeten.</p>
 
@@ -39,6 +40,8 @@
   background-color: #fef7ee;
   font-family: 'Comfortaa', serif;
 }
-
-
+.earth-image {
+  width: 200px;
+  margin-bottom: 1rem;
+}
 </style>
