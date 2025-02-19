@@ -18,6 +18,13 @@
       "lastname": "2",
       "email": "4",
       "password": "5"
+    },
+    {
+      "id": 3,
+      "firstname": "test",
+      "lastname": "test",
+      "email": "test",
+      "password": "test"
     }
   ]
 }

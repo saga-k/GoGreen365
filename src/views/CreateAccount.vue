@@ -1,6 +1,10 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore'
 
+onMounted(() => {
+  userStore.fetchUsers()
+})
+
 const userStore = useUserStore()
 
 let testUser = {
