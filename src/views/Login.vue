@@ -40,8 +40,25 @@
   background-color: #fef7ee;
   font-family: 'Comfortaa', serif;
 }
+
+/* Image - Logo */
 .earth-image {
   width: 200px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
+
+/* Font style */
+h1 {
+  font-size: 24px;
+  margin-bottom: 1rem;
+  color: #3f3d3d;
+}
+
+.subtitle {
+  color: #3f3d3d;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+
 </style>
