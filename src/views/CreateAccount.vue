@@ -1,5 +1,6 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore'
+import { ref, onMounted } from 'vue'
 
 onMounted(() => {
   userStore.fetchUsers()
