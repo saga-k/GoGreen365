@@ -34,11 +34,6 @@ const props = defineProps({
 </template>
 
 <style scoped>
-/* nav {
-  background-color: var(--background-color);
-  display: flex;
-  justify-content: space-around;
-} */
 
 .navbar {
   position: fixed;
@@ -54,10 +49,17 @@ const props = defineProps({
 
 .link {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
   text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+.link img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
 }
 
 .isActive {
