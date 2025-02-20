@@ -6,6 +6,7 @@
       "lastName": "Lastname",
       "mail": "kate@gmail.coms",
       "password": "123456",
+      "profilePicUrl": null,
       "ecoPoints": 18,
       "completedTasks": []
     },
@@ -15,6 +16,7 @@
       "lastName": "gada",
       "mail": "faga",
       "password": "gada",
+      "profilePicUrl": null,
       "ecoPoints": 0,
       "completedTasks": []
     },
@@ -24,6 +26,7 @@
       "lastName": "test",
       "mail": "test",
       "password": "test",
+      "profilePicUrl": null,
       "ecoPoints": 0,
       "completedTasks": []
     }

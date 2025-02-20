@@ -13,6 +13,7 @@ let testUser = {
   lastName: null,
   mail: null,
   password: null,
+  profilePicUrl: null,
   ecoPoints: 0,
   completedTasks: []
 }
