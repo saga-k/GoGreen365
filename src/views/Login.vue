@@ -16,7 +16,7 @@
       <input v-model="password" type="password" placeholder="Ange lösenord" />
 
       <!-- Link to forgot password page -->
-      <RouterLink to="forgotPassword">Glömt lösenord?</RouterLink>
+      <RouterLink to="forgotPassword" class="forgot-link">Glömt lösenord?</RouterLink>
 
       <!-- Go to dashbord when click -->
       <button>
@@ -25,7 +25,7 @@
     </div>
 
     <!-- Go to create account page -->
-    <RouterLink to="/createAccount"> Skapa nytt konto </RouterLink>
+    <RouterLink to="/createAccount" class="create-account-link"> Skapa nytt konto </RouterLink>
   </div>
 </template>
 
@@ -38,6 +38,7 @@
   justify-content: center;
   min-height: 100vh;
   background-color: #fef7ee;
+  color: #3f3d3d;
   font-family: 'Comfortaa', serif;
 }
 
@@ -61,7 +62,7 @@ h1 {
   margin-bottom: 2rem;
 }
 
-/* Form setting */
+/* Form style */
 .form-container {
   width: 100%;
   max-width: 300px;
@@ -72,7 +73,6 @@ h1 {
 .form-container label {
   margin-bottom: 0.25rem;
   font-weight: 600;
-  color: #3f3d3d;
   font-size: 14px;
   transition: color 0.2s ease;
 }
@@ -89,8 +89,24 @@ h1 {
     box-shadow 0.2s ease;
 }
 
+/* Focus when click */
 .form-container input:focus {
   border-color: #c2e07a;
   box-shadow: 0 0 0 2px rgba(194, 224, 122, 0.3);
+}
+
+/* Underline for every link paegs */
+.forgot-link {
+  text-align: right;
+  font-size: 14px;
+  text-decoration: underline;
+  margin-bottom: 1rem;
+}
+
+.create-account-link {
+  display: block;
+  margin-top: 2rem;
+  font-size: 14px;
+  text-decoration: underline;
 }
 </style>
