@@ -24,19 +24,26 @@ export const useUserStore = defineStore('userStore', {
   }),
 
   actions: {
+    addUser(user) {
+      const newUser = {
+        id: this.users.length + 1,
+        ...user,
+      }
+      this.users.push(newUser)
+    },
+
     loginUser(email, password) {
       const user = this.users.find(
         (u) => u.mail.toLowerCase() === email.toLowerCase() && u.password === password,
       )
 
       if (user) {
-        this.currentUser = user // Set the logged-in user in the store
-        localStorage.setItem('currentUser', JSON.stringify(user)) // Optional: store user in localStorage
-        localStorage.setItem('token', 'dummy-token') // Store a token for route protection
-        return true // Login successful
+        this.currentUser = user
+        localStorage.setItem('currentUser', JSON.stringify(user))
+        return true
       }
 
-      return false // Login failed
+      return false
     },
   },
 })

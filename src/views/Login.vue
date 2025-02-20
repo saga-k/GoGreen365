@@ -1,7 +1,36 @@
-<script setup></script>
+<script setup>
+import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/userStore'
+
+const email = ref('')
+const password = ref('')
+const emailError = ref('')
+const passwordError = ref('')
+const router = useRouter()
+const userStore = useUserStore()
+
+// Reset error alert when the user try a new password and email
+watch([email, password], () => {
+  emailError.value = ''
+  passwordError.value = ''
+})
+
+const login = () => {
+  const isLoggedIn = userStore.loginUser(email.value, password.value)
+
+  if (isLoggedIn) {
+    router.push('/dashboard') // Go to dashboard after successful login
+    // Get the alert message when fail
+  } else {
+    emailError.value = 'Fel lösenord eller e-postadress'
+    passwordError.value = 'Fel lösenord eller e-postadress'
+  }
+}
+</script>
 
 <template>
-  <!-- Välkommen -->
+  <!-- Welcoming -->
   <div class="login-app">
     <img src="@/assets/images/happy-earth.png" alt="Happy Earth" class="earth-image" />
     <h1>Välkommen!</h1>
@@ -9,21 +38,35 @@
 
     <!-- Login Form-->
     <div class="form-container">
-      <label for="email">E-post adress</label>
-      <input v-model="email" type="email" placeholder="Ange e-post" />
+      <label for="email" :class="{ 'label-error': emailError }">E-post adress</label>
+      <input
+        id="email"
+        v-model="email"
+        type="email"
+        placeholder="Ange e-post"
+        :class="{ 'input-error': emailError }"
+      />
 
-      <label for="password">Lösenord</label>
-      <input v-model="password" type="password" placeholder="Ange lösenord" />
+      <!-- Get the alert error message when fail  -->
+      <span v-if="emailError" class="error-message">{{ emailError }}</span>
 
-      <!-- Link to forgot password page -->
-      <RouterLink to="forgotPassword" class="forgot-link">Glömt lösenord?</RouterLink>
+      <label :class="{ 'label-error': passwordError }" for="password">Lösenord</label>
+      <input
+        id="password"
+        v-model="password"
+        type="password"
+        placeholder="Ange lösenord"
+        :class="{ 'input-error': passwordError }"
+      />
 
-      <!-- Go to dashbord when click -->
+      <!-- Get the alert error message when fail  -->
+      <span v-if="passwordError" class="error-message">{{ passwordError }}</span>
+
+      <RouterLink to="/forgotPassword" class="forgot-link">Glömt lösenord?</RouterLink>
       <button @click="login" class="login-button">Logga in</button>
     </div>
 
-    <!-- Go to create account page -->
-    <RouterLink to="/createAccount" class="create-account-link"> Skapa nytt konto </RouterLink>
+    <RouterLink to="/createAccount" class="create-account-link">Skapa nytt konto</RouterLink>
   </div>
 </template>
 
