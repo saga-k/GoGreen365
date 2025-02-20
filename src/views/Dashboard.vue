@@ -1,8 +1,10 @@
 <script setup>
-import Navbar from '@/components/Navbar.vue'
 import { useUserStore } from '@/stores/userStore'
-import { ref, onMounted, computed, watch, nextTick } from 'vue';
+import { ref, onMounted } from 'vue';
+
+import Navbar from '@/components/Navbar.vue'
 import PointsBar from '@/components/PointsBar.vue';
+import dailyChallengeDashboard from '@/components/dailyChallengeDashboard.vue';
 
 const userStore = useUserStore()
 let user = ref(null)
@@ -36,7 +38,7 @@ onMounted(async () => {
     </div>
 
     <PointsBar :points='user.ecoPoints'></PointsBar>
-
+    <dailyChallengeDashboard></dailyChallengeDashboard>
   </main>
   <Navbar page="dashboard"></Navbar>
 </template>
