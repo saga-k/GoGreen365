@@ -46,6 +46,9 @@ main {
   background-color: var(--background-color);
   height: 100vh;
   padding: 50px 20px 50px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 #headerWrapper {
@@ -62,6 +65,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 0.5rem;
 }
 </style>
