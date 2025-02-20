@@ -1,6 +1,6 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore'
-import { ref, onMounted, nextTick } from 'vue'
+import { onMounted } from 'vue'
 
 const userStore = useUserStore()
 

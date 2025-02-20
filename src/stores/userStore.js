@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { ref } from "vue";
 
 export const useUserStore = defineStore('userStore',{
   state: () => ({
@@ -45,7 +46,7 @@ export const useUserStore = defineStore('userStore',{
       console.log(data);
     },
 
-    getUserByID(id){
+    getUserById(id){
       let foundUser = this.users.find(user => user.id === id);
       return foundUser;
     },
