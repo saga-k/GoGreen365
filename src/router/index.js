@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'login',
-      component: () => import('../views/Login.vue'),
+      component: () => import('../views/LoginView.vue'),
     },
     {
       path: '/createAccount',
@@ -14,42 +14,37 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/CreateAccount.vue'),
+      component: () => import('../views/CreateAccountView.vue'),
     },
     {
       path: '/forgotPassword',
       name: 'forgotPassword',
-      component: () => import('../views/ForgotPassword.vue'),
+      component: () => import('../views/ForgotPasswordView.vue'),
     },
     {
       path: '/onboarding',
       name: 'onboarding',
-      component: () => import('../views/Onboarding.vue'),
+      component: () => import('../views/OnboardingView.vue'),
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('../views/Dashboard.vue'),
+      component: () => import('../views/DashboardView.vue'),
     },
     {
       path: '/challenge',
       name: 'challenge',
-      component: () => import('../views/ChalLenge.vue'),
-    },
-    {
-      path: '/challenge',
-      name: 'challenge',
-      component: () => import('../views/Challenge.vue'),
+      component: () => import('../views/ChallengeView.vue'),
     },
     {
       path: '/archive',
       name: 'archive',
-      component: () => import('../views/Archive.vue'),
+      component: () => import('../views/ArchiveView.vue'),
     },
     {
       path: '/points',
       name: 'points',
-      component: () => import('../views/Points.vue'),
+      component: () => import('../views/PointsView.vue'),
     },
   ],
 })
