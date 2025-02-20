@@ -29,6 +29,26 @@
       "profilePicUrl": null,
       "ecoPoints": 0,
       "completedTasks": []
+    },
+    {
+      "id": "4",
+      "firstName": "Saga",
+      "lastName": "Saga2",
+      "mail": "saga3",
+      "password": "saga4",
+      "profilePicUrl": null,
+      "ecoPoints": 0,
+      "completedTasks": []
+    },
+    {
+      "id": "5",
+      "firstName": null,
+      "lastName": null,
+      "mail": null,
+      "password": null,
+      "profilePicUrl": null,
+      "ecoPoints": 0,
+      "completedTasks": []
     }
   ]
 }

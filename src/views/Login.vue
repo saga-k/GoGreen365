@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
 
@@ -9,6 +9,10 @@ const emailError = ref('')
 const passwordError = ref('')
 const router = useRouter()
 const userStore = useUserStore()
+
+onMounted(() => {
+  userStore.fetchUsers();
+})
 
 // Reset error alert when the user try a new password and email
 watch([email, password], () => {
@@ -40,25 +44,14 @@ const login = () => {
     <!-- Login Form-->
     <div class="form-container">
       <label for="email" :class="{ 'label-error': emailError }">E-post adress</label>
-      <input
-        id="email"
-        v-model="email"
-        type="email"
-        placeholder="Ange e-post"
-        :class="{ 'input-error': emailError }"
-      />
+      <input id="email" v-model="email" type="email" placeholder="Ange e-post" :class="{ 'input-error': emailError }" />
 
       <!-- Get the alert error message when fail  -->
       <span v-if="emailError" class="error-message">{{ emailError }}</span>
 
       <label :class="{ 'label-error': passwordError }" for="password">Lösenord</label>
-      <input
-        id="password"
-        v-model="password"
-        type="password"
-        placeholder="Ange lösenord"
-        :class="{ 'input-error': passwordError }"
-      />
+      <input id="password" v-model="password" type="password" placeholder="Ange lösenord"
+        :class="{ 'input-error': passwordError }" />
 
       <!-- Get the alert error message when fail  -->
       <span v-if="passwordError" class="error-message">{{ passwordError }}</span>
@@ -183,6 +176,7 @@ h1 {
 .input-error {
   border-color: #ff6b6b !important;
 }
+
 .error-message {
   font-size: 14px;
   color: #e74c3c;
