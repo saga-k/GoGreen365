@@ -1,38 +1,80 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
-export const useUserStore = defineStore('userStore', {
+export const useUserStore = defineStore('userStore',{
   state: () => ({
-    users: [
-      {
-        id: 1,
-        firstName: 'Kate',
-        lastName: 'Lastname',
-        mail: 'kate@gmail.com',
-        password: 'Password123',
-
-        completedTasks: [
-          {
-            id: '1',
-            date: '1/2/2025',
-            title: 'Bring your own shopping bag',
-            description: 'Lorem ipsum dolor sit amet',
-          },
-        ],
-      },
-    ],
-    currentUser: null,
+    users:[]
   }),
 
-  actions: {
-    addUser(user) {
+  actions:{
+
+    async fetchUsers(){
+      try{
+        const promise = await fetch('http://localhost:3000/users');
+        if(!promise.ok){
+          throw new Error('fetch error');
+        }
+        const users = await promise.json();
+        this.users = users
+        console.log('this.users:',this.users)
+      }
+      catch(error){
+        console.error(error)
+      }
+    },
+    
+     addUser(user) {
       const newUser = {
-        id: this.users.length + 1,
+        id: String(this.users.length+1),
         ...user,
       }
       this.users.push(newUser)
+      console.log('this.users', this.users)
+      this.postUser(newUser)
+      },
+
+    async postUser(newUser){
+      const promise = await fetch('http://localhost:3000/users',{
+        method: 'POST',
+        headers:{
+        'Content-Type': 'application/json'
+        },
+        body: 
+        JSON.stringify(newUser)
+        });
+      const data = await promise.json();
+      console.log(data);
     },
 
-    loginUser(email, password) {
+    getUserById(id){
+      let foundUser = this.users.find(user => user.id === id);
+      return foundUser;
+    },
+
+    addEcoPoints(id, points){
+      let user = this.users.find(user => user.id === id);
+      console.log('user', user)
+      let userPoints = Number(user.ecoPoints)
+      console.log(userPoints)
+      user.ecoPoints += points;
+      console.log('users after points:',this.users);
+      this.updateUserInBe(user, id);
+    }, 
+    
+    async updateUserInBe(user, id) {
+
+      const promise = await fetch(`http://localhost:3000/users/${id}`, {
+        method: 'PUT',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user),
+      })
+
+      const data = await promise.json();
+      console.log('post succesful', data);
+
+    },
+       loginUser(email, password) {
       const user = this.users.find(
         (u) => u.mail.toLowerCase() === email.toLowerCase() && u.password === password,
       )
@@ -44,6 +86,7 @@ export const useUserStore = defineStore('userStore', {
       }
 
       return false
-    },
-  },
+    }
+  }
+
 })

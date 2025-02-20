@@ -24,17 +24,32 @@ const router = createRouter({
     {
       path: '/onboarding',
       name: 'onboarding',
-      component: () => import('../views/OnBoarding.vue'),
+      component: () => import('../views/Onboarding.vue'),
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('../views/DashBoard.vue'),
+      component: () => import('../views/Dashboard.vue'),
     },
     {
       path: '/challenge',
       name: 'challenge',
       component: () => import('../views/ChalLenge.vue'),
+    },
+    {
+      path: '/challenge',
+      name: 'challenge',
+      component: () => import('../views/Challenge.vue'),
+    },
+    {
+      path: '/archive',
+      name: 'archive',
+      component: () => import('../views/Archive.vue'),
+    },
+    {
+      path: '/points',
+      name: 'points',
+      component: () => import('../views/Points.vue'),
     },
   ],
 })

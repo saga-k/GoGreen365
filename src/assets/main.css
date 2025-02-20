@@ -46,4 +46,14 @@
   font-size: 14px;
   line-height: 140%;
   color: var(--text-color);
+
+}
+
+.btn-primary{
+  background-color: var(--green);
+  color: var(--text-color);
+  font-family:"Lato", serif;
+  border-radius: 50px;
+  border: none;
+  padding: 0.5rem 1rem;
 }
