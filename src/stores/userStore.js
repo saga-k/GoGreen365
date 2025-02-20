@@ -73,6 +73,20 @@ export const useUserStore = defineStore('userStore',{
       const data = await promise.json();
       console.log('post succesful', data);
 
+    },
+       loginUser(email, password) {
+      const user = this.users.find(
+        (u) => u.mail.toLowerCase() === email.toLowerCase() && u.password === password,
+      )
+
+      if (user) {
+        this.currentUser = user
+        localStorage.setItem('currentUser', JSON.stringify(user))
+        return true
+      }
+
+      return false
     }
   }
+
 })

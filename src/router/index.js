@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../views/Login.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'login',
-      component: Login,
+      component: () => import('../views/Login.vue'),
     },
     {
       path: '/createAccount',
@@ -35,6 +34,11 @@ const router = createRouter({
     {
       path: '/challenge',
       name: 'challenge',
+      component: () => import('../views/ChalLenge.vue'),
+    },
+    {
+      path: '/challenge',
+      name: 'challenge',
       component: () => import('../views/Challenge.vue'),
     },
     {
@@ -47,8 +51,6 @@ const router = createRouter({
       name: 'points',
       component: () => import('../views/Points.vue'),
     },
-
-
   ],
 })
 
