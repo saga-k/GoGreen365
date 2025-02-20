@@ -19,9 +19,7 @@
       <RouterLink to="forgotPassword" class="forgot-link">Glömt lösenord?</RouterLink>
 
       <!-- Go to dashbord when click -->
-      <button>
-        <router-link to="dashboard">Logga in</router-link>
-      </button>
+      <button @click="login" class="login-button">Logga in</button>
     </div>
 
     <!-- Go to create account page -->
@@ -59,7 +57,7 @@ h1 {
   font-size: 16px;
   color: #3f3d3d;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 14px;
 }
 
 /* Form style */
@@ -99,6 +97,7 @@ h1 {
 .forgot-link {
   text-align: right;
   font-size: 14px;
+  color: #3f3d3d;
   text-decoration: underline;
   margin-bottom: 1rem;
 }
@@ -107,6 +106,25 @@ h1 {
   display: block;
   margin-top: 2rem;
   font-size: 14px;
+  color: #3f3d3d;
   text-decoration: underline;
+}
+
+/* Loin button */
+.login-button {
+  font-family: 'Comfortaa', serif;
+  background-color: #c2e07a;
+  color: #3f3d3d;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 39px;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #a5c261;
 }
 </style>
