@@ -34,7 +34,8 @@ const login = () => {
   <div class="login-app">
     <img src="@/assets/images/happy-earth.png" alt="Happy Earth" class="earth-image" />
     <h1>Välkommen!</h1>
-    <p>Tack för att du vill vara med och rädda planeten.</p>
+    <p>Tack för att du vill vara med och</p>
+    <p>rädda planeten.</p>
 
     <!-- Login Form-->
     <div class="form-container">
@@ -85,34 +86,37 @@ const login = () => {
 
 /* Image - Logo */
 .earth-image {
-  width: 200px;
+  width: 180px;
   margin-bottom: 0.5rem;
 }
 
 /* Font style */
 h1 {
-  font-size: 24px;
+  font-size: 36px;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   color: #3f3d3d;
 }
 
 .subtitle {
-  font-size: 16px;
+  font-size: 14px;
   color: #3f3d3d;
   text-align: center;
-  margin-bottom: 14px;
+  margin-bottom: 1.5rem;
 }
 
 /* Form style */
 .form-container {
   width: 100%;
   max-width: 300px;
+  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
 }
 
 .form-container label {
   margin-bottom: 0.25rem;
+  margin-top: 1rem;
   font-weight: 600;
   font-size: 14px;
   transition: color 0.2s ease;
@@ -169,5 +173,20 @@ h1 {
 
 .login-button:hover {
   background-color: #a5c261;
+}
+
+/* When it error*/
+.label-error {
+  color: #e74c3c;
+}
+
+.input-error {
+  border-color: #ff6b6b !important;
+}
+.error-message {
+  font-size: 14px;
+  color: #e74c3c;
+  margin-top: -0.25rem;
+  margin-bottom: -0.25rem;
 }
 </style>
