@@ -38,12 +38,15 @@ let week = ref([
 </script>
 
 <template>
+
   <div id="componentWrapper">
     <h3 class="h3">Veckans Framsteg</h3>
+
   </div>
 </template>
 
 <style scoped>
+
 #componentWrapper {
   width: 100%;
   height: 200px;
