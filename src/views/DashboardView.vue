@@ -5,6 +5,7 @@ import { ref, onMounted } from 'vue';
 import Navbar from '@/components/Navbar.vue'
 import PointsBar from '@/components/PointsBar.vue';
 import dailyChallengeDashboard from '@/components/dailyChallengeDashboard.vue';
+import WeeklyProgress from '@/components/weeklyProgress.vue';
 
 const userStore = useUserStore()
 let user = ref(null)
@@ -35,6 +36,7 @@ onMounted(async () => {
 
     <PointsBar :points='user.ecoPoints'></PointsBar>
     <dailyChallengeDashboard></dailyChallengeDashboard>
+    <WeeklyProgress></WeeklyProgress>
   </main>
   <Navbar page="dashboard"></Navbar>
 </template>
