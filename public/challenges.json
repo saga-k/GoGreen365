@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "title": "Skräppatrullen!",
+    "description": "Det ligger så mycket skräp ute och skräpar i naturen. Hjälp haven och djuren genom att plocka upp ett skräp och återvinn det.",
+    "image": "",
+    "date": 1
+  },
+  {
+    "id": 2,
+    "title": "Minska plast!",
+    "description": "Plast är en stor miljöbov. Byt ut plastpåsen mot en tygpåse idag och gör skillnad!",
+    "image": "",
+    "date": 2
+  },
+  {
+    "id": 3,
+    "title": "Spara vatten!",
+    "description": "Vatten är livsviktigt. Stäng av kranen medan du borstar tänderna och spara på våra resurser.",
+    "image": "",
+    "date": 3
+  },
+  {
+    "id": 4,
+    "title": "Cykla eller åk kollektivt!",
+    "description": "Lämna bilen hemma idag! Ta cykeln eller åk med kollektivtrafiken – ett enkelt val som gör gott för både planeten och din plånbok. Var en miljöhjälte i vardagen!",
+    "image": "",
+    "date": 4
+  },
+  {
+    "id": 5,
+    "title": "Källsortera!",
+    "description": "Idag är det dags att sortera soporna rätt. Glas, papper, plast – allt på sin plats",
+    "image": "",
+    "date": 5
+  },
+  {
+    "id": 6,
+    "title": "Ät vegetariskt!",
+    "description": "Utmana dig själv med en köttfri dag! Vegetarisk mat är bra för både miljön och din kropp.",
+    "image": "",
+    "date": 6
+  },
+  {
+    "id": 7,
+    "title": "Spara el!",
+    "description": "Släck lamporna i rum du inte använder och minska din elförbrukning. Små steg gör stor skillnad!",
+    "image": "",
+    "date": 7
+  }
+]
