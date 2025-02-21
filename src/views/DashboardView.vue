@@ -29,8 +29,8 @@ onMounted(async () => {
     <div id="headerWrapper">
       <img id="profilePic" :src="user?.profilePicUrl || 'src/assets/happyPlanet.svg'" />
       <div id="headerTextWrapper">
-        <h2 class="h2">Hello {{ user.firstName }}</h2>
-        <p class="p-medium">Welcome back</p>
+        <h2 class="h2">Hej {{ user.firstName }}</h2>
+        <p class="p-medium">Välkommen tillbaka!</p>
         <button class="btn-primary">Kontoinställningar</button>
       </div>
     </div>

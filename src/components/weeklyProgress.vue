@@ -63,31 +63,44 @@ const progressValues = ref({
 
 let circleFill = ref()
 
+const happyUrl = ref('/src/assets/happyPlanet.svg')
+const sadUrl = ref('/src/assets/sadPlanet.svg')
+const deadUrl = ref('/src/assets/deadPlanet.svg')
+
+let imageUrl = ref()
+
 const asignProgressValue = () => {
   switch (daysDone.value) {
     case 1: circleFill.value = progressValues.value.oneDay;
+      imageUrl.value = deadUrl.value;
       break;
 
     case 2: circleFill.value = progressValues.value.twoDays;
+      imageUrl.value = deadUrl.value;
       break;
 
     case 3: circleFill.value = progressValues.value.threeDays;
+      imageUrl.value = sadUrl.value;
       break;
 
     case 4: circleFill.value = progressValues.value.fourDays;
+      imageUrl.value = sadUrl.value;
       break;
 
     case 5: circleFill.value = progressValues.value.fiveDays;
-      console.log(circleFill.value);
+      imageUrl.value = happyUrl.value;
       break;
 
     case 6: circleFill.value = progressValues.value.sixDays;
+      imageUrl.value = happyUrl.value;
       break;
 
     case 7: circleFill.value = progressValues.value.sevenDays;
+      imageUrl.value = happyUrl.value;
       break;
   }
 }
+
 
 </script>
 
@@ -97,7 +110,7 @@ const asignProgressValue = () => {
     <h3 class="h3" id="title">Veckans Framsteg</h3>
     <div id="firstRow">
       <div id="topRigt">
-        <img src="/src/assets/happyPlanet.svg" style="height: 50px; width: 50px; border-radius: 50px;">
+        <img :src="imageUrl" style="height: 50px; width: 50px; border-radius: 50px;">
         <div id="doughnutChart">
           <h3 class="h3" id="chartNumber">{{ daysDone }}/7</h3>
           <svg width="110" height="110" view-box="0 0 110 110">
