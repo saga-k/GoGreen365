@@ -26,5 +26,16 @@ export const useChallengeStore = defineStore('challenge', {
         this.loading = false
       }
     },
+    setCurrentUser(userId) {
+      this.currentUserId = userId
+      this.ensureRegistrationDate()
+    },
+    ensureRegistrationDate() {
+      if (!this.currentUserId) return
+      const key = `firstLoginDate_${this.currentUserId}`
+      if (!localStorage.getItem(key)) {
+        localStorage.setItem(key, new Date().toISOString())
+      }
+    },
   },
 })
