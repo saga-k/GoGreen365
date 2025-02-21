@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue';
 
 //Below is hardcoded mockdata for testing, add dynamic updates later
 
-let week = ref([
+let weekDays = ref([
   {
     day: 'Mån',
     challengeDone: true
@@ -44,8 +44,8 @@ onMounted(() => {
 
 const calculateProgress = () => {
 
-  for (let i = 0; i < week.value.length; i++) {
-    if (week.value[i].challengeDone === true) {
+  for (let i = 0; i < weekDays.value.length; i++) {
+    if (weekDays.value[i].challengeDone === true) {
       daysDone.value++
     }
   }
@@ -94,18 +94,33 @@ const asignProgressValue = () => {
 <template>
 
   <div id="componentWrapper">
+    <h3 class="h3" id="title">Veckans Framsteg</h3>
     <div id="firstRow">
-      <h3 class="h3">Veckans Framsteg</h3>
-
-      <div id="topLeft">
+      <div id="topRigt">
         <img src="/src/assets/happyPlanet.svg" style="height: 50px; width: 50px; border-radius: 50px;">
-        <svg width="110" height="110" view-box="0 0 110 110">
-          <circle class="circleBg" cx="55" cy="55" r="50" fill="none" stroke="#ddd" stroke-width="10"></circle>
+        <div id="doughnutChart">
+          <h3 class="h3" id="chartNumber">{{ daysDone }}/7</h3>
+          <svg width="110" height="110" view-box="0 0 110 110">
 
-          <circle class="circleBg" cx="55" cy="55" r="50" fill="none" stroke="var(--peach)" stroke-width="10"
-            transform="rotate(-90 55 55)" :stroke-dasharray="`${circleFill?.filled} ${circleFill?.empty}`"></circle>
+            <circle class="circleBg" cx="55" cy="55" r="50" fill="none" stroke="#ddd" stroke-width="10"></circle>
+
+            <circle class="circleBg" cx="55" cy="55" r="50" fill="none" stroke="var(--peach)" stroke-width="10"
+              transform="rotate(-90 55 55)" :stroke-dasharray="`${circleFill?.filled} ${circleFill?.empty}`">
+            </circle>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div id="week">
+      <div v-for="(weekDay, index) in weekDays" :key="index" class="weekDay">
+        <p class="p-small p-day">{{ weekDay.day }}</p>
+        <svg width="42" height="42" view-box="0 0 42 42">
+          <circle class="circleBg" cx="21" cy="21" r="19" fill="none"
+            :stroke="weekDay.challengeDone ? 'var(--green)' : '#ddd'" stroke-width="3"></circle>
         </svg>
       </div>
+
     </div>
   </div>
 </template>
@@ -113,7 +128,7 @@ const asignProgressValue = () => {
 <style scoped>
 #componentWrapper {
   width: 100%;
-  height: 200px;
+  height: min-content;
   border: solid 1px var(--border-color);
   background-color: white;
   border-radius: 20px;
@@ -122,6 +137,45 @@ const asignProgressValue = () => {
 
 #firstRow {
   display: flex;
-  justify-content: space-around;
+  justify-content: right;
+}
+
+#title {
+  position: absolute;
+  z-index: 1;
+}
+
+#topRigt {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+#doughnutChart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#chartNumber {
+  position: absolute;
+  z-index: 1;
+}
+
+#week {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.weekDay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-day {
+  position: absolute;
+  z-index: 1;
 }
 </style>
