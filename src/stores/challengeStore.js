@@ -38,4 +38,28 @@ export const useChallengeStore = defineStore('challenge', {
       }
     },
   },
+
+  getters: {
+    registrationDate() {
+      if (!this.currentUserId) return null
+      const key = `firstLoginDate_${this.currentUserId}`
+      const dateStr = localStorage.getItem(key)
+      return dateStr ? new Date(dateStr) : null
+    },
+    daysSinceRegistration() {
+      const regDate = this.registrationDate
+      if (!regDate) return 0
+      const today = new Date()
+      // Sätter datumen till midnatt
+      const regDateMidnight = new Date(regDate.getFullYear(), regDate.getMonth(), regDate.getDate())
+      const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+      const diffMs = todayMidnight - regDateMidnight
+      return Math.floor(diffMs / (1000 * 60 * 60 * 24))
+    },
+    todaysChallenge() {
+      if (!this.challenges.length) return null
+      const dayNumber = this.daysSinceRegistration + 1
+      return this.challenges.find((ch) => ch.date === dayNumber) || null
+    },
+  },
 })
