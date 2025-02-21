@@ -7,4 +7,24 @@ export const useChallengeStore = defineStore('challenge', {
     error: null,
     currentUserId: null,
   }),
+
+  actions: {
+    async fetchChallenges() {
+      this.loading = true
+      try {
+        const response = await fetch('/challenges.json')
+        if (!response.ok) {
+          throw new Error('Failed to load challenges')
+        }
+        const data = await response.json()
+        this.challenges = data
+        console.log('Challenges loaded:', this.challenges)
+      } catch (error) {
+        console.error('Error loading challenges:', error)
+        this.error = error.message
+      } finally {
+        this.loading = false
+      }
+    },
+  },
 })
