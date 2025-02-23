@@ -40,6 +40,8 @@ onMounted(async () => {
 
     <weeklyProgress></weeklyProgress>
 
+    <button id="inviteButton" class="btn-primary">Bjud in dina vänner</button>
+
   </main>
   <Navbar page="dashboard"></Navbar>
 </template>
@@ -70,5 +72,9 @@ main {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+}
+
+#inviteButton {
+  height: 40px;
 }
 </style>
