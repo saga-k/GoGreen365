@@ -29,8 +29,8 @@ onMounted(async () => {
     <div id="headerWrapper">
       <img id="profilePic" :src="user?.profilePicUrl || 'src/assets/happyPlanet.svg'" />
       <div id="headerTextWrapper">
-        <h2 class="h2">Hello {{ user.firstName }}</h2>
-        <p class="p-medium">Welcome back</p>
+        <h2 class="h2">Hej {{ user.firstName }}</h2>
+        <p class="p-medium">Välkommen tillbaka!</p>
         <button class="btn-primary">Kontoinställningar</button>
       </div>
     </div>
@@ -39,6 +39,8 @@ onMounted(async () => {
     <dailyChallengeDashboard></dailyChallengeDashboard>
 
     <weeklyProgress></weeklyProgress>
+
+    <button id="inviteButton" class="btn-primary">Bjud in dina vänner</button>
 
   </main>
   <Navbar page="dashboard"></Navbar>
@@ -70,5 +72,9 @@ main {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+}
+
+#inviteButton {
+  height: 40px;
 }
 </style>
