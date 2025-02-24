@@ -49,6 +49,26 @@
       "profilePicUrl": null,
       "ecoPoints": 0,
       "completedTasks": []
+    },
+    {
+      "id": "6",
+      "firstName": "Sagatest",
+      "lastName": "Sagatest",
+      "mail": "Sagatest@mail.com",
+      "password": "Sagatest",
+      "profilePicUrl": null,
+      "ecoPoints": 0,
+      "completedTasks": []
+    },
+    {
+      "id": "7",
+      "firstName": "Sagatest",
+      "lastName": "Sagatest",
+      "mail": "Sagatest@mail.com",
+      "password": "Sagatest",
+      "profilePicUrl": null,
+      "ecoPoints": 0,
+      "completedTasks": []
     }
   ]
 }
