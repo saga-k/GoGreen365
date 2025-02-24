@@ -49,11 +49,11 @@ onMounted(async () => {
 <style scoped>
 main {
   background-color: var(--background-color);
-  height: 100vh;
   padding: 50px 20px 50px 20px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 40px;
 }
 
 #headerWrapper {

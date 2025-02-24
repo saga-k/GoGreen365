@@ -34,7 +34,6 @@ const props = defineProps({
 </template>
 
 <style scoped>
-
 .navbar {
   position: fixed;
   bottom: 0;
