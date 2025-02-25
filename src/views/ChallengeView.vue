@@ -1,16 +1,38 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useChallengeStore } from '@/stores/challengeStore'
+import { useUserStore } from '@/stores/userStore'
 import Navbar from '@/components/Navbar.vue'
 
 const challengeStore = useChallengeStore()
-
-challengeStore.setCurrentUser('1')
+const userStore = useUserStore()
+const isLoading = ref(true)
 
 onMounted(async () => {
-  await challengeStore.fetchChallenges()
-  console.log('Challenges loaded:', challengeStore.challenges)
-  console.log("Today's challenge:", challengeStore.todaysChallenge)
+  try {
+    // Vänta på att både users och challenges laddas
+    await Promise.all([userStore.fetchUsers(), challengeStore.fetchChallenges()])
+
+    // Hämta inloggad användare från userStore (eller från localStorage om ej satt)
+    let currentUser = userStore.currentUser
+    if (!currentUser) {
+      const stored = localStorage.getItem('currentUser')
+      if (stored) {
+        currentUser = JSON.parse(stored)
+        userStore.currentUser = currentUser
+      }
+    }
+    if (currentUser) {
+      challengeStore.setCurrentUser(currentUser.id)
+    }
+
+    console.log('Challenges loaded:', challengeStore.challenges)
+    console.log("Today's challenge:", challengeStore.todaysChallenge)
+  } catch (error) {
+    console.error('Error:', error)
+  } finally {
+    isLoading.value = false
+  }
 })
 </script>
 
