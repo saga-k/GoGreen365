@@ -2,7 +2,20 @@
 import Navbar from '@/components/Navbar.vue';
 import orgListItem from '@/components/orgListItem.vue';
 import PointsBar from '@/components/PointsBar.vue';
-import { ref } from 'vue';
+import { useUserStore } from '@/stores/userStore';
+import { onMounted, ref } from 'vue';
+
+const userStore = useUserStore()
+let user = ref(null)
+let isFetched = ref(false)
+
+onMounted(() => {
+  user.value = userStore.currentUser;
+  if (user.value === null || user.value === undefined) {
+    user.value = JSON.parse(localStorage.getItem('currentUser'))
+  }
+  isFetched.value = true
+})
 
 const orgs = ref([
   {
@@ -62,7 +75,7 @@ const orgs = ref([
   <main>
     <div id="listView">
       <h2 class="h2">Påäng</h2>
-      <PointsBar></PointsBar>
+      <PointsBar :points="user.ecoPoints"></PointsBar>
       <div id="list">
         <orgListItem v-for="(org, index) in orgs" :key=index :org="org"></orgListItem>
       </div>
