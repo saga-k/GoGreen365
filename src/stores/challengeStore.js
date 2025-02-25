@@ -80,10 +80,22 @@ export const useChallengeStore = defineStore('challenge', {
       console.log('Days since registration:', days)
       return days
     },
+
+    // Hämtar dagens utmaning baserat på dagar sedan registrering
     todaysChallenge() {
       if (!this.challenges.length) return null
+
       const dayNumber = this.daysSinceRegistration + 1
-      return this.challenges.find((ch) => ch.date === dayNumber) || null
+      console.log('Looking for challenge day:', dayNumber)
+
+      // Om dayNumber är större än antal utmaningar, returnera null
+      if (dayNumber > this.challenges.length) {
+        return null
+      }
+
+      const challenge = this.challenges.find((ch) => ch.date === dayNumber)
+      console.log('Found challenge:', challenge)
+      return challenge || null
     },
   },
 })
