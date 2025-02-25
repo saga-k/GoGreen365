@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useUserStore } from './userStore'
 
 export const useChallengeStore = defineStore('challenge', {
   state: () => ({
@@ -26,15 +27,25 @@ export const useChallengeStore = defineStore('challenge', {
         this.loading = false
       }
     },
+
+    // Uppdaterad för att använda userStore istället för localStorage
     setCurrentUser(userId) {
-      this.currentUserId = userId
-      this.ensureRegistrationDate()
-    },
-    ensureRegistrationDate() {
-      if (!this.currentUserId) return
-      const key = `firstLoginDate_${this.currentUserId}`
-      if (!localStorage.getItem(key)) {
-        localStorage.setItem(key, new Date().toISOString())
+      const userStore = useUserStore()
+      const user = userStore.getUserById(userId)
+
+      if (user) {
+        this.currentUserId = userId
+        // Kontrollera om användaren har registreringsdatum
+        if (!user.registrationDate) {
+          const today = new Date()
+          userStore.updateUserInBe(
+            {
+              ...user,
+              registrationDate: today.toDateString(), // Sparar i formatet "Tue Feb 25 2025"
+            },
+            userId,
+          )
+        }
       }
     },
   },
