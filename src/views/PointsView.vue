@@ -7,17 +7,17 @@ const orgs = ref([
   {
     name: "Green Horizon Initiative",
     description: "A global organization dedicated to restoring degraded ecosystems through large-scale reforestation and ocean cleanup projects.",
-    imgUrl: null
+    imgUrl: 'public/orgLogos/greenHorizon.webp'
   },
   {
-    name: "EcoPioneers Alliance",
+    name: "Eco Pioneers Alliance",
     description: "Focuses on developing and promoting cutting-edge sustainable technologies for energy, agriculture, and urban planning.",
-    imgUrl: null
+    imgUrl: 'public/orgLogos/ecoPioneers.webp'
   },
   {
-    name: "WildGuard International",
+    name: "Wild Guard International",
     description: "A conservation group that protects endangered wildlife through anti-poaching programs and habitat restoration.",
-    imgUrl: null
+    imgUrl: 'public/orgLogos/wildGuard.webp'
   },
   {
     name: "Blue Pulse Foundation",

@@ -14,7 +14,7 @@ onMounted(() => console.log('props:', props.org))
 
 <template>
   <article id="orgWrapper">
-    <div id="imageContainer"></div>
+    <img id="imageContainer" :src="props.org.imgUrl" />
 
     <div id="rightSide">
       <h3 class="h3">{{ props.org.name }}</h3>
