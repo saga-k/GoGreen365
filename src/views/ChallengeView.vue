@@ -44,6 +44,11 @@ onMounted(async () => {
     <div v-else-if="challengeStore.error">Error: {{ challengeStore.error }}</div>
 
     <div v-if="challengeStore.todaysChallenge" class="challenge">
+      <img
+        :src="challengeStore.todaysChallenge.image"
+        alt="Utmaningsbild"
+        class="challenge-image"
+      />
       <h2>{{ challengeStore.todaysChallenge.title }}</h2>
       <p>{{ challengeStore.todaysChallenge.description }}</p>
     </div>
@@ -53,3 +58,25 @@ onMounted(async () => {
   </div>
   <Navbar page="challenge"></Navbar>
 </template>
+
+<style scoped>
+.challenge-container {
+  background-color: var(--background-color);
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.challenge-image {
+  display: block;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: cover;
+}
+</style>
