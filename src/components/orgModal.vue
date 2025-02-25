@@ -17,8 +17,8 @@ const closeModal = () => emit('closeModal')
 <template>
   <article id="orgModal">
     <div id="firstRow">
-      <p v-if="props.org">Received org: {{ props.org }}</p>
-      <p v-else>No org received</p>
+      <p>{{ props.org.name }}</p>
+      <img src="/icons/circle-xmark-regular.svg" @click="closeModal" />
       <button @click="closeModal">Close</button>
     </div>
 
