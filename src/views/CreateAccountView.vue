@@ -6,6 +6,7 @@ const userStore = useUserStore()
 
 onMounted(() => {
   userStore.fetchUsers();
+  getCurrentDate()
 })
 
 let testUser = {
@@ -15,7 +16,13 @@ let testUser = {
   password: null,
   profilePicUrl: null,
   ecoPoints: 0,
-  completedTasks: []
+  completedTasks: [],
+  registrationDate: null
+}
+
+const getCurrentDate = () => {
+  let today = new Date().toDateString();
+  testUser.registrationDate = today
 }
 
 function addTestUser() {
@@ -34,4 +41,3 @@ function addTestUser() {
   <button @click="addTestUser">AddUser</button>
 
 </template>
-

@@ -4,51 +4,23 @@
       "id": "1",
       "firstName": "kate",
       "lastName": "Lastname",
-      "mail": "kate@gmail.coms",
+      "mail": "kate@gmail.com",
       "password": "123456",
       "profilePicUrl": null,
       "ecoPoints": 18,
-      "completedTasks": []
+      "completedTasks": [],
+      "registrationDate": "Tue Feb 22 2025"
     },
     {
       "id": "2",
-      "firstName": "saga",
-      "lastName": "gada",
-      "mail": "faga",
-      "password": "gada",
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "mail": "namn@mail.com",
+      "password": "1234567",
       "profilePicUrl": null,
       "ecoPoints": 0,
-      "completedTasks": []
-    },
-    {
-      "id": "3",
-      "firstName": "testt",
-      "lastName": "test",
-      "mail": "test",
-      "password": "test",
-      "profilePicUrl": null,
-      "ecoPoints": 0,
-      "completedTasks": []
-    },
-    {
-      "id": "4",
-      "firstName": "Saga",
-      "lastName": "Saga2",
-      "mail": "saga3",
-      "password": "saga4",
-      "profilePicUrl": null,
-      "ecoPoints": 0,
-      "completedTasks": []
-    },
-    {
-      "id": "5",
-      "firstName": null,
-      "lastName": null,
-      "mail": null,
-      "password": null,
-      "profilePicUrl": null,
-      "ecoPoints": 0,
-      "completedTasks": []
+      "completedTasks": [],
+      "registrationDate": "Tue Feb 25 2025"
     }
   ]
 }
