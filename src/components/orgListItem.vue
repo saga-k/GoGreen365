@@ -10,7 +10,7 @@ const props = defineProps({
 
 <template>
   <article id="orgWrapper">
-    <img id="imageContainer" :src="props.org.imgUrl" />
+    <img id="imageContainer" :src="props.org.logoUrl" />
 
     <div id="rightSide">
       <h3 class="h3">{{ props.org.name }}</h3>

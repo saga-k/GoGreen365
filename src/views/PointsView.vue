@@ -25,49 +25,57 @@ const orgs = ref([
     name: "Green Horizon Initiative",
     shortDescription: "Restoring ecosystems through reforestation and ocean cleanup.",
     longDescription: "Green Horizon Initiative is a global nonprofit dedicated to reversing environmental degradation by restoring forests, cleaning up oceans, and rehabilitating damaged ecosystems. Through large-scale tree planting efforts, coastal restoration projects, and collaboration with local communities, the organization works to create a sustainable future. By integrating technology and scientific research, they ensure that their environmental restoration initiatives have a lasting impact on biodiversity and climate resilience.",
-    imgUrl: "public/orgLogos/greenHorizon.webp"
+    logoUrl: "public/orgLogos/greenHorizon.webp",
+    imgUrl: null
   },
   {
     name: "Eco Pioneers Alliance",
     shortDescription: "Developing sustainable technologies for a greener future.",
     longDescription: "EcoPioneers Alliance is at the forefront of sustainable innovation, developing and promoting cutting-edge technologies that reduce environmental impact. Their projects range from renewable energy advancements to eco-friendly urban infrastructure and agricultural solutions. Partnering with engineers, scientists, and policymakers, they work to bridge the gap between technology and sustainability, ensuring that businesses and communities can transition towards a more eco-conscious future.",
-    imgUrl: "public/orgLogos/ecoPioneers.webp"
+    logoUrl: "public/orgLogos/ecoPioneers.webp",
+    imgUrl: null
   },
   {
     name: "Wild Guard International",
     shortDescription: "Protecting endangered wildlife through conservation programs.",
     longDescription: "WildGuard International is a conservation-focused organization that actively protects endangered species and their natural habitats. They work alongside local governments and indigenous communities to combat poaching, deforestation, and illegal wildlife trade. Through research, advocacy, and hands-on field operations, they ensure that vulnerable animal populations are safeguarded from extinction while promoting sustainable coexistence between humans and wildlife.",
-    imgUrl: "public/orgLogos/wildGuard.webp"
+    logoUrl: "public/orgLogos/wildGuard.webp",
+    imgUrl: null
   },
   {
     name: "Blue Pulse Foundation",
     shortDescription: "Preserving marine ecosystems and combating ocean pollution.",
     longDescription: "Blue Pulse Foundation is dedicated to protecting marine environments by reducing ocean pollution, preserving coral reefs, and advocating for sustainable fishing practices. They run community-led clean-up initiatives, fund scientific research on ocean conservation, and push for stronger policies to regulate plastic waste and industrial pollutants. By emphasizing education and community involvement, they empower people to take action in preserving the world’s oceans.",
-    imgUrl: "public/orgLogos/bluePulse.jpg"
+    logoUrl: "public/orgLogos/bluePulse.jpg",
+    imgUrl: null
   },
   {
     name: "CarbonZero Collective",
     shortDescription: "Helping communities and businesses achieve net-zero emissions.",
     longDescription: "CarbonZero Collective provides innovative solutions to reduce global carbon footprints by supporting carbon offset programs, promoting clean energy adoption, and educating organizations on sustainable practices. They collaborate with companies and governments to implement strategies that lower greenhouse gas emissions while encouraging investments in renewable energy, carbon capture technology, and reforestation initiatives.",
-    imgUrl: "public/orgLogos/carbonZero.jpg"
+    logoUrl: "public/orgLogos/carbonZero.jpg",
+    imgUrl: null
   },
   {
     name: "The Verdant Future Project",
     shortDescription: "Empowering communities to adopt sustainable living practices.",
     longDescription: "The Verdant Future Project focuses on grassroots environmental activism, encouraging local communities to adopt sustainable lifestyles. They provide resources and funding for initiatives such as community gardens, renewable energy cooperatives, and zero-waste programs. By fostering environmental awareness and self-sufficiency, they empower individuals to take meaningful action in mitigating climate change and preserving natural resources.",
-    imgUrl: "public/orgLogos/verdantFuture.jpg"
+    logoUrl: "public/orgLogos/verdantFuture.jpg",
+    imgUrl: null
   },
   {
     name: "Terra Nova Trust",
     shortDescription: "Rehabilitating land affected by deforestation and industrial waste.",
     longDescription: "TerraNova Trust is committed to restoring land that has been damaged by industrial waste, deforestation, and urban expansion. They collaborate with environmental scientists and policymakers to develop rewilding projects, introduce soil restoration techniques, and plant native vegetation in degraded areas. Their work not only helps reverse environmental damage but also supports biodiversity and climate resilience.",
-    imgUrl: "public/orgLogos/terraNovaTrust.jpg"
+    logoUrl: "public/orgLogos/terraNovaTrust.jpg",
+    imgUrl: null
   },
   {
     name: "Aurora Climate Corps",
     shortDescription: "Mobilizing youth for climate action and environmental advocacy.",
     longDescription: "Aurora Climate Corps is a youth-led movement dedicated to environmental education, climate activism, and policy advocacy. They organize campaigns, workshops, and volunteer programs to empower young people to take part in sustainability efforts. Their mission is to create a new generation of climate-conscious leaders who actively shape policies and promote sustainable change within their communities.",
-    imgUrl: "public/orgLogos/aurora.jpg"
+    logoUrl: "public/orgLogos/aurora.jpg",
+    imgUrl: "public/orgImages/auroraImg.jpg"
   }
 ]);
 
