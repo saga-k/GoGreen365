@@ -38,7 +38,7 @@ onMounted(async () => {
 
 <template>
   <div class="challenge-container">
-    <h1>Dagens utmaning</h1>
+    <h1 class="h1">Dagens utmaning</h1>
 
     <div v-if="challengeStore.loading">Loading...</div>
     <div v-else-if="challengeStore.error">Error: {{ challengeStore.error }}</div>
@@ -49,11 +49,11 @@ onMounted(async () => {
         alt="Utmaningsbild"
         class="challenge-image"
       />
-      <h2>{{ challengeStore.todaysChallenge.title }}</h2>
-      <p>{{ challengeStore.todaysChallenge.description }}</p>
+      <h2 class="h2">{{ challengeStore.todaysChallenge.title }}</h2>
+      <p class="p-medium">{{ challengeStore.todaysChallenge.description }}</p>
     </div>
     <div v-else class="no-challenge">
-      <p>Inga fler utmaningar tillgängliga för idag.</p>
+      <p class="p-medium">Inga fler utmaningar tillgängliga för idag.</p>
     </div>
   </div>
   <Navbar page="challenge"></Navbar>
@@ -68,7 +68,14 @@ onMounted(async () => {
   align-items: center;
   gap: 1rem;
   min-height: 100vh;
-  text-align: center;
+  text-align: left;
+}
+
+.challenge {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
 }
 
 .challenge-image {
@@ -78,5 +85,6 @@ onMounted(async () => {
   max-width: 500px;
   height: auto;
   object-fit: cover;
+  border-radius: 20px;
 }
 </style>
