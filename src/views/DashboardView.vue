@@ -14,7 +14,7 @@ let isFetched = ref(false)
 
 onMounted(async () => {
   await userStore.fetchUsers()
-  user.value = userStore.getUserById('1');
+  user.value = userStore.currentUser;
   console.log(user.value)
   isFetched.value = true
 })

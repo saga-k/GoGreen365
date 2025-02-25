@@ -18,7 +18,7 @@ onMounted(() => console.log('props:', props.org))
 
     <div id="rightSide">
       <h3 class="h3">{{ props.org.name }}</h3>
-      <p class="p-small">{{ props.org.description }}</p>
+      <p class="p-small">{{ props.org.shortDescription }}</p>
     </div>
   </article>
 </template>
