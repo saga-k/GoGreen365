@@ -22,37 +22,27 @@ const orgs = ref([
   {
     name: "Blue Pulse Foundation",
     description: "A marine-focused NGO working to combat plastic pollution, preserve coral reefs, and advocate for sustainable fishing practices.",
-    imgUrl: null
+    imgUrl: 'public/orgLogos/bluePulse.jpg'
   },
   {
     name: "CarbonZero Collective",
     description: "A nonprofit dedicated to helping businesses and communities achieve net-zero carbon emissions through innovative policies and green initiatives.",
-    imgUrl: null
+    imgUrl: 'public/orgLogos/carbonZero.jpg'
   },
   {
     name: "The Verdant Future Project",
     description: "A grassroots movement empowering local communities to implement eco-friendly solutions and sustainable living practices.",
-    imgUrl: null
+    imgUrl: 'public/orgLogos/verdantFuture.jpg'
   },
   {
-    name: "TerraNova Trust",
+    name: "Terra Nova Trust",
     description: "Works on reclaiming and rehabilitating land damaged by deforestation, mining, and industrial waste.",
-    imgUrl: null
+    imgUrl: 'public/orgLogos/terraNovaTrust.jpg'
   },
   {
     name: "Aurora Climate Corps",
     description: "A youth-led organization that mobilizes volunteers for climate action, education, and policy advocacy.",
-    imgUrl: null
-  },
-  {
-    name: "Biosphere Builders",
-    description: "Focuses on urban greening projects, such as rooftop gardens, vertical forests, and green infrastructure in cities.",
-    imgUrl: null
-  },
-  {
-    name: "Gaia’s Guardians",
-    description: "A spiritual and environmental group that blends ecological activism with cultural traditions to promote harmony between humans and nature.",
-    imgUrl: null
+    imgUrl: 'public/orgLogos/aurora.jpg'
   }
 ]);
 

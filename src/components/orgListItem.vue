@@ -30,19 +30,18 @@ onMounted(() => console.log('props:', props.org))
   border-radius: 20px;
   padding: 1rem;
   display: flex;
+  gap: 1rem;
 }
 
 #imageContainer {
   background-color: lightgrey;
   height: 50px;
-  width: 50px !important;
+  width: 50px;
   border-radius: 50px;
-  flex-grow: 1;
 }
 
 #rightSide {
   display: flex;
   flex-direction: column;
-  flex-shrink: 1;
 }
 </style>
