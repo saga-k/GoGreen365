@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar.vue'
 const challengeStore = useChallengeStore()
 const userStore = useUserStore()
 const isLoading = ref(true)
+const currentDate = ref('')
 
 onMounted(async () => {
   try {
@@ -26,7 +27,13 @@ onMounted(async () => {
       challengeStore.setCurrentUser(currentUser.id)
     }
 
-    console.log('Challenges loaded:', challengeStore.challenges)
+    // Sätt currentDate med det befintliga datumformatet
+    const now = new Date()
+    const day = now.getDate()
+    const localShortMonth = now.toLocaleString('sv-SE', { month: 'short' }).replace('.', '')
+    const month = localShortMonth.charAt(0).toUpperCase() + localShortMonth.slice(1).toLowerCase()
+    currentDate.value = `${day} ${month}`
+
     console.log("Today's challenge:", challengeStore.todaysChallenge)
   } catch (error) {
     console.error('Error:', error)
@@ -38,7 +45,12 @@ onMounted(async () => {
 
 <template>
   <div class="challenge-container">
-    <h1 class="h1">Dagens utmaning</h1>
+    <div class="header">
+      <h1 class="h1">Dagens utmaning</h1>
+      <div class="date-display">
+        <p class="p-small">I dag {{ currentDate }}</p>
+      </div>
+    </div>
 
     <div v-if="challengeStore.loading">Loading...</div>
     <div v-else-if="challengeStore.error">Error: {{ challengeStore.error }}</div>
@@ -69,6 +81,26 @@ onMounted(async () => {
   gap: 1rem;
   min-height: 100vh;
   text-align: left;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.date-display {
+  border: 1px solid var(--border-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 30px;
 }
 
 .challenge {
