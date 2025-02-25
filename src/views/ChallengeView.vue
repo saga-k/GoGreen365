@@ -3,11 +3,11 @@ import { onMounted, ref } from 'vue'
 import { useChallengeStore } from '@/stores/challengeStore'
 import { useUserStore } from '@/stores/userStore'
 import Navbar from '@/components/Navbar.vue'
+import DateDisplay from '@/components/DateDisplay.vue'
 
 const challengeStore = useChallengeStore()
 const userStore = useUserStore()
 const isLoading = ref(true)
-const currentDate = ref('')
 
 onMounted(async () => {
   try {
@@ -27,13 +27,6 @@ onMounted(async () => {
       challengeStore.setCurrentUser(currentUser.id)
     }
 
-    // Sätt currentDate med det befintliga datumformatet
-    const now = new Date()
-    const day = now.getDate()
-    const localShortMonth = now.toLocaleString('sv-SE', { month: 'short' }).replace('.', '')
-    const month = localShortMonth.charAt(0).toUpperCase() + localShortMonth.slice(1).toLowerCase()
-    currentDate.value = `${day} ${month}`
-
     console.log("Today's challenge:", challengeStore.todaysChallenge)
   } catch (error) {
     console.error('Error:', error)
@@ -47,9 +40,8 @@ onMounted(async () => {
   <div class="challenge-container">
     <div class="header">
       <h1 class="h1">Dagens utmaning</h1>
-      <div class="date-display">
-        <p class="p-small">I dag {{ currentDate }}</p>
-      </div>
+      <!-- Hämta det formaterade datumet från DateDisplay-komponenten -->
+      <DateDisplay />
     </div>
 
     <div v-if="challengeStore.loading">Loading...</div>
@@ -95,12 +87,6 @@ onMounted(async () => {
 .header h1 {
   font-size: 24px;
   margin: 0;
-}
-
-.date-display {
-  border: 1px solid var(--border-color);
-  padding: 0.2rem 0.5rem;
-  border-radius: 30px;
 }
 
 .challenge {
