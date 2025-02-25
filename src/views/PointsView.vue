@@ -11,9 +11,11 @@ let isFetched = ref(false)
 
 onMounted(() => {
   user.value = userStore.currentUser;
+  console.log(user.value, 'uservalue-frompointsview')
   if (user.value === null || user.value === undefined) {
     user.value = JSON.parse(localStorage.getItem('currentUser'))
   }
+  console.log(user.value, 'uservalue-frompointsview2')
   isFetched.value = true
 })
 
@@ -72,10 +74,10 @@ const orgs = ref([
 
 <template>
 
-  <main>
+  <main v-if="isFetched">
     <div id="listView">
       <h2 class="h2">Påäng</h2>
-      <PointsBar :points="user.ecoPoints"></PointsBar>
+      <PointsBar :points='user.ecoPoints'></PointsBar>
       <div id="list">
         <orgListItem v-for="(org, index) in orgs" :key=index :org="org"></orgListItem>
       </div>
