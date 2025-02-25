@@ -54,6 +54,7 @@ main {
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 40px;
+  min-height: 100vh;
 }
 
 #headerWrapper {
