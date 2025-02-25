@@ -79,6 +79,9 @@ const openModal = (org) => {
   modalIsOpen.value = true
 }
 
+const handleCloseModal = () => {
+  modalIsOpen.value = false
+}
 </script>
 
 <template>
@@ -93,7 +96,7 @@ const openModal = (org) => {
     </div>
   </main>
 
-  <orgModal id="orgModal" v-if="modalIsOpen" :org="chosenOrg"></orgModal>
+  <orgModal id="orgModal" v-if="modalIsOpen" :org="chosenOrg" @close-modal="handleCloseModal"></orgModal>
 
   <Navbar id="navBar" page="points"></Navbar>
 </template>
