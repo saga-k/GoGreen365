@@ -2,6 +2,7 @@
 import Navbar from '@/components/Navbar.vue';
 import orgListItem from '@/components/orgListItem.vue';
 import PointsBar from '@/components/PointsBar.vue';
+import orgModal from '@/components/orgModal.vue';
 import { useUserStore } from '@/stores/userStore';
 import { onMounted, ref } from 'vue';
 
@@ -70,23 +71,31 @@ const orgs = ref([
   }
 ]);
 
+let chosenOrg = ref(null)
+let modalIsOpen = ref(false)
+
+const openModal = (org) => {
+  chosenOrg.value = org
+  modalIsOpen.value = true
+}
+
 </script>
 
 <template>
 
-  <main v-if="isFetched">
+  <main v-if="isFetched && !modalIsOpen">
     <div id="listView">
       <h2 class="h2">Påäng</h2>
       <PointsBar :points='user.ecoPoints'></PointsBar>
       <div id="list">
-        <orgListItem v-for="(org, index) in orgs" :key=index :org="org"></orgListItem>
+        <orgListItem v-for="(org, index) in orgs" :key=index :org="org" @click="openModal(org)"></orgListItem>
       </div>
     </div>
-
-    <div id="modal">
-    </div>
   </main>
-  <Navbar page="points"></Navbar>
+
+  <orgModal id="orgModal" v-if="modalIsOpen" :org="chosenOrg"></orgModal>
+
+  <Navbar id="navBar" page="points"></Navbar>
 </template>
 
 <style scoped>
@@ -102,5 +111,10 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+#orgModal {
+  background-color: var(--background-color);
+  height: 100vh;
 }
 </style>
