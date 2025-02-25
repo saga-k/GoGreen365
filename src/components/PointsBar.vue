@@ -8,7 +8,9 @@ const props = defineProps({
   }
 })
 
-onMounted(() => console.log(props.points))
+onMounted(() => {
+  console.log(props.points)
+})
 
 </script>
 

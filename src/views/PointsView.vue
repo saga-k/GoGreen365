@@ -1,6 +1,7 @@
 <script setup>
 import Navbar from '@/components/Navbar.vue';
 import orgListItem from '@/components/orgListItem.vue';
+import PointsBar from '@/components/PointsBar.vue';
 import { ref } from 'vue';
 
 const orgs = ref([
@@ -61,6 +62,7 @@ const orgs = ref([
   <main>
     <div id="listView">
       <h2 class="h2">Påäng</h2>
+      <PointsBar></PointsBar>
       <div id="list">
         <orgListItem v-for="(org, index) in orgs" :key=index :org="org"></orgListItem>
       </div>

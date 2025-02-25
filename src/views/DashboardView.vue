@@ -16,9 +16,11 @@ onMounted(async () => {
   await userStore.fetchUsers()
   user.value = userStore.currentUser;
   console.log(user.value)
+  if (user.value === null || user.value === undefined) {
+    user.value = JSON.parse(localStorage.getItem('currentUser'))
+  }
   isFetched.value = true
 })
-
 
 
 </script>
