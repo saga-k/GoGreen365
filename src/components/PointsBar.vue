@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue';
 
+
 const props = defineProps({
   points: {
     type: Number,
