@@ -16,6 +16,20 @@ const completeChallenge = () => {
   const currentUser = userStore.currentUser
   const currentChallengeId = challengeStore.todaysChallenge?.id
 
+  // Kontrollera om utmaningen redan är avklarad för dagen
+  if (
+    currentUser &&
+    currentChallengeId &&
+    currentUser.completedTasks &&
+    currentUser.completedTasks.includes(currentChallengeId)
+  ) {
+    console.log('Challenge already completed for today.')
+    return
+  }
+
+  challengeCompleted.value = true
+
+  // Om användare och utmaning finns, uppdatera poäng och avklarade uppgifter
   if (currentUser && currentChallengeId) {
     userStore.addEcoPoints(currentUser, 5)
     if (!currentUser.completedTasks) {
