@@ -52,11 +52,14 @@ const closeSuccess = () => {
     <PointsBar :points="props.user.ecoPoints"></PointsBar>
     <button class="btn-primary" id="bigButton" @click="donateMoney()" :disabled="isDisabled">Donera 100
       sek</button>
-    <button @click="addPoints()">addPoints</button>
   </div>
 
-  <div id="successMsg" v-else>
-    <p>test</p>
+  <div class="successMsg" v-else>
+    <img id="happyPlanet" src="../assets/happyPlanet.svg" />
+    <h2 class="h2">Bra jobbat!</h2>
+    <p class="p-small">Du har just donerat 100 SEK till en miljöorganisation! 🌱 Tack för att du gör
+      skillnad –
+      tillsammans skapar vi en grönare framtid. Fortsätt samla poäng och stöd fler viktiga miljöinitiativ! 💚</p>
     <button class="btn-primary" id="smallButton" @click="closeSuccess">Ok</button>
   </div>
 </template>
@@ -89,16 +92,22 @@ const closeSuccess = () => {
   align-self: center;
 }
 
-#success {
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  position: absolute;
-  z-index: 1;
+.successMsg {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
 }
 
 #smallButton {
-  width: 100px;
+  width: 150px;
+}
+
+#happyPlanet {
+  width: 150px;
+  border-radius: 300px;
+  margin-bottom: 2rem;
 }
 </style>

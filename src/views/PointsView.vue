@@ -136,4 +136,8 @@ main {
 .h2 {
   margin-bottom: 0.5rem;
 }
+
+#navBar {
+  z-index: 2;
+}
 </style>
