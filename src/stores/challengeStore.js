@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useUserStore } from './userStore'
 
 export const useChallengeStore = defineStore('challenge', {
   state: () => ({
@@ -26,40 +27,75 @@ export const useChallengeStore = defineStore('challenge', {
         this.loading = false
       }
     },
+
+    // Uppdaterad för att använda userStore istället för localStorage
     setCurrentUser(userId) {
-      this.currentUserId = userId
-      this.ensureRegistrationDate()
-    },
-    ensureRegistrationDate() {
-      if (!this.currentUserId) return
-      const key = `firstLoginDate_${this.currentUserId}`
-      if (!localStorage.getItem(key)) {
-        localStorage.setItem(key, new Date().toISOString())
+      const userStore = useUserStore()
+      const user = userStore.getUserById(userId)
+
+      if (user) {
+        this.currentUserId = userId
+        // Kontrollera om användaren har registreringsdatum
+        if (!user.registrationDate) {
+          const today = new Date()
+          userStore.updateUserInBe(
+            {
+              ...user,
+              registrationDate: today.toDateString(), // Sparar i formatet "Tue Feb 25 2025"
+            },
+            userId,
+          )
+        }
       }
     },
   },
 
   getters: {
-    registrationDate() {
-      if (!this.currentUserId) return null
-      const key = `firstLoginDate_${this.currentUserId}`
-      const dateStr = localStorage.getItem(key)
-      return dateStr ? new Date(dateStr) : null
+    // Använder userStore för att hämta användardata
+    currentUser() {
+      const userStore = useUserStore()
+      return userStore.getUserById(this.currentUserId)
     },
+
+    // Hämtar registreringsdatum från userStore och hanterar string-format
+    registrationDate() {
+      if (!this.currentUser?.registrationDate) return null
+      // Hanterar det befintliga formatet "Tue Feb 25 2025"
+      return new Date(this.currentUser.registrationDate)
+    },
+
+    // Beräknar dagar sedan registrering
     daysSinceRegistration() {
       const regDate = this.registrationDate
       if (!regDate) return 0
+
       const today = new Date()
-      // Sätter datumen till midnatt
-      const regDateMidnight = new Date(regDate.getFullYear(), regDate.getMonth(), regDate.getDate())
-      const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate())
-      const diffMs = todayMidnight - regDateMidnight
-      return Math.floor(diffMs / (1000 * 60 * 60 * 24))
+      today.setHours(0, 0, 0, 0) // Sätter tiden till midnatt
+
+      const regDateMidnight = new Date(regDate)
+      regDateMidnight.setHours(0, 0, 0, 0)
+
+      const diffMs = today - regDateMidnight
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+      console.log('Days since registration:', days)
+      return days
     },
+
+    // Hämtar dagens utmaning baserat på dagar sedan registrering
     todaysChallenge() {
       if (!this.challenges.length) return null
+
       const dayNumber = this.daysSinceRegistration + 1
-      return this.challenges.find((ch) => ch.date === dayNumber) || null
+      console.log('Looking for challenge day:', dayNumber)
+
+      // Om dayNumber är större än antal utmaningar, returnera null
+      if (dayNumber > this.challenges.length) {
+        return null
+      }
+
+      const challenge = this.challenges.find((ch) => ch.date === dayNumber)
+      console.log('Found challenge:', challenge)
+      return challenge || null
     },
   },
 })
