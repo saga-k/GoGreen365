@@ -124,7 +124,7 @@ yarn install
 
 ## Development
 
-# Running the Dev Server
+### Running the Dev Server
 
 Start the development server with Vite:
 
@@ -134,7 +134,7 @@ npm run dev
 
 Open your browser and navigate to http://localhost:5173 (the URL may vary if configured differently).
 
-# Running json-sever
+### Running json-sever
 
 This project uses two JSON files located in the public folder:
 
