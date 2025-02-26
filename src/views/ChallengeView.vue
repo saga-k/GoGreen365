@@ -80,6 +80,11 @@ onMounted(async () => {
 
       <!-- Om utmaningen är slutfört visas skärmen "Bra jobbat" -->
       <div v-else class="good-job">
+        <img
+          src="../assets/happyPlanet-transparent-bg.svg"
+          alt="Happy planet"
+          class="good-job-image"
+        />
         <h2>Bra jobbat!!</h2>
         <p>Belöningen har tilldelats! Kom tillbaka imorgon för nya utmaningar!</p>
       </div>
