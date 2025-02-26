@@ -85,8 +85,11 @@ onMounted(async () => {
           alt="Happy planet"
           class="good-job-image"
         />
-        <h2>Bra jobbat!!</h2>
-        <p>Belöningen har tilldelats! Kom tillbaka imorgon för nya utmaningar!</p>
+        <h2 class="h2">Bra jobbat!</h2>
+        <p class="p-medium">
+          Belöningen har tilldelats!<br />
+          Kom tillbaka imorgon för nya utmaningar!
+        </p>
       </div>
     </div>
   </main>
@@ -164,6 +167,7 @@ main {
   width: 130px;
   height: 35px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 #point-placeholder {
@@ -171,5 +175,30 @@ main {
   height: 35px;
   width: 35px;
   border-radius: 100%;
+}
+
+.good-job {
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 2rem;
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.good-job h2 {
+  font-size: 28px;
+  margin-top: 2rem;
+}
+
+.good-job-image {
+  width: 100%;
+  max-width: 70%;
+  height: auto;
+  object-fit: cover;
 }
 </style>
