@@ -11,17 +11,27 @@ const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
 const profileImage = ref(null)
+
 const errorMessage = ref('')
+const emailError = ref('')
 const passwordError = ref('')
 
 // Handle file upload
 const handleImageUpload = (event) => {
   profileImage.value = event.target.files[0]
 }
+
+const clearErrors = () => {
+  errorMessage.value = ''
+  emailError.value = ''
+  passwordError.value = ''
+}
 // Create a new user account
 const createAccount = async () => {
+  clearErrors()
+
   if (!firstName.value || !lastName.value || !email.value || !password.value) {
-    errorMessage.value = 'All fields are required!'
+    errorMessage.value = 'Alla fält måste fyllas i!'
     return
   }
 
@@ -33,7 +43,7 @@ const createAccount = async () => {
   // Simple email validation
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailPattern.test(email.value)) {
-    errorMessage.value = 'Invalid email format'
+    emailError.value = 'Ogiltigt email-format!'
     return
   }
 
@@ -59,7 +69,7 @@ const createAccount = async () => {
 
   try {
     await axios.post('http://localhost:3000/users', newUser)
-    router.push('onboarding') // Redirect to login after account creation
+    router.push('/onboarding') // Redirect to login after account creation
   } catch (error) {
     errorMessage.value = 'Fel vid skapande av konto, försök igen senare.'
     console.error('Error creating account:', error)

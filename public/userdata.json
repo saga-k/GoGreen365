@@ -76,6 +76,28 @@
       "ecoPoints": 0,
       "completedTasks": [],
       "registrationDate": "Wed Feb 26 2025"
+    },
+    {
+      "id": "c319",
+      "firstName": "adfasda",
+      "lastName": "dads",
+      "mail": "arif@gmail.com",
+      "password": "1234",
+      "profilePicUrl": null,
+      "ecoPoints": 0,
+      "completedTasks": [],
+      "registrationDate": "Wed Feb 26 2025"
+    },
+    {
+      "id": "083f",
+      "firstName": "helllo",
+      "lastName": "Hello",
+      "mail": "helllo@gmail.com",
+      "password": "1234",
+      "profilePicUrl": null,
+      "ecoPoints": 0,
+      "completedTasks": [],
+      "registrationDate": "Wed Feb 26 2025"
     }
   ]
 }
