@@ -43,7 +43,7 @@ onMounted(async () => {
 
 <template>
   <main class="challenge-container">
-    <div class="header">
+    <div class="header" v-if="!challengeCompleted">
       <h1 class="h1">Dagens utmaning</h1>
       <!-- Hämta det formaterade datumet från DateDisplay-komponenten -->
       <DateDisplay />
