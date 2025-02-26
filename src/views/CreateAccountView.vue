@@ -9,12 +9,23 @@ const firstName = ref('')
 const lastName = ref('')
 const email = ref('')
 const password = ref('')
+const confirmPassword = ref('')
+const profileImage = ref(null)
 const errorMessage = ref('')
 
+// Handle file upload
+const handleImageUpload = (event) => {
+  profileImage.value = event.target.files[0]
+}
 // Create a new user account
 const createAccount = async () => {
   if (!firstName.value || !lastName.value || !email.value || !password.value) {
     errorMessage.value = 'All fields are required!'
+    return
+  }
+
+  if (password.value !== confirmPassword.value) {
+    errorMessage.value = 'Lösenorden matchar inte!'
     return
   }
 
@@ -41,11 +52,15 @@ const createAccount = async () => {
   //   newUser.registrationDate = today
   // }
 
+  if (profileImage.value) {
+    newUser.append('profilePic', profileImage.value)
+  }
+
   try {
     await axios.post('http://localhost:3000/users', newUser)
-    router.push('/') // Redirect to login after account creation
+    router.push('onboarding') // Redirect to login after account creation
   } catch (error) {
-    errorMessage.value = 'Error creating account.'
+    errorMessage.value = 'Fel vid skapande av konto, försök igen senare.'
     console.error('Error creating account:', error)
   }
 }
@@ -53,7 +68,10 @@ const createAccount = async () => {
 
 <template>
   <div class="register-container">
-    <img src="@/assets/images/happy-earth.png" alt="Happy Earth" class="earth-image" />
+    <div>
+      <img src="@/assets/images/happy-earth.png" alt="Happy Earth" class="earth-image" />
+    </div>
+    <!-- want a image upload icon here -->
     <h2>Skapa konto</h2>
     <div class="form-container">
       <div class="name-container">
@@ -71,10 +89,18 @@ const createAccount = async () => {
       <label :class="{ 'label-error': passwordError }" for="password">Lösenord</label>
       <input type="password" placeholder="Ange lösenord" v-model="password" class="form-control" />
       <label :class="{ 'label-error': passwordError }" for="password">Bekräfta lösenord</label>
-      <input type="password" placeholder="Ange lösenord" v-model="password" class="form-control" />
+      <input
+        type="password"
+        placeholder="Bekräfta lösenord"
+        v-model="confirmPassword"
+        class="form-control"
+      />
+
+      <label>Profilbild (valfritt)</label>
+      <input type="file" @change="handleImageUpload" class="form-control file-input" />
+
       <button @click="createAccount" class="register-button">Registera</button>
     </div>
-
     <p v-if="errorMessage" class="text-danger mt-2">{{ errorMessage }}</p>
 
     <p class="login-link">
@@ -84,7 +110,6 @@ const createAccount = async () => {
   </div>
 </template>
 <style scoped>
-/* Base style */
 .register-container {
   display: flex;
   flex-direction: column;
@@ -96,77 +121,53 @@ const createAccount = async () => {
   font-family: 'Comfortaa', serif;
 }
 
-/* Image - Logo */
 .earth-image {
   width: 180px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-/* Font style */
 h2 {
   font-size: 36px;
-  margin-top: 1rem;
   margin-bottom: 1rem;
-  color: #3f3d3d;
 }
 
-.subtitle {
-  font-size: 14px;
-  color: #3f3d3d;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-/* Form style */
 .form-container {
   width: 100%;
-  max-width: 300px;
-  margin-top: 1.5rem;
+  max-width: 350px;
   display: flex;
   flex-direction: column;
 }
+
 .name-container {
+  width: 100%;
+  max-width: 350px;
   display: flex;
 }
 
-.form-container label {
-  margin-bottom: 0.25rem;
+label {
   margin-top: 1rem;
   font-weight: 600;
-  font-size: 14px;
-  transition: color 0.2s ease;
 }
 
-.form-container input {
+input.form-control {
   padding: 0.75rem;
-  margin-bottom: 0.5rem;
   border: 1px solid #f4dec3;
   border-radius: 6px;
-  font-size: 14px;
-  outline: none;
   transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
-/* Focus when click */
-.form-container input:focus {
+input.form-control:focus {
   border-color: #c2e07a;
   box-shadow: 0 0 0 2px rgba(194, 224, 122, 0.3);
 }
 
-/* Underline for every link paegs */
-.login-link {
-  display: block;
-  margin-top: 2rem;
-  font-size: 14px;
-  color: #3f3d3d;
-  text-decoration: underline;
+.file-input {
+  padding: 0.5rem;
 }
 
-/* Register button */
 .register-button {
-  font-family: 'Comfortaa', serif;
   background-color: #c2e07a;
   color: #3f3d3d;
   font-size: 1rem;
@@ -175,6 +176,7 @@ h2 {
   border-radius: 39px;
   padding: 0.75rem;
   cursor: pointer;
+  margin-top: 1.5rem;
   transition: background-color 0.3s ease;
 }
 
@@ -182,19 +184,15 @@ h2 {
   background-color: #a5c261;
 }
 
-/* When it error*/
-.label-error {
-  color: #e74c3c;
-}
-
-.input-error {
-  border-color: #ff6b6b !important;
+.login-link {
+  margin-top: 2rem;
+  font-size: 14px;
+  text-decoration: underline;
 }
 
 .error-message {
-  font-size: 14px;
   color: #e74c3c;
-  margin-top: -0.25rem;
-  margin-bottom: -0.25rem;
+  margin-top: 0.75rem;
+  text-align: center;
 }
 </style>
