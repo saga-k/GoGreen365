@@ -44,8 +44,7 @@ onMounted(async () => {
       <DateDisplay />
     </div>
 
-    <div v-if="challengeStore.loading">Loading...</div>
-    <div v-else-if="challengeStore.error">Error: {{ challengeStore.error }}</div>
+    <div v-if="challengeStore.error">Error: {{ challengeStore.error }}</div>
 
     <div v-if="challengeStore.todaysChallenge" class="challenge">
       <img
