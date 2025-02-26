@@ -12,6 +12,20 @@ const challengeCompleted = ref(false)
 
 const completeChallenge = () => {
   challengeCompleted.value = true
+
+  const currentUser = userStore.currentUser
+  const currentChallengeId = challengeStore.todaysChallenge?.id
+
+  if (currentUser && currentChallengeId) {
+    userStore.addEcoPoints(currentUser, 5)
+    if (!currentUser.completedTasks) {
+      currentUser.completedTasks = []
+    }
+    if (!currentUser.completedTasks.includes(currentChallengeId)) {
+      currentUser.completedTasks.push(currentChallengeId)
+    }
+    userStore.updateUserInBe(currentUser, currentUser.id)
+  }
 }
 
 onMounted(async () => {
