@@ -12,6 +12,7 @@ const password = ref('')
 const confirmPassword = ref('')
 const profileImage = ref(null)
 const errorMessage = ref('')
+const passwordError = ref('')
 
 // Handle file upload
 const handleImageUpload = (event) => {
@@ -25,7 +26,7 @@ const createAccount = async () => {
   }
 
   if (password.value !== confirmPassword.value) {
-    errorMessage.value = 'Lösenorden matchar inte!'
+    passwordError.value = 'Lösenorden matchar inte!'
     return
   }
 
