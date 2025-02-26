@@ -97,6 +97,9 @@ const handleCloseModal = () => {
   <main v-if="isFetched && !modalIsOpen">
     <div id="listView">
       <h2 class="h2">Påäng</h2>
+      <p class="p-medium">Du har {{ user.ecoPoints }} Eco-points. Tjäna hundra så donerar vi 100 sek till valfri
+        organisation.
+      </p>
       <PointsBar :points='user.ecoPoints'></PointsBar>
       <div id="list">
         <orgListItem v-for="(org, index) in orgs" :key=index :org="org" @click="openModal(org)"></orgListItem>
@@ -127,5 +130,9 @@ main {
 #orgModal {
   background-color: var(--background-color);
   height: 100vh;
+}
+
+.h2 {
+  margin-bottom: 0.5rem;
 }
 </style>

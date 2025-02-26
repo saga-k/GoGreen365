@@ -51,6 +51,9 @@ const isDisabled = computed(() => props.user.ecoPoints < 100)
 <style scoped>
 #orgModal {
   padding: 50px 20px 50px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 #firstRow {
@@ -65,5 +68,11 @@ const isDisabled = computed(() => props.user.ecoPoints < 100)
 #image {
   width: 100%;
   border-radius: 20px;
+}
+
+.btn-primary {
+  height: 3rem;
+  width: 15rem;
+  align-self: center;
 }
 </style>
