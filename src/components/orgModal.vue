@@ -1,15 +1,32 @@
 <script setup>
 
 import { defineEmits } from 'vue';
+import PointsBar from './PointsBar.vue';
+import { useUserStore } from '@/stores/userStore';
+
+const userStore = useUserStore()
 
 const props = defineProps({
   org: {
-    type: Object
+    type: Object,
+    required: true
+  },
+  user: {
+    type: Object,
+    required: true
   }
 })
 
 const emit = defineEmits(['closeModal'])
 const closeModal = () => emit('closeModal')
+
+const donateMoney = () => {
+  userStore.donatePoints(props.user)
+}
+
+const addPoints = () => {
+  userStore.addEcoPoints(props.user, 100)
+}
 
 </script>
 
@@ -22,6 +39,11 @@ const closeModal = () => emit('closeModal')
     </div>
     <img id="image" :src="props.org.imgUrl" />
     <p class="p-medium">{{ props.org.longDescription }}</p>
+    <PointsBar :points="props.user.ecoPoints"></PointsBar>
+    <button class="btn-primary" @click="donateMoney()">Donera 100
+      sek</button>
+
+    <button class="btn-secondary" @click="addPoints()">add 100 points</button>
   </article>
 </template>
 

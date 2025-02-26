@@ -56,4 +56,8 @@
   border-radius: 50px;
   border: none;
   padding: 0.5rem 1rem;
+
+  &:disabled{
+    background-color: #CFCFCF;
+  }
 }
