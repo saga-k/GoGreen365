@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue'
 import { useChallengeStore } from '@/stores/challengeStore'
 import { useUserStore } from '@/stores/userStore'
 import Navbar from '@/components/Navbar.vue'
-import DateDisplay from '@/components/DateDisplay.vue'
+import DateDisplay from '@/components/dateDisplay.vue'
 
 const challengeStore = useChallengeStore()
 const userStore = useUserStore()
