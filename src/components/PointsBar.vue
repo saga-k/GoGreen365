@@ -66,4 +66,9 @@ onMounted(() => console.log(props.points))
   max-width: 100%;
   border-radius: 15px;
 }
+
+#succesMessage {
+  position: absolute;
+  z-index: 3;
+}
 </style>
