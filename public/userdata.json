@@ -21,6 +21,17 @@
       "ecoPoints": 0,
       "completedTasks": [],
       "registrationDate": "Tue Feb 25 2025"
+    },
+    {
+      "id": "efe4",
+      "firstName": "Test",
+      "lastName": "Me",
+      "mail": "test@mail.com",
+      "password": "1234",
+      "profilePicUrl": null,
+      "ecoPoints": 0,
+      "completedTasks": [],
+      "registrationDate": "Wed Feb 26 2025"
     }
   ]
 }
