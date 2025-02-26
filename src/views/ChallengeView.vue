@@ -37,7 +37,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="challenge-container">
+  <main class="challenge-container">
     <div class="header">
       <h1 class="h1">Dagens utmaning</h1>
       <!-- Hämta det formaterade datumet från DateDisplay-komponenten -->
@@ -59,20 +59,34 @@ onMounted(async () => {
     <div v-else class="no-challenge">
       <p class="p-medium">Inga fler utmaningar tillgängliga för idag.</p>
     </div>
-  </div>
+    <div class="points-container">
+      <div class="points-left">
+        <div id="point-placeholder"></div>
+        <p class="p-small">Belöning: 5 Eco-points!</p>
+      </div>
+      <div class="points-right">
+        <button class="btn-primary">Hämta</button>
+      </div>
+    </div>
+  </main>
   <Navbar page="challenge"></Navbar>
 </template>
 
 <style scoped>
-.challenge-container {
+main {
   background-color: var(--background-color);
+  height: min-content;
+  min-height: 100vh;
   padding: 50px 20px;
+  margin-bottom: 40px;
+}
+
+.challenge-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  min-height: 100vh;
   text-align: left;
+  gap: 1rem;
 }
 
 .header {
@@ -98,11 +112,43 @@ onMounted(async () => {
 
 .challenge-image {
   display: block;
-  margin: 1rem auto;
+  margin-bottom: 1rem;
   width: 100%;
   max-width: 500px;
   height: auto;
   object-fit: cover;
   border-radius: 20px;
+}
+
+.points-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.points-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.p-small {
+  font-weight: 700;
+}
+
+.points-right .btn-primary {
+  width: 130px;
+  height: 35px;
+  font-weight: 700;
+}
+
+#point-placeholder {
+  background-color: lightgray;
+  height: 35px;
+  width: 35px;
+  border-radius: 100%;
 }
 </style>
