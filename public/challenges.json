@@ -3,28 +3,28 @@
     "id": 1,
     "title": "Skräppatrullen!",
     "description": "Det ligger så mycket skräp ute och skräpar i naturen. Hjälp haven och djuren genom att plocka upp ett skräp och återvinn det.",
-    "image": "public/challengeIllustrations/garbage.svg",
+    "image": "challengeIllustrations/garbage.svg",
     "date": 1
   },
   {
     "id": 2,
     "title": "Minska plast!",
     "description": "Plast är en stor miljöbov. Byt ut plastpåsen mot en tygpåse idag och gör skillnad!",
-    "image": "public/challengeIllustrations/bag.svg",
+    "image": "challengeIllustrations/bag.svg",
     "date": 2
   },
   {
     "id": 3,
     "title": "Spara vatten!",
     "description": "Vatten är livsviktigt. Stäng av kranen medan du borstar tänderna och spara på våra resurser.",
-    "image": "public/challengeIllustrations/waterdrop.svg",
+    "image": "challengeIllustrations/waterdrop.svg",
     "date": 3
   },
   {
     "id": 4,
     "title": "Cykla eller åk kollektivt!",
     "description": "Lämna bilen hemma idag! Ta cykeln eller åk med kollektivtrafiken – ett enkelt val som gör gott för både planeten och din plånbok. Var en miljöhjälte i vardagen!",
-    "image": "public/challengeIllustrations/bus.svg",
+    "image": "challengeIllustrations/bus.svg",
     "date": 4
   },
   {
@@ -38,14 +38,14 @@
     "id": 6,
     "title": "Ät vegetariskt!",
     "description": "Utmana dig själv med en köttfri dag! Vegetarisk mat är bra för både miljön och din kropp.",
-    "image": "public/challengeIllustrations/mushrooms.svg",
+    "image": "challengeIllustrations/mushrooms.svg",
     "date": 6
   },
   {
     "id": 7,
     "title": "Spara el!",
     "description": "Släck lamporna i rum du inte använder och minska din elförbrukning. Små steg gör stor skillnad!",
-    "image": "public/challengeIllustrations/lamps.svg",
+    "image": "challengeIllustrations/lamps.svg",
     "date": 7
   }
 ]

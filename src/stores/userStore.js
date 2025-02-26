@@ -2,7 +2,8 @@ import { defineStore } from "pinia";
 
 export const useUserStore = defineStore('userStore',{
   state: () => ({
-    users:[]
+    users:[],
+    currentUser: null
   }),
 
   actions:{
@@ -50,15 +51,22 @@ export const useUserStore = defineStore('userStore',{
       return foundUser;
     },
 
-    addEcoPoints(id, points){
-      let user = this.users.find(user => user.id === id);
+    addEcoPoints(user, points){
       console.log('user', user)
-      let userPoints = Number(user.ecoPoints)
-      console.log(userPoints)
       user.ecoPoints += points;
-      console.log('users after points:',this.users);
-      this.updateUserInBe(user, id);
-    }, 
+      console.log('user after points:',user);
+      this.currentUser = user;
+      this.updateUserInBe(user, user.id);
+      localStorage.setItem('currentUser', JSON.stringify(user))
+    },
+
+    donatePoints(user){
+      console.log('user', user)
+      user.ecoPoints = Number(user.ecoPoints-100)
+      this.updateUserInBe(user, user.id);
+      this.currentUser = user;
+      localStorage.setItem('currentUser', JSON.stringify(user))
+    },
     
     async updateUserInBe(user, id) {
 
@@ -74,7 +82,8 @@ export const useUserStore = defineStore('userStore',{
       console.log('post succesful', data);
 
     },
-       loginUser(email, password) {
+
+    loginUser(email, password) {
       const user = this.users.find(
         (u) => u.mail.toLowerCase() === email.toLowerCase() && u.password === password,
       )

@@ -12,13 +12,13 @@ const userStore = useUserStore()
 let user = ref(null)
 let isFetched = ref(false)
 
-onMounted(async () => {
-  await userStore.fetchUsers()
-  user.value = userStore.getUserById('1');
-  console.log(user.value)
+onMounted(() => {
+  user.value = userStore.currentUser;
+  if (user.value === null || user.value === undefined) {
+    user.value = JSON.parse(localStorage.getItem('currentUser'))
+  }
   isFetched.value = true
 })
-
 
 
 </script>

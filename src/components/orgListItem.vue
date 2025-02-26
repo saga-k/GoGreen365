@@ -1,6 +1,4 @@
 <script setup>
-import { onMounted } from 'vue';
-
 
 const props = defineProps({
   org: {
@@ -8,17 +6,15 @@ const props = defineProps({
   }
 })
 
-onMounted(() => console.log('props:', props.org))
-
 </script>
 
 <template>
   <article id="orgWrapper">
-    <div id="imageContainer"></div>
+    <img id="imageContainer" :src="props.org.logoUrl" />
 
     <div id="rightSide">
       <h3 class="h3">{{ props.org.name }}</h3>
-      <p class="p-small">{{ props.org.description }}</p>
+      <p class="p-small">{{ props.org.shortDescription }}</p>
     </div>
   </article>
 </template>
@@ -30,19 +26,18 @@ onMounted(() => console.log('props:', props.org))
   border-radius: 20px;
   padding: 1rem;
   display: flex;
+  gap: 1rem;
 }
 
 #imageContainer {
   background-color: lightgrey;
   height: 50px;
-  width: 50px !important;
+  width: 50px;
   border-radius: 50px;
-  flex-grow: 1;
 }
 
 #rightSide {
   display: flex;
   flex-direction: column;
-  flex-shrink: 1;
 }
 </style>
