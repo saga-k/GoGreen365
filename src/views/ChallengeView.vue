@@ -8,6 +8,11 @@ import DateDisplay from '@/components/dateDisplay.vue'
 const challengeStore = useChallengeStore()
 const userStore = useUserStore()
 const isLoading = ref(true)
+const challengeCompleted = ref(false)
+
+const completeChallenge = () => {
+  challengeCompleted.value = true
+}
 
 onMounted(async () => {
   try {
@@ -44,27 +49,39 @@ onMounted(async () => {
       <DateDisplay />
     </div>
 
-    <div v-if="challengeStore.error">Error: {{ challengeStore.error }}</div>
+    <div v-if="isLoading">Loading...</div>
+    <div v-else-if="challengeStore.error">Error: {{ challengeStore.error }}</div>
 
-    <div v-if="challengeStore.todaysChallenge" class="challenge">
-      <img
-        :src="challengeStore.todaysChallenge.image"
-        alt="Utmaningsbild"
-        class="challenge-image"
-      />
-      <h2 class="h2">{{ challengeStore.todaysChallenge.title }}</h2>
-      <p class="p-medium">{{ challengeStore.todaysChallenge.description }}</p>
-    </div>
-    <div v-else class="no-challenge">
-      <p class="p-medium">Inga fler utmaningar tillgängliga för idag.</p>
-    </div>
-    <div class="points-container">
-      <div class="points-left">
-        <div id="point-placeholder"></div>
-        <p class="p-small">Belöning: 5 Eco-points!</p>
+    <div v-else>
+      <!-- Om utmaningen inte är slutförd, visa utmaningskort -->
+      <div v-if="!challengeCompleted">
+        <div v-if="challengeStore.todaysChallenge" class="challenge">
+          <img
+            :src="challengeStore.todaysChallenge.image"
+            alt="Utmaningsbild"
+            class="challenge-image"
+          />
+          <h2 class="h2">{{ challengeStore.todaysChallenge.title }}</h2>
+          <p class="p-medium">{{ challengeStore.todaysChallenge.description }}</p>
+        </div>
+        <div v-else class="no-challenge">
+          <p class="p-medium">Inga fler utmaningar tillgängliga för idag.</p>
+        </div>
+        <div class="points-container">
+          <div class="points-left">
+            <div id="point-placeholder"></div>
+            <p class="p-small">Belöning: 5 Eco-points!</p>
+          </div>
+          <div class="points-right">
+            <button class="btn-primary" @click="completeChallenge">Hämta</button>
+          </div>
+        </div>
       </div>
-      <div class="points-right">
-        <button class="btn-primary">Hämta</button>
+
+      <!-- Om utmaningen är slutfört visas skärmen "Bra jobbat" -->
+      <div v-else class="good-job">
+        <h2>Bra jobbat!!</h2>
+        <p>Belöningen har tilldelats! Kom tillbaka imorgon för nya utmaningar!</p>
       </div>
     </div>
   </main>
