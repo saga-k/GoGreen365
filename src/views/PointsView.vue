@@ -130,6 +130,7 @@ main {
 #orgModal {
   background-color: var(--background-color);
   height: 100vh;
+  margin-bottom: 40px;
 }
 
 .h2 {
