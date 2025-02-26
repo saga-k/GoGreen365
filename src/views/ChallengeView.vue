@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useChallengeStore } from '@/stores/challengeStore'
 import { useUserStore } from '@/stores/userStore'
 import Navbar from '@/components/Navbar.vue'
@@ -8,15 +8,22 @@ import DateDisplay from '@/components/dateDisplay.vue'
 const challengeStore = useChallengeStore()
 const userStore = useUserStore()
 const isLoading = ref(true)
-const challengeCompleted = ref(false)
+
+// Beräknad egenskap som kontrollerar om den aktuella utmaningen är avklarad
+const isChallengeCompleted = computed(() => {
+  const currentUser = userStore.currentUser
+  const currentChallengeId = challengeStore.todaysChallenge?.id
+  if (currentUser && currentChallengeId) {
+    return currentUser.completedTasks && currentUser.completedTasks.includes(currentChallengeId)
+  }
+  return false
+})
 
 const completeChallenge = () => {
-  challengeCompleted.value = true
-
   const currentUser = userStore.currentUser
   const currentChallengeId = challengeStore.todaysChallenge?.id
 
-  // Kontrollera om utmaningen redan är avklarad för dagen
+  // Förhindra dubbelslutförande om redan avklarad
   if (
     currentUser &&
     currentChallengeId &&
@@ -26,8 +33,6 @@ const completeChallenge = () => {
     console.log('Challenge already completed for today.')
     return
   }
-
-  challengeCompleted.value = true
 
   // Om användare och utmaning finns, uppdatera poäng och avklarade uppgifter
   if (currentUser && currentChallengeId) {
@@ -71,9 +76,9 @@ onMounted(async () => {
 
 <template>
   <main class="challenge-container">
-    <div class="header" v-if="!challengeCompleted">
+    <!-- Visa header endast om utmaningen inte är avklarad -->
+    <div class="header" v-if="!isChallengeCompleted">
       <h1 class="h1">Dagens utmaning</h1>
-      <!-- Hämta det formaterade datumet från DateDisplay-komponenten -->
       <DateDisplay />
     </div>
 
@@ -81,8 +86,21 @@ onMounted(async () => {
     <div v-else-if="challengeStore.error">Error: {{ challengeStore.error }}</div>
 
     <div v-else>
-      <!-- Om utmaningen inte är slutförd, visa utmaningskort -->
-      <div v-if="!challengeCompleted">
+      <!-- Om utmaningen är slutfört visas skärmen "Bra jobbat" -->
+      <div v-if="isChallengeCompleted" class="good-job">
+        <img
+          src="../assets/happyPlanet-transparent-bg.svg"
+          alt="Happy planet"
+          class="good-job-image"
+        />
+        <h2 class="h2">Bra jobbat!</h2>
+        <p class="p-medium">
+          Belöningen har tilldelats!<br />
+          Kom tillbaka imorgon för nya utmaningar!
+        </p>
+      </div>
+
+      <div v-else>
         <div v-if="challengeStore.todaysChallenge" class="challenge">
           <img
             :src="challengeStore.todaysChallenge.image"
@@ -104,20 +122,6 @@ onMounted(async () => {
             <button class="btn-primary" @click="completeChallenge">Hämta</button>
           </div>
         </div>
-      </div>
-
-      <!-- Om utmaningen är slutfört visas skärmen "Bra jobbat" -->
-      <div v-else class="good-job">
-        <img
-          src="../assets/happyPlanet-transparent-bg.svg"
-          alt="Happy planet"
-          class="good-job-image"
-        />
-        <h2 class="h2">Bra jobbat!</h2>
-        <p class="p-medium">
-          Belöningen har tilldelats!<br />
-          Kom tillbaka imorgon för nya utmaningar!
-        </p>
       </div>
     </div>
   </main>
