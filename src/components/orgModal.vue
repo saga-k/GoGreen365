@@ -1,6 +1,6 @@
 <script setup>
 
-import { defineEmits } from 'vue';
+import { computed, defineEmits, onMounted } from 'vue';
 import PointsBar from './PointsBar.vue';
 import { useUserStore } from '@/stores/userStore';
 
@@ -24,9 +24,12 @@ const donateMoney = () => {
   userStore.donatePoints(props.user)
 }
 
+//for testing purposes
 const addPoints = () => {
   userStore.addEcoPoints(props.user, 100)
 }
+
+const isDisabled = computed(() => props.user.ecoPoints < 100)
 
 </script>
 
@@ -40,10 +43,8 @@ const addPoints = () => {
     <img id="image" :src="props.org.imgUrl" />
     <p class="p-medium">{{ props.org.longDescription }}</p>
     <PointsBar :points="props.user.ecoPoints"></PointsBar>
-    <button class="btn-primary" @click="donateMoney()">Donera 100
+    <button class="btn-primary" @click="donateMoney()" :disabled="isDisabled">Donera 100
       sek</button>
-
-    <button class="btn-secondary" @click="addPoints()">add 100 points</button>
   </article>
 </template>
 
