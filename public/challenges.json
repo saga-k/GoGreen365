@@ -30,8 +30,8 @@
   {
     "id": 5,
     "title": "Källsortera!",
-    "description": "Idag är det dags att sortera soporna rätt. Glas, papper, plast – allt på sin plats",
-    "image": "challengeIllustrations/bins.svg",
+    "description": "Idag är det dags att sortera soporna rätt. Glas, papper, plast – allt på sin plats.",
+    "image": "public/challengeIllustrations/bins.svg",
     "date": 5
   },
   {
