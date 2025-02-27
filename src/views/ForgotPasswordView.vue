@@ -14,20 +14,23 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const emailError = ref(false)
 const passwordError = ref(false)
+const confirmPasswordError = ref(false)
 
 // Validation for password and email if not return error messages
 watch([userEmail, newPassword, confirmPassword], ([email, password, confirm]) => {
   emailError.value = !emailPattern.test(email) && email.length > 0
   passwordError.value = !passwordPattern.test(password) && password.length > 0
+  confirmPasswordError.value = password !== confirm && confirm.length > 0
 
   if (!email || !password || !confirm) {
-    errorMessages.value = 'Vänligen fyll i alla rutar.'
+    errorMessages.value = '*Vänligen fyll i alla rutor.'
   } else if (!emailPattern.test(email)) {
-    errorMessages.value = 'Ange en giltig e-postadress.'
+    errorMessages.value = '*Ange en giltig e-postadress.'
   } else if (!passwordPattern.test(password)) {
-    errorMessages.value = 'Lösnordet ska vara minst 6 tecken långt och endast bokstäver och siffror'
+    errorMessages.value =
+      '*Lösnordet ska vara minst 6 tecken långt och endast bokstäver och siffror'
   } else if (password !== confirm) {
-    errorMessages.value = 'Lösenord matchar inte!'
+    errorMessages.value = '*Lösenord matchar inte!'
   } else {
     errorMessages.value = ''
   }
@@ -97,12 +100,15 @@ async function updatePassword() {
       />
 
       <!-- confirm new password -->
-      <label for="confirmPassword">bekräfta lösenord</label>
+      <label :="{ 'label-error': confirmPasswordError }" for="confirmPassword"
+        >bekräfta lösenord</label
+      >
       <input
         id="confirmPassword"
         v-model="confirmPassword"
         type="password"
         placeholder="Bekräfta lösenord"
+        :class="{ 'input-error': confirmPasswordError }"
       />
 
       <!-- Show up error message -->
@@ -200,7 +206,12 @@ h1 {
   transition: background-color 0.3s ease;
 }
 
-.confirm-button:hover {
+.confirm-button:disabled {
+  background-color: #ffbcb5;
+  cursor: not-allowed;
+}
+
+.confirm-button:hover:not(:disabled) {
   background-color: #a5c261;
 }
 
@@ -210,7 +221,12 @@ h1 {
 }
 
 .input-error {
-  border: 1px solid red;
+  border-color: red;
+}
+
+.input-error:focus {
+  border-color: red !important;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
 
 /* Error message */
