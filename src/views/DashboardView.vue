@@ -43,7 +43,7 @@ onMounted(() => {
     <button id="inviteButton" class="btn-primary">Bjud in dina vänner</button>
 
   </main>
-  <Navbar page="dashboard"></Navbar>
+  <Navbar id="navBar" page="dashboard"></Navbar>
 </template>
 
 <style scoped>
@@ -77,5 +77,9 @@ main {
 
 #inviteButton {
   height: 40px;
+}
+
+#navBar {
+  z-index: 2;
 }
 </style>

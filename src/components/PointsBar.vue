@@ -54,7 +54,7 @@ onMounted(() => console.log(props.points))
 
   height: 22px;
   width: 100%;
-  max-width: 90vw;
+  max-width: 100%;
   background-color: lightgray;
   border-radius: 15px;
 }
@@ -63,7 +63,12 @@ onMounted(() => console.log(props.points))
 
   background-color: var(--peach);
   height: 22px;
-  max-width: 90vw;
+  max-width: 100%;
   border-radius: 15px;
+}
+
+#succesMessage {
+  position: absolute;
+  z-index: 3;
 }
 </style>
