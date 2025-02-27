@@ -6,7 +6,7 @@ const router = useRouter()
 const userEmail = ref('')
 const newPassword = ref('')
 const confirmPassword = ref('')
-const errorMessages = ref('')
+const errorMessages = ref([])
 
 // Password must be at least 6 characters just only letters and numbers
 const passwordPattern = /^[a-zA-Z0-9]{6,}$/
@@ -27,21 +27,23 @@ watch([userEmail, newPassword, confirmPassword], ([email, password, confirm]) =>
   if (!email || !password || !confirm) {
     errorMessages.value.push('Vänligen fyll i alla rutor')
   }
-  if (!emailPattern.test(email)) {
+  if (!emailPattern.test(email) && email.length > 0) {
     errorMessages.value.push('Ange en giltig e-postadress')
   }
-  if (!passwordPattern.test(password)) {
+  if (!passwordPattern.test(password) && password.length > 0) {
     errorMessages.value.push(
       'Lösnordet ska vara minst 6 tecken långt och endast bokstäver och siffror',
     )
   }
-  if (password !== confirm) {
+  if (password !== confirm && confirm.length > 0) {
     errorMessages.value.push('Lösenord matchar inte!')
   }
 })
 
 // Update password in JSON server
 async function updatePassword() {
+  if (errorMessages.value.length > 0) return
+
   try {
     // Find the user by emial on json
     const response = await fetch(`http://localhost:3000/users?mail=${userEmail.value}`)
@@ -70,7 +72,7 @@ async function updatePassword() {
     }
   } catch (error) {
     console.error('Error updating password:', error)
-    errorMessages.value.push('Något gick fel. Försök igen.')
+    errorMessages.value.push('Något gick fel. Försök igen!')
   }
 }
 </script>
@@ -121,11 +123,11 @@ async function updatePassword() {
       </ul>
 
       <!-- Push to success page -->
-      <button @click="updatePassword" :disabled="!!errorMessages" class="confirm-button">
+      <button @click="updatePassword" :disabled="errorMessages.length > 0" class="confirm-button">
         Ändra lösenord
       </button>
     </div>
-    <RouterLink to="/" class="login-link">Login</RouterLink>
+    <RouterLink to="/" class="links">Har du redan konto? Logga in</RouterLink>
   </div>
 </template>
 
@@ -190,7 +192,7 @@ h1 {
 }
 
 /* Underline for link paeg */
-.login-link {
+.links {
   display: block;
   margin-top: 2rem;
   font-size: 14px;
