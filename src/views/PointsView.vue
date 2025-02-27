@@ -5,19 +5,27 @@ import PointsBar from '@/components/PointsBar.vue';
 import orgModal from '@/components/orgModal.vue';
 import { useUserStore } from '@/stores/userStore';
 import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const userStore = useUserStore()
 let user = ref(null)
 let isFetched = ref(false)
 
 onMounted(() => {
   user.value = userStore.currentUser;
-  console.log(user.value, 'uservalue-frompointsview')
+  //If userStore doesnt have a current user, get current user from local storage
   if (user.value === null || user.value === undefined) {
     user.value = JSON.parse(localStorage.getItem('currentUser'))
   }
-  console.log(user.value, 'uservalue-frompointsview2')
-  isFetched.value = true
+
+  //If there's no user in local storage, user is logged out and will be rerouted to login page
+  if (user.value === null || user.value === undefined) {
+    router.push('/')
+  } else {
+    isFetched.value = true
+  }
+
 })
 
 const orgs = ref([
