@@ -9,7 +9,7 @@ const next = () => {
 </script>
 <template>
   <div class="success-app">
-    <img src="@/assets/icons/badge-check.svg" alt="Success" class="success-icon" />
+    <img src="@/assets/images/success.png" alt="Success" class="success-icon" />
     <h1>Lyckades!</h1>
     <p>Lyckades att återställa lösenordet!</p>
     <button @click="next" class="success-button">Gå vidare</button>
@@ -52,12 +52,13 @@ p {
   background-color: #ffbcb5;
   color: #3f3d3d;
   font-size: 1rem;
-  font-weight: 600;
   border: none;
-  border-radius: 20px;
+  font-weight: 600;
+  border-radius: 39px;
   padding: 0.75rem 1.5rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-family: 'Comfortaa', serif;
 }
 
 .success-button:hover {
