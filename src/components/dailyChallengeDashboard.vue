@@ -1,4 +1,5 @@
 <script setup>
+import dateDisplay from './dateDisplay.vue';
 //need to get daily challenge from json and pinia
 
 </script>
@@ -7,9 +8,7 @@
   <div id="wrapper">
     <div id="left">
       <h3 class="h3">Dagens utmaning</h3>
-      <div id="dateDisplay">
-        <p class="p-small" id="dateCopy">I dag 17 Feb</p> <!--Detta är hårdkodat nu, vi får byta det sedan-->
-      </div>
+      <dateDisplay id="dateDisplay" />
     </div>
     <div id="placeHolder"></div>
   </div>
@@ -35,10 +34,8 @@
 }
 
 #dateDisplay {
-  border: solid 1px var(--border-color);
   width: min-content;
-  padding: 0.2rem 0.5rem;
-  border-radius: 30px;
+  text-wrap: noWrap;
 }
 
 #dateCopy {

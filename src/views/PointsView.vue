@@ -129,10 +129,15 @@ main {
 
 #orgModal {
   background-color: var(--background-color);
-  height: 100vh;
+  min-height: 100vh;
+  margin-bottom: 40px;
 }
 
 .h2 {
   margin-bottom: 0.5rem;
+}
+
+#navBar {
+  z-index: 2;
 }
 </style>
