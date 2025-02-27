@@ -42,25 +42,27 @@ const closeSuccess = () => {
 
 
 <template>
-  <div id="orgModal" v-if="success === false">
-    <div id="firstRow">
-      <h2 class="h2">{{ props.org.name }}</h2>
-      <img id="closeIcon" src="/icons/circle-xmark-regular.svg" @click="closeModal" />
+  <div id="fullLayout">
+    <div id="orgModal" v-if="success === false">
+      <div id="firstRow">
+        <h2 class="h2">{{ props.org.name }}</h2>
+        <img id="closeIcon" src="/icons/circle-xmark-regular.svg" @click="closeModal" />
+      </div>
+      <img id="image" :src="props.org.imgUrl" />
+      <p class="p-medium">{{ props.org.longDescription }}</p>
+      <PointsBar :points="props.user.ecoPoints"></PointsBar>
+      <button class="btn-primary" id="bigButton" @click="donateMoney()" :disabled="isDisabled">Donera 100
+        sek</button>
     </div>
-    <img id="image" :src="props.org.imgUrl" />
-    <p class="p-medium">{{ props.org.longDescription }}</p>
-    <PointsBar :points="props.user.ecoPoints"></PointsBar>
-    <button class="btn-primary" id="bigButton" @click="donateMoney()" :disabled="isDisabled">Donera 100
-      sek</button>
-  </div>
 
-  <div class="successMsg" v-else>
-    <img id="happyPlanet" src="../assets/happyPlanet.svg" />
-    <h2 class="h2">Bra jobbat!</h2>
-    <p class="p-small">Du har just donerat 100 SEK till en miljöorganisation! 🌱 Tack för att du gör
-      skillnad –
-      tillsammans skapar vi en grönare framtid. Fortsätt samla poäng och stöd fler viktiga miljöinitiativ! 💚</p>
-    <button class="btn-primary" id="smallButton" @click="closeSuccess">Ok</button>
+    <div class="successMsg" v-else>
+      <img id="happyPlanet" src="../assets/happyPlanet.svg" />
+      <h2 class="h2">Bra jobbat!</h2>
+      <p class="p-small">Du har just donerat 100 SEK till en miljöorganisation! 🌱 Tack för att du gör
+        skillnad –
+        tillsammans skapar vi en grönare framtid. Fortsätt samla poäng och stöd fler viktiga miljöinitiativ! 💚</p>
+      <button class="btn-primary" id="smallButton" @click="closeSuccess">Ok</button>
+    </div>
   </div>
 </template>
 
@@ -84,6 +86,7 @@ const closeSuccess = () => {
 #image {
   width: 100%;
   border-radius: 20px;
+  max-width: 500px;
 }
 
 #bigButton {
