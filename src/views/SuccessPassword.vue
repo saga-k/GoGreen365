@@ -9,7 +9,7 @@ const next = () => {
 </script>
 <template>
   <div class="success-app">
-    <img src="@/assets/happyPlanet.svg" alt="Happy Planet" class="success-icon" />
+    <img src="@/assets/images/happy-earth.png" alt="Happy Planet" class="success-icon" />
     <h1>Lösenordet ändrat</h1>
     <p>Logga in igen med ditt nya lösenord</p>
     <button @click="next" class="success-button">Tillbaka till logga in</button>
@@ -24,7 +24,6 @@ const next = () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
   background-color: #fef7ee;
   background-image: url('/UIImages/Confetti.svg');
   background-size: cover;
@@ -37,12 +36,14 @@ const next = () => {
 .success-icon {
   width: 180px;
   margin-bottom: 1rem;
+  margin-top: 6rem;
 }
 
 h1 {
   font-size: 36px;
   color: #3f3d3d;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
 }
 
 p {
@@ -63,6 +64,7 @@ p {
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-family: 'Comfortaa', serif;
+  margin-top: 10rem;
 }
 
 .success-button:hover {
