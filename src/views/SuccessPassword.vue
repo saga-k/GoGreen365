@@ -9,10 +9,10 @@ const next = () => {
 </script>
 <template>
   <div class="success-app">
-    <img src="@/assets/images/success.png" alt="Success" class="success-icon" />
-    <h1>Lyckades!</h1>
-    <p>Lyckades att återställa lösenordet!</p>
-    <button @click="next" class="success-button">Gå vidare</button>
+    <img src="@/assets/happyPlanet.svg" alt="Happy Planet" class="success-icon" />
+    <h1>Lösenordet ändrat</h1>
+    <p>Logga in igen med ditt nya lösenord</p>
+    <button @click="next" class="success-button">Tillbaka till logga in</button>
   </div>
 </template>
 <style scoped>
@@ -23,15 +23,17 @@ const next = () => {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #c2e07a;
+  background-color: #fef7ee;
+  background: url('@/public/Uilmages/Confetti.svg');
+  background-size: cover;
   color: #3f3d3d;
   font-family: 'Comfortaa', serif;
   text-align: center;
 }
 
+/* logo */
 .success-icon {
-  width: 80px;
-  height: 80px;
+  width: 180px;
   margin-bottom: 1rem;
 }
 
@@ -49,7 +51,7 @@ p {
 
 /* Button */
 .success-button {
-  background-color: #ffbcb5;
+  background-color: #c2e07a;
   color: #3f3d3d;
   font-size: 1rem;
   border: none;
@@ -62,6 +64,6 @@ p {
 }
 
 .success-button:hover {
-  background-color: #fbb4ad;
+  background-color: #a5c261;
 }
 </style>
