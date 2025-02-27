@@ -12,8 +12,14 @@ const errorMessages = ref('')
 const passwordPattern = /^[a-zA-Z0-9]{6,}$/
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+const emailError = ref(false)
+const passwordError = ref(false)
+
 // Validation for password and email if not return error messages
 watch([userEmail, newPassword, confirmPassword], ([email, password, confirm]) => {
+  emailError.value = !emailPattern.test(email) && email.length > 0
+  passwordError.value = !passwordPattern.test(password) && password.length > 0
+
   if (!email || !password || !confirm) {
     errorMessages.value = 'Vänligen fyll i alla rutar.'
   } else if (!emailPattern.test(email)) {
@@ -36,6 +42,7 @@ async function updatePassword() {
 
     if (users.length === 0) {
       errorMessages.value = 'Fel e-post adress'
+      emailError.value = true
       return
     }
 
@@ -70,19 +77,36 @@ async function updatePassword() {
       <h1>Ändra lösenord</h1>
 
       <!-- Controll E-mail -->
-      <label for="email">E-postadress</label>
-      <input v-model="newEmail" type="email" placeholder="Ange e-post" />
+      <label :class="{ 'label-error': emailError }" for="email">E-postadress</label>
+      <input
+        id="email"
+        v-model="userEmail"
+        type="email"
+        placeholder="Ange e-post"
+        :class="{ 'input-error': emailError }"
+      />
 
       <!-- new password -->
-      <label for="newPassword">Nytt lösenord</label>
-      <input v-model="newPassword" type="password" placeholder="Ange nytt lösenord" />
+      <label :class="{ 'label-error': passwordError }" for="newPassword">Nytt lösenord</label>
+      <input
+        id="password"
+        v-model="newPassword"
+        type="password"
+        placeholder="Ange nytt lösenord"
+        :class="{ 'input-error': passwordError }"
+      />
 
       <!-- confirm new password -->
       <label for="confirmPassword">bekräfta lösenord</label>
-      <input v-model="confirmPassword" type="password" placeholder="Bekräfta lösenord" />
+      <input
+        id="confirmPassword"
+        v-model="confirmPassword"
+        type="password"
+        placeholder="Bekräfta lösenord"
+      />
 
       <!-- Show up error message -->
-      <p v-if="errorMessages" class="error-message">{{ errorMessage }}</p>
+      <p v-if="errorMessages" class="error-message">{{ errorMessages }}</p>
 
       <!-- Push to success page -->
       <button @click="updatePassword" :disabled="!!errorMessages" class="confirm-button">
@@ -178,5 +202,21 @@ h1 {
 
 .confirm-button:hover {
   background-color: #a5c261;
+}
+
+/* Input validation errors */
+.label-error {
+  color: red;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+/* Error message */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 0.5rem;
 }
 </style>
