@@ -8,10 +8,18 @@ const newPassword = ref('')
 const confirmPassword = ref('')
 const errorMessages = ref('')
 
-// Validation
+// Password must be at least 6 characters just only letters and numbers
+const passwordPattern = /^[a-zA-Z0-9]{6,}$/
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+// Validation for password and email if not return error messages
 watch([userEmail, newPassword, confirmPassword], ([email, password, confirm]) => {
   if (!email || !password || !confirm) {
-    errorMessages.value = 'Vänligen fyll i alla fälten.'
+    errorMessages.value = 'Vänligen fyll i alla rutar.'
+  } else if (!emailPattern.test(email)) {
+    errorMessages.value = 'Ange en giltig e-postadress.'
+  } else if (!passwordPattern.test(password)) {
+    errorMessages.value = 'Lösnordet ska vara minst 6 tecken långt och endast bokstäver och siffror'
   } else if (password !== confirm) {
     errorMessages.value = 'Lösenord matchar inte!'
   } else {
