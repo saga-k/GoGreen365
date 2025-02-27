@@ -22,17 +22,21 @@ watch([userEmail, newPassword, confirmPassword], ([email, password, confirm]) =>
   passwordError.value = !passwordPattern.test(password) && password.length > 0
   confirmPasswordError.value = password !== confirm && confirm.length > 0
 
+  errorMessages.value = []
+
   if (!email || !password || !confirm) {
-    errorMessages.value = '*Vänligen fyll i alla rutor.'
-  } else if (!emailPattern.test(email)) {
-    errorMessages.value = '*Ange en giltig e-postadress.'
-  } else if (!passwordPattern.test(password)) {
-    errorMessages.value =
-      '*Lösnordet ska vara minst 6 tecken långt och endast bokstäver och siffror'
-  } else if (password !== confirm) {
-    errorMessages.value = '*Lösenord matchar inte!'
-  } else {
-    errorMessages.value = ''
+    errorMessages.value.push('Vänligen fyll i alla rutor')
+  }
+  if (!emailPattern.test(email)) {
+    errorMessages.value.push('Ange en giltig e-postadress')
+  }
+  if (!passwordPattern.test(password)) {
+    errorMessages.value.push(
+      'Lösnordet ska vara minst 6 tecken långt och endast bokstäver och siffror',
+    )
+  }
+  if (password !== confirm) {
+    errorMessages.value.push('Lösenord matchar inte!')
   }
 })
 
@@ -44,7 +48,7 @@ async function updatePassword() {
     const users = await response.json()
 
     if (users.length === 0) {
-      errorMessages.value = 'Fel e-post adress'
+      errorMessages.value.push('Fel e-post adress')
       emailError.value = true
       return
     }
@@ -62,11 +66,11 @@ async function updatePassword() {
     if (updateResponse.ok) {
       router.push('/successPassword')
     } else {
-      errorMessages.value = 'Missllyckades med att uppdatera lösenordet.'
+      errorMessages.value.push('Missllyckades med att uppdatera lösenordet')
     }
   } catch (error) {
     console.error('Error updating password:', error)
-    errorMessages.value = 'Något gick fel. Försök igen.'
+    errorMessages.value.push('Något gick fel. Försök igen.')
   }
 }
 </script>
@@ -100,8 +104,8 @@ async function updatePassword() {
       />
 
       <!-- confirm new password -->
-      <label :="{ 'label-error': confirmPasswordError }" for="confirmPassword"
-        >bekräfta lösenord</label
+      <label :class="{ 'label-error': confirmPasswordError }" for="confirmPassword"
+        >Bekräfta lösenord</label
       >
       <input
         id="confirmPassword"
@@ -111,15 +115,17 @@ async function updatePassword() {
         :class="{ 'input-error': confirmPasswordError }"
       />
 
-      <!-- Show up error message -->
-      <p v-if="errorMessages" class="error-message">{{ errorMessages }}</p>
+      <!-- Show up error message as a list -->
+      <ul v-if="errorMessages.length" class="error-message">
+        <li v-for="(message, index) in errorMessages" :key="index">{{ message }}</li>
+      </ul>
 
       <!-- Push to success page -->
       <button @click="updatePassword" :disabled="!!errorMessages" class="confirm-button">
         Ändra lösenord
       </button>
     </div>
-    <RouterLink to="/createAccount" class="create-account-link">Skapa nytt konto</RouterLink>
+    <RouterLink to="/" class="login-link">Login</RouterLink>
   </div>
 </template>
 
@@ -183,8 +189,8 @@ h1 {
   box-shadow: 0 0 0 2px rgba(194, 224, 122, 0.3);
 }
 
-/* Underline for every link paegs */
-.create-account-link {
+/* Underline for link paeg */
+.login-link {
   display: block;
   margin-top: 2rem;
   font-size: 14px;
@@ -192,6 +198,7 @@ h1 {
   text-decoration: underline;
 }
 
+/* Button */
 .confirm-button {
   font-family: 'Comfortaa', serif;
   background-color: #c2e07a;
@@ -206,16 +213,11 @@ h1 {
   transition: background-color 0.3s ease;
 }
 
-.confirm-button:disabled {
-  background-color: #ffbcb5;
-  cursor: not-allowed;
-}
-
-.confirm-button:hover:not(:disabled) {
+.confirm-button:hover {
   background-color: #a5c261;
 }
 
-/* Input validation errors */
+/* Error */
 .label-error {
   color: red;
 }
