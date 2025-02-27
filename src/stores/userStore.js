@@ -1,86 +1,80 @@
-import { defineStore } from "pinia";
-
-export const useUserStore = defineStore('userStore',{
+import { defineStore } from 'pinia'
+export const useUserStore = defineStore('userStore', {
   state: () => ({
-    users:[],
-    currentUser: null
+    users: [],
+    currentUser: null,
   }),
 
-  actions:{
-
-    async fetchUsers(){
-      try{
-        const promise = await fetch('http://localhost:3000/users');
-        if(!promise.ok){
-          throw new Error('fetch error');
+  actions: {
+    async fetchUsers() {
+      try {
+        const promise = await fetch('http://localhost:3000/users')
+        if (!promise.ok) {
+          throw new Error('fetch error')
         }
-        const users = await promise.json();
+        const users = await promise.json()
         this.users = users
-        console.log('this.users:',this.users)
-      }
-      catch(error){
+        console.log('this.users:', this.users)
+      } catch (error) {
         console.error(error)
       }
     },
-    
-     addUser(user) {
+
+    addUser(user) {
       const newUser = {
-        id: String(this.users.length+1),
+        id: String(this.users.length + 1),
         ...user,
       }
       this.users.push(newUser)
       console.log('this.users', this.users)
       this.postUser(newUser)
-      },
+    },
 
-    async postUser(newUser){
-      const promise = await fetch('http://localhost:3000/users',{
+    async postUser(newUser) {
+      const promise = await fetch('http://localhost:3000/users', {
         method: 'POST',
-        headers:{
-        'Content-Type': 'application/json'
+        headers: {
+          'Content-Type': 'application/json',
         },
-        body: 
-        JSON.stringify(newUser)
-        });
-      const data = await promise.json();
-      console.log(data);
+        body: JSON.stringify(newUser),
+      })
+      const data = await promise.json()
+      console.log(data)
     },
 
-    getUserById(id){
-      let foundUser = this.users.find(user => user.id === id);
-      return foundUser;
+    getUserById(id) {
+      let foundUser = this.users.find((user) => user.id === id)
+      return foundUser
     },
 
-    addEcoPoints(user, points){
+    addEcoPoints(user, points) {
       console.log('user', user)
-      user.ecoPoints += points;
-      console.log('user after points:',user);
-      this.currentUser = user;
-      this.updateUserInBe(user, user.id);
+      user.ecoPoints += points
+      console.log('user after points:', user)
+      this.currentUser = user
+      this.updateUserInBe(user, user.id)
       localStorage.setItem('currentUser', JSON.stringify(user))
     },
 
-    donatePoints(user){
+    donatePoints(user) {
       console.log('user', user)
-      user.ecoPoints = Number(user.ecoPoints-100)
-      this.updateUserInBe(user, user.id);
-      this.currentUser = user;
+      user.ecoPoints = Number(user.ecoPoints - 100)
+      this.updateUserInBe(user, user.id)
+      this.currentUser = user
       localStorage.setItem('currentUser', JSON.stringify(user))
     },
-    
+
     async updateUserInBe(user, id) {
-
       const promise = await fetch(`http://localhost:3000/users/${id}`, {
         method: 'PUT',
-        headers:{
-          'Content-Type': 'application/json'
+        headers: {
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
       })
 
-      const data = await promise.json();
-      console.log('post succesful', data);
-
+      const data = await promise.json()
+      console.log('post succesful', data)
     },
 
     loginUser(email, password) {
@@ -95,7 +89,11 @@ export const useUserStore = defineStore('userStore',{
       }
 
       return false
-    }
-  }
+    },
 
+    logout() {
+      this.currentUser.value = null
+      localStorage.removeItem('user')
+    },
+  },
 })

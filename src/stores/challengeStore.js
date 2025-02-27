@@ -48,6 +48,9 @@ export const useChallengeStore = defineStore('challenge', {
         }
       }
     },
+    getChallengeById(challengeId) {
+      return this.challenges.find((challenge) => challenge.id === challengeId)
+    },
   },
 
   getters: {
