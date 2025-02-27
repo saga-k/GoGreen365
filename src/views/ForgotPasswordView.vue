@@ -127,7 +127,7 @@ async function updatePassword() {
         Ändra lösenord
       </button>
     </div>
-    <RouterLink to="/" class="links">Har du redan konto? Logga in</RouterLink>
+    <RouterLink to="/" class="links">Har du redan konto? Logga in</RouterLink>h
   </div>
 </template>
 
