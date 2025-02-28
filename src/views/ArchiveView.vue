@@ -12,26 +12,33 @@ const selectedDate = ref(null)
 const currentMonth = ref(today.getMonth())
 const currentYear = ref(today.getFullYear())
 
-const challenge = (taskId) => {
-  challengeStore.getChallengeById(taskId)
-}
-
-console.log(challenge(1))
-
+// Handle date selection - Use `toLocaleDateString` to prevent timezone shift
 const selectDate = (date) => {
-  //selectedDate.value = date.toISOString().split('T')[0] // Ensure 'YYYY-MM-DD' format
-  selectedDate.value = date.toDateString()
+  selectedDate.value = date.toLocaleDateString('sv-SE') // Format: YYYY-MM-DD (Swedish Locale)
 }
 
-// Get completed tasks by mapping challenge IDs to full challenge objects
+// Get completed tasks filtered by selectedDate
+// const completedTasks = computed(() => {
+//   if (!userStore.currentUser || !selectedDate.value) return []
+
+//   return userStore.currentUser.completedTasks
+//     .filter((task) => task.dateCompleted === selectedDate.value) // ✅ Filter tasks by correct date format
+//     .map((taskId) => challengeStore.getChallengeById(taskId)) // Convert task IDs to challenge objects
+//     .filter((task) => task !== null) // Remove null values
+// })
+
+// Get completed tasks filtered by selectedDate
 const completedTasks = computed(() => {
-  if (!userStore.currentUser) return []
+  if (!userStore.currentUser || !selectedDate.value) return []
 
   return userStore.currentUser.completedTasks
-    .map((taskId) => challengeStore.getChallengeById(taskId)) // Get full challenge object
-    .filter((task) => task !== null) // Filter out null values (if any)
+    .map((taskId) => challengeStore.getChallengeById(taskId)) // Convert task ID to full object
+    .filter(
+      (task) => task !== null && task.dateCompleted === selectedDate.value, // Ensure dateCompleted matches
+    )
 })
 
+// Change Month Logic
 const changeMonth = (step) => {
   currentMonth.value += step
   if (currentMonth.value < 0) {
@@ -43,6 +50,7 @@ const changeMonth = (step) => {
   }
 }
 
+// Generate Days in Month
 const daysInMonth = computed(() => {
   const firstDay = new Date(currentYear.value, currentMonth.value, 1)
   const lastDay = new Date(currentYear.value, currentMonth.value + 1, 0)
