@@ -59,6 +59,15 @@ const daysInMonth = computed(() => {
     (_, i) => new Date(currentYear.value, currentMonth.value, i + 1),
   )
 })
+
+const isToday = (date) => {
+  const todayDate = new Date()
+  return (
+    date.getDate() === todayDate.getDate() &&
+    date.getMonth() === todayDate.getMonth() &&
+    date.getFullYear() === todayDate.getFullYear()
+  )
+}
 </script>
 
 <template>
@@ -87,6 +96,7 @@ const daysInMonth = computed(() => {
           v-for="day in daysInMonth"
           :key="day.toDateString()"
           class="calendar-day"
+          :class="{ today: isToday(day) }"
           @click="selectDate(day)"
         >
           {{ day.getDate() }}
@@ -116,52 +126,129 @@ const daysInMonth = computed(() => {
 }
 
 .header {
+  margin: 10px auto;
   display: flex;
 }
 
 .calendar-container {
-  max-width: 350px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 40px auto;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 15px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
+  font-size: 1.2rem;
 }
 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  gap: 6px;
+  padding: 10px 0;
 }
 
 .calendar-day {
-  width: 40px;
-  height: 40px;
+  width: 35x;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
   background: white;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.2s ease-in-out;
 }
 
+.calendar-day:hover {
+  background-color: #e0f7fa;
+}
+
+.today {
+  background-color: #ffdd57 !important; /* Highlight today's date */
+  color: #fff;
+  font-weight: bold;
+  border: 2px solid #ffa500;
+  box-shadow: 0px 2px 6px rgba(255, 165, 0, 0.4);
+}
 .calendar-day:hover {
   background-color: #d4edda;
 }
 
 .selected-date {
   margin-top: 20px;
-  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 12px;
+  background: linear-gradient(to right, #232322, #514a2c); /* Warm gradient */
+  color: #fff;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.selected-date h4 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.selected-date ul {
+  list-style: none;
+  padding: 0;
+}
+
+.selected-date li {
+  background: rgba(255, 255, 255, 0.2); /* Subtle white transparency */
   padding: 10px;
+  margin: 8px 0;
   border-radius: 8px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.selected-date li strong {
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.selected-date p {
+  font-size: 1rem;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.no-tasks {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Small animation when a new task is displayed */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.selected-date li,
+.selected-date p {
+  animation: fadeIn 0.4s ease-in-out;
 }
 </style>
