@@ -13,11 +13,17 @@ const isLoading = ref(true)
 const isChallengeCompleted = computed(() => {
   const currentUser = userStore.currentUser
   const currentChallengeId = challengeStore.todaysChallenge?.id
-  if (currentUser && currentChallengeId) {
-    return currentUser.completedTasks && currentUser.completedTasks.includes(currentChallengeId)
+  const currentChallenge = challengeStore.todaysChallenge
+  if (currentUser && currentChallenge) {
+    //Sagas kod här
+    return (
+      currentUser.completedTasks &&
+      currentUser.completedTasks.some((element) => element.id === currentChallengeId)
+    )
   }
   return false
 })
+
 // Kates code
 // const completeChallenge = () => {
 //   const currentUser = userStore.currentUser

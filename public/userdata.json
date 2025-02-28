@@ -7,8 +7,13 @@
       "mail": "kate@gmail.com",
       "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 40,
-      "completedTasks": [],
+      "ecoPoints": 45,
+      "completedTasks": [
+        {
+          "id": 4,
+          "dateCompleted": "2025-02-28"
+        }
+      ],
       "registrationDate": "Tue Feb 25 2025"
     },
     {
@@ -37,6 +42,22 @@
         }
       ],
       "registrationDate": "Thu Feb 27 2025"
+    },
+    {
+      "id": "fb12",
+      "firstName": "shifu",
+      "lastName": "master",
+      "mail": "shifu@gmail.com",
+      "password": "123456",
+      "profilePicUrl": null,
+      "ecoPoints": 5,
+      "completedTasks": [
+        {
+          "id": 1,
+          "dateCompleted": "2025-02-28"
+        }
+      ],
+      "registrationDate": "Fri Feb 28 2025"
     }
   ]
 }
