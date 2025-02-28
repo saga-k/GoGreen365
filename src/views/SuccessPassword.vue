@@ -14,7 +14,8 @@ const next = () => {
     <p>Logga in igen med ditt nya lösenord</p>
     <button @click="next" class="success-button">Tillbaka till logga in</button>
 
-    <img src="/UiImages/Confetti.svg" alt="Confetti" />
+    <img src="/uiImages/Confetti.svg" alt="Confetti" />
+
   </div>
 </template>
 <style scoped>
@@ -25,7 +26,10 @@ const next = () => {
   align-items: center;
   justify-content: center;
   background-color: #fef7ee;
-  background-image: url('/UiImages/Confetti.svg');
+
+  background-image: url('/uiImages/Confetti.svg');
+  background-size: cover;
+
   color: #3f3d3d;
   font-family: 'Comfortaa', serif;
   text-align: center;
