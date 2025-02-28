@@ -1,63 +1,27 @@
 {
   "users": [
     {
-      "id": "1",
-      "firstName": "kate",
-      "lastName": "Lastname",
-      "mail": "kate@gmail.com",
-      "password": "123456",
+      "id": "e80d",
+      "firstName": "Maria",
+      "lastName": "E",
+      "mail": "maria@mail.com",
+      "password": "maria",
       "profilePicUrl": null,
-      "ecoPoints": 45,
+      "ecoPoints": 10,
       "completedTasks": [
-        {
-          "id": 4,
-          "dateCompleted": "2025-02-28"
-        }
-      ],
-      "registrationDate": "Tue Feb 25 2025"
-    },
-    {
-      "id": "2",
-      "firstName": "Förnamn",
-      "lastName": "Efternamn",
-      "mail": "namn@mail.com",
-      "password": "1234567",
-      "profilePicUrl": null,
-      "ecoPoints": 5,
-      "completedTasks": [],
-      "registrationDate": "Tue Feb 25 2025"
-    },
-    {
-      "id": "39fa",
-      "firstName": "Arif",
-      "lastName": "Hossain",
-      "mail": "arif@gmail.com",
-      "password": "123456",
-      "profilePicUrl": null,
-      "ecoPoints": 30,
-      "completedTasks": [
-        {
-          "id": 2,
-          "dateCompleted": "2025-02-28"
-        }
       ],
       "registrationDate": "Thu Feb 27 2025"
     },
     {
-      "id": "fb12",
-      "firstName": "shifu",
-      "lastName": "master",
-      "mail": "shifu@gmail.com",
-      "password": "123456",
+      "id": "9379",
+      "firstName": "hi",
+      "lastName": "hi",
+      "mail": "hi@mail.com",
+      "password": "hi12345",
       "profilePicUrl": null,
-      "ecoPoints": 5,
-      "completedTasks": [
-        {
-          "id": 1,
-          "dateCompleted": "2025-02-28"
-        }
-      ],
-      "registrationDate": "Fri Feb 28 2025"
+      "ecoPoints": 0,
+      "completedTasks": [],
+      "registrationDate": "Thu Feb 27 2025"
     }
   ]
 }
