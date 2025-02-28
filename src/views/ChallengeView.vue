@@ -117,7 +117,7 @@ onMounted(async () => {
         </div>
         <div class="points-container">
           <div class="points-left">
-            <div id="point-placeholder"></div>
+            <img src="/UiImages/ecoPoints.svg" alt="eco points"/>
             <p class="p-small">Belöning: 5 Eco-points!</p>
           </div>
           <div class="points-right">
@@ -202,13 +202,6 @@ main {
   height: 35px;
   font-weight: 700;
   cursor: pointer;
-}
-
-#point-placeholder {
-  background-color: lightgray;
-  height: 35px;
-  width: 35px;
-  border-radius: 100%;
 }
 
 .good-job {
