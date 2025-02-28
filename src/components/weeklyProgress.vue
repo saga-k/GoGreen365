@@ -1,46 +1,84 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useUserStore } from '@/stores/userStore';
+import { useChallengeStore } from '@/stores/challengeStore';
 
 //Below is hardcoded mockdata for testing, add dynamic updates later
 
+const userStore = useUserStore()
+const challengeStore = useChallengeStore()
+let user = ref(null)
+let isLoading = ref(true)
+
 let weekDays = ref([
-  {
-    day: 'Mån',
-    challengeDone: true
-  },
-  {
-    day: 'Tis',
-    challengeDone: false
-  },
-  {
-    day: 'Ons',
-    challengeDone: false
-  },
-  {
-    day: 'Tor',
-    challengeDone: true
-  },
-  {
-    day: 'Fre',
-    challengeDone: true
-  },
-  {
-    day: 'Lör',
-    challengeDone: true
-  },
-  {
-    day: 'Sön',
-    challengeDone: true
-  }
 ])
 
 let daysDone = ref(0)
 
-onMounted(() => {
+onMounted(async () => {
+  try {
+    // Vänta på att både users och challenges laddas
+    await Promise.all([userStore.fetchUsers(), challengeStore.fetchChallenges()])
+
+    // Hämta inloggad användare från userStore (eller från localStorage om ej satt)
+    let currentUser = userStore.currentUser
+    if (!currentUser) {
+      const stored = localStorage.getItem('currentUser')
+      if (stored) {
+        currentUser = JSON.parse(stored)
+        userStore.currentUser = currentUser
+      }
+    }
+    if (currentUser) {
+      challengeStore.setCurrentUser(currentUser.id)
+    }
+
+    console.log("Today's challenge:", challengeStore.todaysChallenge)
+  } catch (error) {
+    console.error('Error:', error)
+  } finally {
+    isLoading.value = false
+  }
+
+  user.value = userStore.currentUser;
+  console.log('user', user.value)
+
+  generateWeek();
+  findCompletedTasks()
   calculateProgress();
-  console.log('daysdone', daysDone.value);
   asignProgressValue();
 })
+
+
+let testWeek = []
+const generateWeek = () => {
+  const today = new Date();
+
+  for (let i = 6; i >= 0; i--) {
+    const date = new Date();
+    date.setDate(today.getDate() - i);
+
+    weekDays.value.push({
+      day: date.toLocaleDateString('swe', { weekday: 'short' }),
+      date: date.toISOString().split('T')[0],
+      challengeDone: false
+    });
+  }
+};
+
+const findCompletedTasks = () => {
+  let completedTasks = user.value.completedTasks
+  console.log('completedtasks', completedTasks)
+
+  for (let i = 0; i < weekDays.value.length; i++) {
+    for (let j = 0; j < completedTasks.length; j++) {
+      if (weekDays.value[i].date === completedTasks[j].dateCompleted) {
+        weekDays.value[i].challengeDone = true
+      }
+    }
+  }
+
+}
 
 const calculateProgress = () => {
 

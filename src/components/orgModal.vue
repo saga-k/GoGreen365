@@ -102,7 +102,7 @@ const closeSuccess = () => {
   align-items: center;
   text-align: center;
   gap: 1rem;
-  background-image: url(public/UiImages/Confetti.svg);
+  background-image: url(public/uiImages/Confetti.svg);
 }
 
 #smallButton {

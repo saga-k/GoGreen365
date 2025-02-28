@@ -5,12 +5,20 @@
       "firstName": "Maria",
       "lastName": "E",
       "mail": "maria@mail.com",
-      "password": "maria",
+      "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 10,
+      "ecoPoints": 15,
       "completedTasks": [
+        {
+          "id": 1,
+          "dateCompleted": "2025-02-26"
+        },
+        {
+          "id": 2,
+          "dateCompleted": "2025-02-27"
+        }
       ],
-      "registrationDate": "Thu Feb 27 2025"
+      "registrationDate": "Tue Feb 25 2025"
     },
     {
       "id": "9379",
