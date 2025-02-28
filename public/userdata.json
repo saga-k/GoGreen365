@@ -8,10 +8,7 @@
       "password": "123456789",
       "profilePicUrl": null,
       "ecoPoints": 10,
-      "completedTasks": [
-        5,
-        6
-      ],
+      "completedTasks": [],
       "registrationDate": "Tue Feb 22 2025"
     },
     {
@@ -22,9 +19,7 @@
       "password": "1234567",
       "profilePicUrl": null,
       "ecoPoints": 5,
-      "completedTasks": [
-        2
-      ],
+      "completedTasks": [],
       "registrationDate": "Tue Feb 25 2025"
     }
   ]
