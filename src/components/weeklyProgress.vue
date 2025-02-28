@@ -3,12 +3,8 @@ import { ref, onMounted } from 'vue';
 import { useUserStore } from '@/stores/userStore';
 import { useChallengeStore } from '@/stores/challengeStore';
 
-//Below is hardcoded mockdata for testing, add dynamic updates later
-
 const userStore = useUserStore()
-const challengeStore = useChallengeStore()
 let user = ref(null)
-let isFetched = ref(false)
 
 let weekDays = ref([
 ])
