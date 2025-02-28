@@ -29,9 +29,12 @@
       "mail": "arif@gmail.com",
       "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 20,
+      "ecoPoints": 30,
       "completedTasks": [
-        1
+        {
+          "id": 2,
+          "dateCompleted": "2025-02-28"
+        }
       ],
       "registrationDate": "Thu Feb 27 2025"
     }

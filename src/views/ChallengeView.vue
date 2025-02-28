@@ -18,33 +18,59 @@ const isChallengeCompleted = computed(() => {
   }
   return false
 })
+// Kates code
+// const completeChallenge = () => {
+//   const currentUser = userStore.currentUser
+//   const currentChallengeId = challengeStore.todaysChallenge?.id
 
+//   // Förhindra dubbelslutförande om redan avklarad
+//   if (
+//     currentUser &&
+//     currentChallengeId &&
+//     currentUser.completedTasks &&
+//     currentUser.completedTasks.includes(currentChallengeId)
+//   ) {
+//     console.log('Challenge already completed for today.')
+//     return
+//   }
+
+//   // Om användare och utmaning finns, uppdatera poäng och avklarade uppgifter
+//   if (currentUser && currentChallengeId) {
+//     userStore.addEcoPoints(currentUser, 5)
+//     if (!currentUser.completedTasks) {
+//       currentUser.completedTasks = []
+//     }
+//     if (!currentUser.completedTasks.includes(currentChallengeId)) {
+//       currentUser.completedTasks.push(currentChallengeId)
+//     }
+//     userStore.updateUserInBe(currentUser, currentUser.id)
+//   }
+// }
+
+// Arif code
 const completeChallenge = () => {
   const currentUser = userStore.currentUser
   const currentChallengeId = challengeStore.todaysChallenge?.id
 
-  // Förhindra dubbelslutförande om redan avklarad
-  if (
-    currentUser &&
-    currentChallengeId &&
-    currentUser.completedTasks &&
-    currentUser.completedTasks.includes(currentChallengeId)
-  ) {
+  if (!currentUser || !currentChallengeId) return
+
+  // Prevent duplicates
+  const alreadyCompleted = currentUser.completedTasks.some((task) => task.id === currentChallengeId)
+  if (alreadyCompleted) {
     console.log('Challenge already completed for today.')
     return
   }
 
-  // Om användare och utmaning finns, uppdatera poäng och avklarade uppgifter
-  if (currentUser && currentChallengeId) {
-    userStore.addEcoPoints(currentUser, 5)
-    if (!currentUser.completedTasks) {
-      currentUser.completedTasks = []
-    }
-    if (!currentUser.completedTasks.includes(currentChallengeId)) {
-      currentUser.completedTasks.push(currentChallengeId)
-    }
-    userStore.updateUserInBe(currentUser, currentUser.id)
+  // Store task with completion date
+  const completedTask = {
+    id: currentChallengeId,
+    dateCompleted: new Date().toLocaleDateString('sv-SE'), // Store as 'YYYY-MM-DD'
+    // dateCompleted: new Date().toISOString().split('T')[0], // Store as 'YYYY-MM-DD'
   }
+
+  currentUser.completedTasks.push(completedTask)
+  userStore.addEcoPoints(currentUser, 5)
+  userStore.updateUserInBe(currentUser, currentUser.id)
 }
 
 onMounted(async () => {

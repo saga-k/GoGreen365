@@ -18,25 +18,25 @@ const selectDate = (date) => {
 }
 
 // Get completed tasks filtered by selectedDate
-// const completedTasks = computed(() => {
-//   if (!userStore.currentUser || !selectedDate.value) return []
-
-//   return userStore.currentUser.completedTasks
-//     .filter((task) => task.dateCompleted === selectedDate.value) // ✅ Filter tasks by correct date format
-//     .map((taskId) => challengeStore.getChallengeById(taskId)) // Convert task IDs to challenge objects
-//     .filter((task) => task !== null) // Remove null values
-// })
-
-// Get completed tasks filtered by selectedDate
 const completedTasks = computed(() => {
   if (!userStore.currentUser || !selectedDate.value) return []
 
   return userStore.currentUser.completedTasks
-    .map((taskId) => challengeStore.getChallengeById(taskId)) // Convert task ID to full object
-    .filter(
-      (task) => task !== null && task.dateCompleted === selectedDate.value, // Ensure dateCompleted matches
-    )
+    .filter((task) => task.dateCompleted === selectedDate.value) // ✅ Filter by date
+    .map((task) => challengeStore.getChallengeById(task.id)) // ✅ Convert ID to challenge
+    .filter((task) => task !== null) // ✅ Remove null values
 })
+
+// Get completed tasks filtered by selectedDate
+// const completedTasks = computed(() => {
+//   if (!userStore.currentUser || !selectedDate.value) return []
+
+//   return userStore.currentUser.completedTasks
+//     .map((taskId) => challengeStore.getChallengeById(taskId)) // Convert task ID to full object
+//     .filter(
+//       (task) => task !== null && task.dateCompleted === selectedDate.value, // Ensure dateCompleted matches
+//     )
+// })
 
 // Change Month Logic
 const changeMonth = (step) => {
@@ -52,7 +52,7 @@ const changeMonth = (step) => {
 
 // Generate Days in Month
 const daysInMonth = computed(() => {
-  const firstDay = new Date(currentYear.value, currentMonth.value, 1)
+  //   const firstDay = new Date(currentYear.value, currentMonth.value, 1)
   const lastDay = new Date(currentYear.value, currentMonth.value + 1, 0)
   return Array.from(
     { length: lastDay.getDate() },
@@ -60,9 +60,6 @@ const daysInMonth = computed(() => {
   )
 })
 </script>
-
-
-
 
 <template>
   <div class="archive-container">
