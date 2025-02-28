@@ -8,7 +8,7 @@ import { useChallengeStore } from '@/stores/challengeStore';
 const userStore = useUserStore()
 const challengeStore = useChallengeStore()
 let user = ref(null)
-let isLoading = ref(true)
+let isFetched = ref(false)
 
 let weekDays = ref([
 ])
@@ -16,33 +16,13 @@ let weekDays = ref([
 let daysDone = ref(0)
 
 onMounted(async () => {
-  try {
-    // Vänta på att både users och challenges laddas
-    await Promise.all([userStore.fetchUsers(), challengeStore.fetchChallenges()])
-
-    // Hämta inloggad användare från userStore (eller från localStorage om ej satt)
-    let currentUser = userStore.currentUser
-    if (!currentUser) {
-      const stored = localStorage.getItem('currentUser')
-      if (stored) {
-        currentUser = JSON.parse(stored)
-        userStore.currentUser = currentUser
-      }
-    }
-    if (currentUser) {
-      challengeStore.setCurrentUser(currentUser.id)
-    }
-
-    console.log("Today's challenge:", challengeStore.todaysChallenge)
-  } catch (error) {
-    console.error('Error:', error)
-  } finally {
-    isLoading.value = false
+  user.value = userStore.currentUser;
+  //If userStore doesnt have a current user, get current user from local storage
+  if (user.value === null || user.value === undefined) {
+    user.value = JSON.parse(localStorage.getItem('currentUser'))
   }
 
   user.value = userStore.currentUser;
-  console.log('user', user.value)
-
   generateWeek();
   findCompletedTasks()
   calculateProgress();
@@ -50,7 +30,6 @@ onMounted(async () => {
 })
 
 
-let testWeek = []
 const generateWeek = () => {
   const today = new Date();
 

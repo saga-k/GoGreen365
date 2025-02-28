@@ -7,7 +7,7 @@
       "mail": "maria@mail.com",
       "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 15,
+      "ecoPoints": 20,
       "completedTasks": [
         {
           "id": 1,
@@ -16,6 +16,10 @@
         {
           "id": 2,
           "dateCompleted": "2025-02-27"
+        },
+        {
+          "id": 4,
+          "dateCompleted": "2025-02-28"
         }
       ],
       "registrationDate": "Tue Feb 25 2025"
