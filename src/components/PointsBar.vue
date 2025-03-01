@@ -71,4 +71,14 @@ onMounted(() => console.log(props.points))
   position: absolute;
   z-index: 3;
 }
+
+@media (min-width: 768px) {
+  #pointsBar {
+    height: 28px;
+  }
+
+  #pointsBarTop {
+    height: 28px;
+  }
+}
 </style>
