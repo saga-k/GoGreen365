@@ -60,6 +60,9 @@ body {
   border-radius: 50px;
   border: none;
   padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:disabled{
     background-color: #CFCFCF;
@@ -86,7 +89,9 @@ body {
   }
   .btn-primary {
     padding: 1rem 1.5rem;
-    font-size: 1.1rem;
+    font-size: 16px;
+    height: 45px;
+    cursor: pointer;
   }
 }
 
@@ -110,6 +115,6 @@ body {
   }
   .btn-primary {
     padding: 1.2rem 2rem;
-    font-size: 1.2rem;
+    font-size: 18px;
   }
 }
