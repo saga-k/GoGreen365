@@ -38,6 +38,22 @@
       "ecoPoints": 0,
       "completedTasks": [],
       "registrationDate": "Thu Feb 27 2025"
+    },
+    {
+      "id": "7778",
+      "firstName": "Arif",
+      "lastName": "Hossain",
+      "mail": "arif@gmail.com",
+      "password": "123456",
+      "profilePicUrl": null,
+      "ecoPoints": 5,
+      "completedTasks": [
+        {
+          "id": 1,
+          "dateCompleted": "2025-03-01"
+        }
+      ],
+      "registrationDate": "Sat Mar 01 2025"
     }
   ]
 }
