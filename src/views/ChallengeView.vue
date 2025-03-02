@@ -142,7 +142,7 @@ main {
 .challenge {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   width: 100%;
 }
 
