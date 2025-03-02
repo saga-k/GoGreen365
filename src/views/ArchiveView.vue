@@ -79,7 +79,7 @@ const isToday = (date) => {
 
     <div class="calendar-container">
       <div class="calendar-header">
-        <button @click="changeMonth(-1)" class="btn btn-sm btn-outline-primary">❮</button>
+        <button @click="changeMonth(-1)" class="btn-primary">❮</button>
         <h3 class = "h3">
           {{
             new Date(currentYear, currentMonth).toLocaleString('default', {
@@ -88,7 +88,7 @@ const isToday = (date) => {
             })
           }}
         </h3>
-        <button @click="changeMonth(1)" class="btn btn-sm btn-outline-primary">❯</button>
+        <button @click="changeMonth(1)" class="btn-primary">❯</button>
       </div>
 
       <div class="calendar-grid">
@@ -145,7 +145,7 @@ main {
   border: 1px;
   border-radius: 20px;
   padding: 15px;
-  background-color: #ffffff;
+  background-color: white;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -178,29 +178,21 @@ main {
   transition: all 0.2s ease-in-out;
 }
 
-.calendar-day:hover {
-  background-color: #e0f7fa;
+.calendar-day:not(.today):hover {
+  background-color: var(--border-color);
 }
 
 .today {
-  background-color: #ffdd57 !important; /* Highlight today's date */
-  color: #fff;
-  font-weight: bold;
-  border: 2px solid #ffa500;
-  box-shadow: 0px 2px 6px rgba(255, 165, 0, 0.4);
-}
-.calendar-day:hover {
-  background-color: #d4edda;
+  background-color: var(--green);
+  font-weight: 700;
 }
 
 .selected-date {
   margin-top: 20px;
   padding: 15px;
   border-radius: 12px;
-  background: linear-gradient(to right, #232322, #514a2c); /* Warm gradient */
-  color: #fff;
-  text-align: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
 }
 
@@ -221,7 +213,6 @@ main {
 }
 
 .selected-date li strong {
-  color: #fff;
   font-size: 1.1rem;
 }
 
@@ -229,7 +220,6 @@ main {
   font-size: 1rem;
   margin-top: 10px;
   font-weight: 700;
-  color: #fff;
 }
 
 /* Small animation when a new task is displayed */
@@ -247,6 +237,10 @@ main {
 .selected-date li,
 .selected-date p {
   animation: fadeIn 0.4s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--background-color);
 }
 
 @media (min-width: 768px) {
