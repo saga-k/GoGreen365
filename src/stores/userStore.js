@@ -20,6 +20,29 @@ export const useUserStore = defineStore('userStore', {
       }
     },
 
+    updatedUser(user) {
+      const updatedUser = {
+        id: String(this.users.length + 1),
+        ...user,
+      }
+      this.users.push(updatedUser)
+      console.log('this.users', this.users)
+      this.updateUser(updatedUser)
+    },
+
+    async updateUser(user, id) {
+      const promise = await fetch(`http://localhost:3000/users/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      })
+
+      const data = await promise.json()
+      console.log('post succesful', data)
+    },
+
     addUser(user) {
       const newUser = {
         id: String(this.users.length + 1),

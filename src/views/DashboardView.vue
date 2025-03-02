@@ -1,6 +1,7 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore'
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 import Navbar from '@/components/Navbar.vue'
 import PointsBar from '@/components/PointsBar.vue'
@@ -8,6 +9,7 @@ import dailyChallengeDashboard from '@/components/dailyChallengeDashboard.vue'
 
 import weeklyProgress from '@/components/weeklyProgress.vue'
 
+const router = useRouter()
 const userStore = useUserStore()
 let user = ref(null)
 let isFetched = ref(false)
@@ -27,6 +29,8 @@ onMounted(() => {
     isFetched.value = true
   }
 })
+
+const handleClickSettings = () => router.push('/settings')
 </script>
 
 <template>
@@ -36,7 +40,7 @@ onMounted(() => {
       <div id="headerTextWrapper">
         <h2 class="h2">Hej {{ user.firstName }}</h2>
         <p class="p-medium">Välkommen tillbaka!</p>
-        <button class="btn-primary">Kontoinställningar</button>
+        <button class="btn-primary" @click="handleClickSettings">Kontoinställningar</button>
       </div>
     </div>
 

@@ -50,6 +50,11 @@ const router = createRouter({
       path: '/successPassword',
       name: 'successPassword',
       component: () => import('../views/SuccessPassword.vue'),
+    }
+    ,{
+      path: '/settings',
+      name: 'settings',
+      component: () => import('../views/AccountSettings.vue'),
     },
   ],
 })

@@ -42,15 +42,19 @@
     {
       "id": "34ba",
       "firstName": "Arif",
-      "lastName": "Hossain",
+      "lastName": "Sumon",
       "mail": "arif@gmail.com",
-      "password": "123456",
+      "password": "12345678",
       "profilePicUrl": null,
-      "ecoPoints": 5,
+      "ecoPoints": 10,
       "completedTasks": [
         {
           "id": 1,
           "dateCompleted": "2025-03-01"
+        },
+        {
+          "id": 2,
+          "dateCompleted": "2025-03-02"
         }
       ],
       "registrationDate": "Sat Mar 01 2025"
