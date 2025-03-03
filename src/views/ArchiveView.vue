@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import Navbar from '@/components/Navbar.vue'
 import DateDisplay from '@/components/dateDisplay.vue'
 import { useUserStore } from '@/stores/userStore.js'
@@ -68,13 +68,20 @@ const isToday = (date) => {
     date.getFullYear() === todayDate.getFullYear()
   )
 }
+// Responsive dateDisplay for mobile view
+const isMobile = ref(window.innerWidth <= 390)
+onMounted(() => {
+  window.addEventListener('resize', () => {
+    isMobile.value = window.innerWidth <= 390
+  })
+})
 </script>
 
 <template>
   <main class="archive-container">
     <div class="header">
       <h2 class="h2">Arkiverad utmaning</h2>
-      <DateDisplay />
+      <DateDisplay class="date" :showPrefix="!isMobile"/>
     </div>
 
     <div class="calendar-container">
