@@ -259,6 +259,15 @@ main {
     font-size: 18px;
   }
 
+  .calendar-grid {
+    gap: 10px;
+  }
+
+  .calendar-day {
+    height: 70px;
+    font-size: 1.2rem;
+  }
+
 }
 
 @media (min-width: 1024px) {

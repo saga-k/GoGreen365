@@ -142,4 +142,10 @@ main {
 #navBar {
   z-index: 2;
 }
+
+@media  (min-width: 768px) {
+  #list {
+   gap: 1rem;
+  }
+}
 </style>

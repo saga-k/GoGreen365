@@ -119,6 +119,7 @@ const closeSuccess = () => {
 @media (min-width: 768px) {
   #orgModal {
     max-width: 700px;
+    gap: 1.5rem;
   }
   #closeIcon {
     height: 30px;
