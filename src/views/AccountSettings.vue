@@ -24,6 +24,12 @@ const emailError = ref('')
 const passwordError = ref('')
 const oldPasswordError = ref('')
 
+// Logout
+const handleLogout = () => {
+  userStore.logout()
+  router.push('/')
+}
+
 // Fetch current user
 const currentUser = computed(() => userStore.currentUser)
 
@@ -169,6 +175,7 @@ const updateUser = async () => {
       <span v-if="passwordError" class="error-message">{{ passwordError }}</span>
 
       <button @click="updateUser" class="update-button">Spara ändringar</button>
+      <button @click="handleLogout" class="update-button">Logout</button>
     </div>
     <Navbar />
   </div>

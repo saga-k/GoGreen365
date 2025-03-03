@@ -14,7 +14,7 @@ export const useUserStore = defineStore('userStore', {
         }
         const users = await promise.json()
         this.users = users
-        console.log('this.users:', this.users)
+        // console.log('this.users:', this.users)
       } catch (error) {
         console.error(error)
       }
@@ -116,7 +116,7 @@ export const useUserStore = defineStore('userStore', {
 
     logout() {
       this.currentUser.value = null
-      localStorage.removeItem('user')
+      localStorage.removeItem(this.currentUser)
     },
   },
 })

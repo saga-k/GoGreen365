@@ -7,7 +7,7 @@
       "mail": "maria@mail.com",
       "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 25,
+      "ecoPoints": 30,
       "completedTasks": [
         {
           "id": 1,
@@ -24,6 +24,10 @@
         {
           "id": 5,
           "dateCompleted": "2025-03-01"
+        },
+        {
+          "id": 6,
+          "dateCompleted": "2025-03-02"
         }
       ],
       "registrationDate": "Tue Feb 25 2025"
@@ -41,12 +45,12 @@
     },
     {
       "id": "34ba",
-      "firstName": "Arif",
+      "firstName": "Kate",
       "lastName": "Sumon",
       "mail": "arif@gmail.com",
       "password": "12345678",
       "profilePicUrl": null,
-      "ecoPoints": 10,
+      "ecoPoints": 15,
       "completedTasks": [
         {
           "id": 1,
@@ -55,6 +59,10 @@
         {
           "id": 2,
           "dateCompleted": "2025-03-02"
+        },
+        {
+          "id": 3,
+          "dateCompleted": "2025-03-03"
         }
       ],
       "registrationDate": "Sat Mar 01 2025"
