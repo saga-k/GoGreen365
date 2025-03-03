@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 
 // Add showPrefix prop with default value true
-const props = defineProps({
+defineProps({
   showPrefix: {
     type: Boolean,
     default: true

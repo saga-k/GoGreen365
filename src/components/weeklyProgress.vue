@@ -123,10 +123,10 @@ const asignProgressValue = () => {
     <h3 class="h3" id="title">Veckans Framsteg</h3>
     <div id="firstRow">
       <div id="topRigt">
-        <img :src="imageUrl" style="height: 50px; width: 50px; border-radius: 50px;">
+        <img :src="imageUrl" class="planet-img">
         <div id="doughnutChart">
           <h3 class="h3" id="chartNumber">{{ daysDone }}/7</h3>
-          <svg width="110" height="110" view-box="0 0 110 110">
+          <svg width="110" height="110" viewBox="0 0 110 110">
 
             <circle class="circleBg" cx="55" cy="55" r="50" fill="none" stroke="#ddd" stroke-width="10"></circle>
 
@@ -141,12 +141,11 @@ const asignProgressValue = () => {
     <div id="week">
       <div v-for="(weekDay, index) in weekDays" :key="index" class="weekDay">
         <p class="p-small p-day">{{ weekDay.day }}</p>
-        <svg width="42" height="42" view-box="0 0 42 42">
+        <svg width="42" height="42" viewBox="0 0 42 42">
           <circle class="circleBg" cx="21" cy="21" r="19" fill="none"
             :stroke="weekDay.challengeDone ? 'var(--green)' : '#ddd'" stroke-width="3"></circle>
         </svg>
       </div>
-
     </div>
   </div>
 </template>
@@ -175,6 +174,13 @@ const asignProgressValue = () => {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.planet-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
 }
 
 #doughnutChart {
@@ -203,5 +209,54 @@ const asignProgressValue = () => {
 .p-day {
   position: absolute;
   z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .h3 {
+    font-size: 24px;
+  }
+
+  #componentWrapper {
+    padding: 2rem;
+  }
+
+  #doughnutChart circle.circleBg {
+    stroke-width: 10;
+  }
+
+  #doughnutChart svg {
+    width: 140px;
+    height: 140px;
+  }
+
+  #topRigt {
+    gap: 1.5rem;
+  }
+
+  #topRigt img {
+    height: 70px;
+    width: 70px;
+  }
+
+  #week {
+    margin-top: 2rem;
+  }
+
+  .weekDay svg {
+    width: 70px;
+    height: 70px;
+  }
+
+  .weekDay svg .circleBg {
+    stroke-width: 4;
+  }
+
+  #chartNumber {
+    font-size: 24px;
+  }
+
+  .p-day {
+    font-size: 18px;
+  }
 }
 </style>

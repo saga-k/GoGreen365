@@ -94,6 +94,9 @@ main {
 }
 
 @media (min-width: 768px) {
+  main {
+    gap: 1.5rem;
+  }
   #profilePic {
     height: 200px;
   }
