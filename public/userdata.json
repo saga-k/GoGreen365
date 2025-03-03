@@ -45,12 +45,12 @@
     },
     {
       "id": "34ba",
-      "firstName": "Kate",
-      "lastName": "Sumon",
-      "mail": "arif@gmail.com",
+      "firstName": "Sumon",
+      "lastName": "Hossain",
+      "mail": "sumon@gmail.com",
       "password": "12345678",
       "profilePicUrl": null,
-      "ecoPoints": 15,
+      "ecoPoints": 20,
       "completedTasks": [
         {
           "id": 1,
@@ -63,6 +63,10 @@
         {
           "id": 3,
           "dateCompleted": "2025-03-03"
+        },
+        {
+          "id": 4,
+          "dateCompleted": "2025-03-04"
         }
       ],
       "registrationDate": "Sat Mar 01 2025"

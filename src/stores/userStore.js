@@ -115,8 +115,31 @@ export const useUserStore = defineStore('userStore', {
     },
 
     logout() {
-      this.currentUser.value = null
-      localStorage.removeItem(this.currentUser)
+      this.currentUser = null
+      localStorage.removeItem('currentUser')
+    },
+
+    async deleteUser() {
+      if (!this.currentUser) return false
+
+      try {
+        const response = await fetch(`http://localhost:3000/users/${this.currentUser.id}`, {
+          method: 'DELETE',
+        })
+
+        if (!response.ok) throw new Error('Failed to delete user')
+
+        // Clear local user data
+        this.users = this.users.filter((user) => user.id !== this.currentUser.id)
+        localStorage.removeItem('currentUser')
+        this.currentUser = null
+
+        console.log('User deleted successfully')
+        return true
+      } catch (error) {
+        console.error('Error deleting user:', error)
+        return false
+      }
     },
   },
 })

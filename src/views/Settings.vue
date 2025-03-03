@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
 import Navbar from '@/components/Navbar.vue'
 
-// Modal - confirmation popup
 const showLogoutPopup = ref(false)
 const showDeletePopup = ref(false)
 const showDeleteResult = ref(false)
@@ -12,57 +11,47 @@ const showDeleteResult = ref(false)
 const router = useRouter()
 const userStore = useUserStore()
 
-// Fetch user data
 onMounted(async () => {
   await userStore.fetchUsers()
 })
 
-// Update password
-const navigateToUpdatePassword = () => {
-  router.push('/updatePassword')
-}
+// const navigateToUpdatePassword = () => {
+//   router.push('/updatePassword')
+// }
 
-// Logout Modal - confirmation popup
-// Popup showup when click
 const logout = () => {
   showLogoutPopup.value = true
 }
 
-// If confirm to logout push to login page
 const confirmLogout = () => {
   showLogoutPopup.value = false
-  userStore.logout() // Clear user data
+  userStore.logout()
   router.push('/')
 }
 
-// If not stay remaining to current page
 const cancelLogout = () => {
   showLogoutPopup.value = false
 }
 
-// Delete account Modal - confirmation popup
-// Popup showup when click
 const deleteAccount = () => {
   showDeletePopup.value = true
 }
 
-// If confirm to delete push to login page
 const confirmDelete = async () => {
   const success = await userStore.deleteUser()
   if (success) {
-    showDeletePopup.value = false
-    showDeleteResult.value = true
+    alert('Ditt konto har raderats!')
+    router.push('/')
+  } else {
+    alert('Fel vid radering av konto.')
   }
 }
 
-// Final ask
 const confirmFinalDelete = () => {
-  showDeletePopup.value = false
   showDeleteResult.value = false
   router.push('/')
 }
 
-// If not stay remaining to current page
 const cancelDelete = () => {
   showDeletePopup.value = false
 }
@@ -72,34 +61,32 @@ const cancelDelete = () => {
   <div class="setting-container">
     <img src="@/assets/images/happy-earth.png" alt="Happy Planet" class="earth-image" />
 
-    <div class="name-container">
+    <!-- Edit name -->
+    <div class="name-container" @click="router.push('/editName')">
       <h1 v-if="userStore.currentUser">
         {{ userStore.currentUser.firstName }} {{ userStore.currentUser.lastName }}
-        <router-link to="/accountsetting">
-          <img src="/icons/setting-mark.png" alt="setting-mark" class="setting-mark-img" />
-        </router-link>
+        <img src="/icons/setting-mark.png" alt="Edit Name" class="setting-mark-img" />
       </h1>
-      <h1 v-else>...</h1>
     </div>
 
-    <div class="email-container">
+    <!-- Edit email -->
+    <div class="email-container" @click="router.push('/editEmail')">
       <h2 v-if="userStore.currentUser">
         {{ userStore.currentUser.mail }}
-        <router-link to="/accountsetting">
-          <img src="/icons/setting-mark.png" alt="setting-mark" class="setting-mark-img" />
-        </router-link>
+        <img src="/icons/setting-mark.png" alt="Edit Email" class="setting-mark-img" />
       </h2>
     </div>
 
-    <button @click="navigateToUpdatePassword" class="update-password-button">
-      Uppdateara lösenord
+    <!-- Update password -->
+    <button @click="router.push('/updatePassword')" class="update-password-button">
+      Uppdatera lösenord
     </button>
 
+    <!-- Logout and delete buttons -->
     <button @click="logout" class="logout-button">Logga ut</button>
-
     <h2 class="delete-account" @click="deleteAccount">Radera konto</h2>
 
-    <!-- Logout confirmation popup -->
+    <!-- Modals (Logout, Delete) -->
     <div v-if="showLogoutPopup" class="modal-overlay">
       <div class="modal">
         <p>Är du säker på att du vill logga ut?</p>
@@ -110,10 +97,9 @@ const cancelDelete = () => {
       </div>
     </div>
 
-    <!-- Deleat account confirmation popup -->
     <div v-if="showDeletePopup" class="modal-overlay">
       <div class="modal">
-        <p>Är du säker på att du vill <strong>radera</strong> denna konto?</p>
+        <p>Är du säker på att du vill <strong>radera</strong> detta konto?</p>
         <div class="button-container">
           <button @click="confirmDelete" class="confirm-button">Ja</button>
           <button @click="cancelDelete" class="cancel-button">Nej</button>
@@ -121,7 +107,6 @@ const cancelDelete = () => {
       </div>
     </div>
 
-    <!-- Final confirmation popup -->
     <div v-if="showDeleteResult" class="modal-overlay">
       <div class="modal">
         <p><strong>Ditt konto har raderats!</strong></p>
@@ -130,8 +115,9 @@ const cancelDelete = () => {
         </div>
       </div>
     </div>
+
+    <Navbar id="navBar" page="setting"></Navbar>
   </div>
-  <Navbar id="navBar" page="setting"></Navbar>
 </template>
 
 <style scoped>
@@ -145,6 +131,16 @@ const cancelDelete = () => {
   background-color: #fef7ee;
   color: #3f3d3d;
   font-family: 'Comfortaa', serif;
+}
+
+.name-container,
+.email-container {
+  cursor: pointer;
+}
+
+.name-container:hover,
+.email-container:hover {
+  opacity: 0.8;
 }
 
 /* Image - Logo */
