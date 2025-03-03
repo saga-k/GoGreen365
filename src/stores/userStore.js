@@ -70,6 +70,13 @@ export const useUserStore = defineStore('userStore', {
       return foundUser
     },
 
+    loadCurrentUser() {
+      const storedUser = JSON.parse(localStorage.getItem('currentUser'))
+      if (storedUser) {
+        this.currentUser = storedUser
+      }
+    },
+
     addEcoPoints(user, points) {
       console.log('user', user)
       user.ecoPoints += points
