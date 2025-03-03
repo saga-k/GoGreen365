@@ -69,6 +69,7 @@ const closeSuccess = () => {
 <style scoped>
 #orgModal {
   padding: 50px 20px 50px 20px;
+  margin: 0 auto 40px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -114,4 +115,26 @@ const closeSuccess = () => {
   border-radius: 300px;
   margin-bottom: 2rem;
 }
+
+@media (min-width: 768px) {
+  #orgModal {
+    max-width: 700px;
+  }
+  #closeIcon {
+    height: 30px;
+  }
+  #image {
+    max-width: 700px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #orgModal {
+    max-width: 900px;
+  }
+  #image {
+    max-width: 900px;
+  }
+}
+
 </style>

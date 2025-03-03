@@ -115,7 +115,7 @@ const handleCloseModal = () => {
     </div>
   </main>
 
-  <orgModal id="orgModal" v-if="modalIsOpen" :org="chosenOrg" :user="user" @close-modal="handleCloseModal"></orgModal>
+  <orgModal v-if="modalIsOpen" :org="chosenOrg" :user="user" @close-modal="handleCloseModal"></orgModal>
 
   <Navbar id="navBar" page="points"></Navbar>
 </template>
@@ -133,12 +133,6 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
-
-#orgModal {
-  background-color: var(--background-color);
-  min-height: 100vh;
-  margin-bottom: 40px;
 }
 
 .h2 {
