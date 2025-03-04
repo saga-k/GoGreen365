@@ -14,8 +14,7 @@ const next = () => {
     <p>Logga in igen med ditt nya lösenord</p>
     <button @click="next" class="success-button">Tillbaka till logga in</button>
 
-    <img src="/uiImages/Confetti.svg" alt="Confetti" />
-
+    <img src="/UiImages/Confetti.svg" alt="Confetti" />
   </div>
 </template>
 <style scoped>
