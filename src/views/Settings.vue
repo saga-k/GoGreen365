@@ -13,13 +13,30 @@ const passwordError = ref('')
 const router = useRouter()
 const userStore = useUserStore()
 
+let user = ref(null)
+
 onMounted(async () => {
   await userStore.fetchUsers()
+  setCurrentUser()
 })
 
 // const navigateToUpdatePassword = () => {
 //   router.push('/updatePassword')
 // }
+
+const setCurrentUser = () => {
+  user.value = userStore.currentUser
+  //If userStore doesnt have a current user, get current user from local storage
+  if (user.value === null || user.value === undefined) {
+    user.value = JSON.parse(localStorage.getItem('currentUser'))
+    userStore.currentUser = user.value
+  }
+
+  //If there's no user in local storage, user is logged out and will be rerouted to login page
+  if (user.value === null || user.value === undefined) {
+    router.push('/')
+  }
+}
 
 const logout = () => {
   showLogoutPopup.value = true
