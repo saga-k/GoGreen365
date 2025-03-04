@@ -48,4 +48,18 @@ import dateDisplay from './dateDisplay.vue';
   width: 7rem;
   border-radius: 8px;
 }
+
+@media (min-width: 768px) {
+  .h3 {
+    font-size: 24px;
+  }
+  #wrapper {
+    height: 10rem;
+    padding: 2rem;
+  }
+  #placeHolder {
+    width: 10rem;
+    height: 100%;
+  }
+}
 </style>

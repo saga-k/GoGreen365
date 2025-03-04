@@ -65,4 +65,27 @@ const props = defineProps({
   text-decoration: underline;
   font-weight: 700 !important;
 }
+
+@media (min-width: 768px) {
+  .navbar {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 660px;
+    border-radius: 20px;
+
+  }
+  .link img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar {
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 860px;
+  }
+}
 </style>
