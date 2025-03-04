@@ -4,9 +4,11 @@ import Navbar from '@/components/Navbar.vue'
 import DateDisplay from '@/components/dateDisplay.vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { useChallengeStore } from '@/stores/challengeStore.js'
+import { useRouter } from 'vue-router'
 
 const userStore = useUserStore()
 const challengeStore = useChallengeStore()
+const router = useRouter()
 const today = new Date()
 const selectedDate = ref(null)
 const currentMonth = ref(today.getMonth())
@@ -17,6 +19,8 @@ onMounted(async () => {
   const storedUser = JSON.parse(localStorage.getItem('currentUser'))
   if (storedUser) {
     userStore.currentUser = storedUser
+  } else if (storedUser === undefined || storedUser === null){
+    router.push('/')
   }
 
   if (!challengeStore.challenges.length) {
