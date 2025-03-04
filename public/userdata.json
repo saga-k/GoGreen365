@@ -66,10 +66,10 @@
     },
     {
       "id": "cf34",
-      "firstName": "Master Shifu",
+      "firstName": "Shifu",
       "lastName": "Cat",
       "mail": "shifu@gmail.com",
-      "password": "123456",
+      "password": "12",
       "profilePicUrl": null,
       "ecoPoints": 5,
       "completedTasks": [
