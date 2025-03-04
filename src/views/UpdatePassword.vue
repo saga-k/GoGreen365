@@ -13,6 +13,9 @@ const passwordError = ref('')
 const oldPasswordError = ref('')
 const errorMessage = ref('')
 
+
+const passwordPattern = /^[a-zA-Z0-9]{6,}$/
+
 const currentUser = computed(() => userStore.currentUser)
 
 onMounted(() => {
@@ -34,6 +37,11 @@ const savePassword = async () => {
 
   if (!oldPassword.value || !newPassword.value || !confirmNewPassword.value) {
     errorMessage.value = 'Vänligen fyll i alla rutor!'
+    return
+  }
+
+    if (!passwordPattern.test(newPassword.value)) {
+    passwordError.value = 'Lösenordet måste vara minst 6 tecken och endast innehålla bokstäver och siffror.'
     return
   }
 
