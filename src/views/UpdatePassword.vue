@@ -33,7 +33,7 @@ const savePassword = async () => {
   clearErrors()
 
   if (!oldPassword.value || !newPassword.value || !confirmNewPassword.value) {
-    errorMessage.value = 'Alla fält måste fyllas i!'
+    errorMessage.value = 'Vänligen fyll i alla rutor!'
     return
   }
 
@@ -41,7 +41,7 @@ const savePassword = async () => {
   if (newPassword.value || confirmNewPassword.value) {
     // 🔹 Validate old password before allowing change
     if (!oldPassword.value) {
-      oldPasswordError.value = 'Du måste ange ditt nuvarande lösenord för att ändra det!'
+      oldPasswordError.value = 'Ange ditt nuvarande lösenord!'
       return
     }
 
@@ -74,7 +74,7 @@ const savePassword = async () => {
     alert('Profil uppdaterad!')
 
     //  Redirect to Dashboard
-    router.push('/settings')
+    router.push('/successPassword')
   } catch (error) {
     console.error('Error updating user:', error)
     errorMessage.value = 'Fel vid uppdatering av konto, försök igen senare.'
@@ -90,30 +90,49 @@ const savePassword = async () => {
   <div class="update-password-container">
     <h1>Uppdatera lösenord</h1>
     <!-- 🔹 Extra Security: Old Password Required to Change -->
-    <label for="oldPassword">Nuvarande lösenord (endast om du ändrar lösenordet)</label>
+    <label for="oldPassword" class="label">Nuvarande lösenord</label>
     <input type="password" v-model="oldPassword" class="form-control" />
     <span v-if="oldPasswordError" class="error-message">{{ oldPasswordError }}</span>
 
-    <label for="newPassword">Nytt lösenord</label>
+    <label for="newPassword" class="label">Nytt lösenord</label>
     <input type="password" v-model="newPassword" class="form-control" />
 
-    <label for="confirmNewPassword">Bekräfta nytt lösenord</label>
+    <label for="confirmNewPassword" class="label">Bekräfta nytt lösenord</label>
     <input type="password" v-model="confirmNewPassword" class="form-control" />
     <span v-if="passwordError" class="error-message">{{ passwordError }}</span>
     <button @click="savePassword">Spara</button>
-    <p v-if="errorMessage">{{ errorMessage }}</p>
+    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   </div>
 </template>
 
 <style scoped>
+/* Base style */
 .update-password-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 20px;
+  padding-top: 100px;
   font-family: 'Comfortaa', serif;
+  background-color: #fef7ee;
+  color: #3f3d3d;
+  min-height: 100vh;
 }
 
+/* Font size */
+h1 {
+  font-size: 36px;
+  margin-bottom: 3rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+/* Input */
 input {
   margin: 10px 0;
   padding: 10px;
@@ -123,21 +142,32 @@ input {
   border-radius: 6px;
 }
 
+input:focus {
+  outline: none;
+  border-color: #c2e07a;
+  box-shadow: 0 0 0 2px rgba(194, 224, 122, 0.3);
+}
+
+/* Buttons */
 button {
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #c2e07a;
+  color: #3f3d3d;
   border: none;
   border-radius: 39px;
   font-weight: bold;
   cursor: pointer;
+  min-width: 300px;
+  font-size: 1rem;
+  font-family: 'Comfortaa', serif;
 }
 
 button:hover {
   background-color: #a5c261;
 }
 
-p {
+.error-message {
   color: red;
   margin-top: 10px;
 }
