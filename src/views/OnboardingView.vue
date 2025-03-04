@@ -3,96 +3,111 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-const avatars = [
-  { src: 'https://randomuser.me/api/portraits/men/1.jpg', alt: 'Avatar 1' },
-  { src: 'https://randomuser.me/api/portraits/women/2.jpg', alt: 'Avatar 2' },
-  { src: 'https://randomuser.me/api/portraits/men/3.jpg', alt: 'Avatar 3' },
-]
+// const planets = [
+//   { src: '/images/planet-sad.svg', alt: 'Sad Planet', size: '50px' },
+//   { src: '/images/planet-neutral.svg', alt: 'Neutral Planet', size: '70px' },
+//   { src: '/images/planet-happy.png', alt: 'Happy Planet', size: '100px' },
+// ]
 
 const goToDashboard = () => {
   router.push('/dashboard')
 }
 </script>
-
 <template>
   <div class="onboarding-container">
-    <!-- Avatar Section -->
-    <div class="avatar-container">
-      <img
-        v-for="(avatar, index) in avatars"
-        :key="index"
-        :src="avatar.src"
-        :alt="avatar.alt"
-        class="avatar"
-      />
+    <!-- Planet Icons -->
+    <div class="planet-wrapper">
+      <img src="/images/planet-sad.svg" alt="Sad Planet" class="planet planet-sad" />
+      <img src="/images/planet-neutral.svg" alt="Neutral Planet" class="planet planet-neutral" />
+      <img src="/images/planet-happy.png" alt="Happy Planet" class="planet planet-happy" />
     </div>
 
-    <!-- Title & Text -->
-    <h1>Välkommen</h1>
+    <!-- Title -->
+    <h1>Välkommen!</h1>
+
+    <!-- Description -->
     <p class="description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.
-      Sed cursus ante dapibus diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-      nec odio. Praesent libero. Sed cursus ante dapibus diam. Lorem ipsum dolor sit amet,
-      consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.
-      Sed cursus ante dapibus diam.
+      Här får du dagliga utmaningar som hjälper dig att leva mer hållbart och göra smartare val för
+      planeten. Följ dina framsteg, samla poäng och upptäck hur små förändringar kan göra stor
+      skillnad. Tillsammans skapar vi en grönare framtid!
     </p>
 
-    <!-- 'Gå vidare' Button -->
+    <!-- Continue Button -->
     <button @click="goToDashboard" class="continue-button">Gå vidare</button>
   </div>
 </template>
 
 <style scoped>
 .onboarding-container {
+  background-color: #fef7ee;
+  min-height: 100vh;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  padding: 20px;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.avatar-container {
-  display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Comfortaa', serif;
 }
 
-.avatar {
+.planet-wrapper {
+  position: relative;
+  width: 280px; /* Increased width for more room */
+  height: 220px; /* Slightly taller */
+  margin-bottom: 30px;
+}
+
+.planet {
+  position: absolute;
+  object-fit: contain;
+}
+
+/* Precise positions based on the Figma screenshot */
+.planet-sad {
   width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  top: 100px;
+  left: 0;
+}
+
+.planet-neutral {
+  width: 105px;
+  top: 0;
+  left: 55px;
+}
+
+.planet-happy {
+  width: 140px;
+  top: 70px;
+  right: 0;
 }
 
 h1 {
-  font-size: 24px;
-  color: #2e7d32;
+  font-size: 28px;
+  color: #3f3d3d;
+  margin-bottom: 20px;
 }
 
 .description {
   font-size: 16px;
-  color: #555;
-  margin-bottom: 20px;
-  text-align: justify;
+  color: #3f3d3d;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  max-width: 400px;
 }
 
 .continue-button {
-  background-color: #4caf50;
-  color: white;
+  background-color: #c2e07a;
+  color: #3f3d3d;
   font-size: 18px;
-  padding: 10px 20px;
+  font-weight: bold;
+  padding: 12px 30px;
   border: none;
-  border-radius: 8px;
+  border-radius: 39px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 .continue-button:hover {
-  background-color: #388e3c;
+  background-color: #a5c261;
 }
 </style>

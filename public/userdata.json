@@ -7,7 +7,7 @@
       "mail": "maria@mail.com",
       "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 25,
+      "ecoPoints": 30,
       "completedTasks": [
         {
           "id": 1,
@@ -24,16 +24,20 @@
         {
           "id": 5,
           "dateCompleted": "2025-03-01"
+        },
+        {
+          "id": 6,
+          "dateCompleted": "2025-03-02"
         }
       ],
       "registrationDate": "Tue Feb 25 2025"
     },
     {
       "id": "9379",
-      "firstName": "hi",
-      "lastName": "hi",
-      "mail": "hi@mail.com",
-      "password": "hi12345",
+      "firstName": "arif",
+      "lastName": "hossain",
+      "mail": "arif@gmail.com",
+      "password": "123456",
       "profilePicUrl": null,
       "ecoPoints": 5,
       "completedTasks": [
@@ -43,6 +47,38 @@
         }
       ],
       "registrationDate": "Thu Feb 27 2025"
+    },
+    {
+      "id": "cd73",
+      "firstName": "Sumon",
+      "lastName": "Hossain",
+      "mail": "sumon@gmail.com",
+      "password": "123456",
+      "profilePicUrl": null,
+      "ecoPoints": 5,
+      "completedTasks": [
+        {
+          "id": 1,
+          "dateCompleted": "2025-03-04"
+        }
+      ],
+      "registrationDate": "Tue Mar 04 2025"
+    },
+    {
+      "id": "cf34",
+      "firstName": "Master Shifu",
+      "lastName": "Cat",
+      "mail": "shifu@gmail.com",
+      "password": "123456",
+      "profilePicUrl": null,
+      "ecoPoints": 5,
+      "completedTasks": [
+        {
+          "id": 1,
+          "dateCompleted": "2025-03-04"
+        }
+      ],
+      "registrationDate": "Tue Mar 04 2025"
     }
   ]
 }

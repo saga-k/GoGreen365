@@ -51,6 +51,31 @@ const router = createRouter({
       name: 'successPassword',
       component: () => import('../views/SuccessPassword.vue'),
     },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('../views/Settings.vue'),
+    },
+    {
+      path: '/accountsetting',
+      name: 'accountsetting',
+      component: () => import('../views/AccountSettings.vue'),
+    },
+    {
+      path: '/editName',
+      name: 'editName',
+      component: () => import('../views/EditName.vue'),
+    },
+    {
+      path: '/editEmail',
+      name: 'editEmail',
+      component: () => import('../views/EditEmail.vue'),
+    },
+    {
+      path: '/updatePassword',
+      name: 'updatePassword',
+      component: () => import('../views/UpdatePassword.vue'),
+    },
   ],
 })
 

@@ -2,8 +2,10 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import { useUserStore } from '@/stores/userStore'
 
 const router = useRouter()
+const userStore = useUserStore()
 
 const firstName = ref('')
 const lastName = ref('')
@@ -68,8 +70,19 @@ const createAccount = async () => {
   }
 
   try {
-    await axios.post('http://localhost:3000/users', newUser)
-    router.push('/onboarding') // Redirect to login after account creation
+    // Save user to backend
+    const response = await axios.post('http://localhost:3000/users', newUser)
+
+    if (response.status === 201) {
+      const createdUser = response.data
+
+      // Automatically log in the user
+      userStore.currentUser = createdUser
+      localStorage.setItem('currentUser', JSON.stringify(createdUser))
+
+      // Redirect to onboarding page
+      router.push('/onboarding')
+    }
   } catch (error) {
     errorMessage.value = 'Fel vid skapande av konto, försök igen senare.'
     console.error('Error creating account:', error)
