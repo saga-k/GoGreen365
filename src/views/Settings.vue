@@ -7,6 +7,8 @@ import Navbar from '@/components/Navbar.vue'
 const showLogoutPopup = ref(false)
 const showDeletePopup = ref(false)
 const showDeleteResult = ref(false)
+const passwordInput = ref('')
+const passwordError = ref('')
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -38,8 +40,25 @@ const deleteAccount = () => {
 }
 
 const confirmDelete = async () => {
+  passwordError.value = ''
+
+  if (!passwordInput.value) {
+    passwordError.value = 'Vänligen ange ditt lösenord.'
+    return
+  }
+
+  /*
+    Is only safe if passwords are stored in plain text (which is not recommended in real-world apps).
+    If you later switch to hashed passwords, this logic will need to compare via backend verification instead.
+  */
+  if (passwordInput.value !== userStore.currentUser.password) {
+    passwordError.value = 'Felaktigt lösenord.'
+    return
+  }
+
   const success = await userStore.deleteUser()
   if (success) {
+    passwordInput.value = ''
     alert('Ditt konto har raderats!')
     router.push('/')
   } else {
@@ -54,6 +73,8 @@ const confirmFinalDelete = () => {
 
 const cancelDelete = () => {
   showDeletePopup.value = false
+  passwordInput.value = ''
+  passwordError.value = ''
 }
 </script>
 
@@ -100,6 +121,17 @@ const cancelDelete = () => {
     <div v-if="showDeletePopup" class="modal-overlay">
       <div class="modal">
         <p>Är du säker på att du vill <strong>radera</strong> detta konto?</p>
+
+        <input
+          type="password"
+          v-model="passwordInput"
+          placeholder="Ange ditt lösenord"
+          class="form-control"
+          autocomplete="current-password"
+        />
+
+        <p v-if="passwordError" class="error-message">{{ passwordError }}</p>
+
         <div class="button-container">
           <button @click="confirmDelete" class="confirm-button">Ja</button>
           <button @click="cancelDelete" class="cancel-button">Nej</button>
@@ -231,6 +263,19 @@ h2 {
 .modal p {
   margin-bottom: 3rem;
   margin-top: 3rem;
+}
+.modal input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  max-width: 250px;
+  border: 1px solid #f4dec3;
+  border-radius: 6px;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-top: 0.5rem;
 }
 
 /* Buttons in modal or popup */
