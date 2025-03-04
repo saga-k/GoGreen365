@@ -49,32 +49,36 @@
       "registrationDate": "Thu Feb 27 2025"
     },
     {
-      "id": "34ba",
+      "id": "cd73",
       "firstName": "Sumon",
       "lastName": "Hossain",
       "mail": "sumon@gmail.com",
-      "password": "12345678",
+      "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 20,
+      "ecoPoints": 5,
       "completedTasks": [
         {
           "id": 1,
-          "dateCompleted": "2025-03-01"
-        },
-        {
-          "id": 2,
-          "dateCompleted": "2025-03-02"
-        },
-        {
-          "id": 3,
-          "dateCompleted": "2025-03-03"
-        },
-        {
-          "id": 4,
           "dateCompleted": "2025-03-04"
         }
       ],
-      "registrationDate": "Sat Mar 01 2025"
+      "registrationDate": "Tue Mar 04 2025"
+    },
+    {
+      "id": "cf34",
+      "firstName": "Master Shifu",
+      "lastName": "Cat",
+      "mail": "shifu@gmail.com",
+      "password": "123456",
+      "profilePicUrl": null,
+      "ecoPoints": 5,
+      "completedTasks": [
+        {
+          "id": 1,
+          "dateCompleted": "2025-03-04"
+        }
+      ],
+      "registrationDate": "Tue Mar 04 2025"
     }
   ]
 }
