@@ -1,19 +1,21 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 import Navbar from '@/components/Navbar.vue'
-import PointsBar from '@/components/PointsBar.vue';
-import dailyChallengeDashboard from '@/components/dailyChallengeDashboard.vue';
+import PointsBar from '@/components/PointsBar.vue'
+import dailyChallengeDashboard from '@/components/dailyChallengeDashboard.vue'
 
-import weeklyProgress from '@/components/weeklyProgress.vue';
+import weeklyProgress from '@/components/weeklyProgress.vue'
 
+const router = useRouter()
 const userStore = useUserStore()
 let user = ref(null)
 let isFetched = ref(false)
 
 onMounted(() => {
-  user.value = userStore.currentUser;
+  user.value = userStore.currentUser
   //If userStore doesnt have a current user, get current user from local storage
   if (user.value === null || user.value === undefined) {
     user.value = JSON.parse(localStorage.getItem('currentUser'))
@@ -26,31 +28,28 @@ onMounted(() => {
   } else {
     isFetched.value = true
   }
-
 })
 
-
+const handleClickSettings = () => router.push('/settings')
 </script>
 
 <template>
   <main v-if="isFetched === true">
-
     <div id="headerWrapper">
       <img id="profilePic" :src="user?.profilePicUrl || 'src/assets/happyPlanet.svg'" />
       <div id="headerTextWrapper">
         <h2 class="h2">Hej {{ user.firstName }}</h2>
         <p class="p-medium">Välkommen tillbaka!</p>
-        <button class="btn-primary">Kontoinställningar</button>
+        <button class="btn-primary" @click="handleClickSettings">Kontoinställningar</button>
       </div>
     </div>
 
-    <PointsBar :points='user.ecoPoints'></PointsBar>
+    <PointsBar :points="user.ecoPoints"></PointsBar>
     <dailyChallengeDashboard></dailyChallengeDashboard>
 
     <weeklyProgress></weeklyProgress>
 
     <button id="inviteButton" class="btn-primary">Bjud in dina vänner</button>
-
   </main>
   <Navbar id="navBar" page="dashboard"></Navbar>
 </template>

@@ -14,10 +14,33 @@ export const useUserStore = defineStore('userStore', {
         }
         const users = await promise.json()
         this.users = users
-        console.log('this.users:', this.users)
+        // console.log('this.users:', this.users)
       } catch (error) {
         console.error(error)
       }
+    },
+
+    updatedUser(user) {
+      const updatedUser = {
+        id: String(this.users.length + 1),
+        ...user,
+      }
+      this.users.push(updatedUser)
+      console.log('this.users', this.users)
+      this.updateUser(updatedUser)
+    },
+
+    async updateUser(user, id) {
+      const promise = await fetch(`http://localhost:3000/users/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      })
+
+      const data = await promise.json()
+      console.log('post succesful', data)
     },
 
     addUser(user) {
@@ -45,6 +68,13 @@ export const useUserStore = defineStore('userStore', {
     getUserById(id) {
       let foundUser = this.users.find((user) => user.id === id)
       return foundUser
+    },
+
+    loadCurrentUser() {
+      const storedUser = JSON.parse(localStorage.getItem('currentUser'))
+      if (storedUser) {
+        this.currentUser = storedUser
+      }
     },
 
     addEcoPoints(user, points) {
@@ -92,8 +122,31 @@ export const useUserStore = defineStore('userStore', {
     },
 
     logout() {
-      this.currentUser.value = null
-      localStorage.removeItem('user')
+      this.currentUser = null
+      localStorage.removeItem('currentUser')
+    },
+
+    async deleteUser() {
+      if (!this.currentUser) return false
+
+      try {
+        const response = await fetch(`http://localhost:3000/users/${this.currentUser.id}`, {
+          method: 'DELETE',
+        })
+
+        if (!response.ok) throw new Error('Failed to delete user')
+
+        // Clear local user data
+        this.users = this.users.filter((user) => user.id !== this.currentUser.id)
+        localStorage.removeItem('currentUser')
+        this.currentUser = null
+
+        console.log('User deleted successfully')
+        return true
+      } catch (error) {
+        console.error('Error deleting user:', error)
+        return false
+      }
     },
   },
 })

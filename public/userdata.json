@@ -7,7 +7,7 @@
       "mail": "maria@mail.com",
       "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 25,
+      "ecoPoints": 30,
       "completedTasks": [
         {
           "id": 1,
@@ -24,6 +24,10 @@
         {
           "id": 5,
           "dateCompleted": "2025-03-01"
+        },
+        {
+          "id": 6,
+          "dateCompleted": "2025-03-02"
         }
       ],
       "registrationDate": "Tue Feb 25 2025"
@@ -43,6 +47,34 @@
         }
       ],
       "registrationDate": "Thu Feb 27 2025"
+    },
+    {
+      "id": "34ba",
+      "firstName": "Sumon",
+      "lastName": "Hossain",
+      "mail": "sumon@gmail.com",
+      "password": "12345678",
+      "profilePicUrl": null,
+      "ecoPoints": 20,
+      "completedTasks": [
+        {
+          "id": 1,
+          "dateCompleted": "2025-03-01"
+        },
+        {
+          "id": 2,
+          "dateCompleted": "2025-03-02"
+        },
+        {
+          "id": 3,
+          "dateCompleted": "2025-03-03"
+        },
+        {
+          "id": 4,
+          "dateCompleted": "2025-03-04"
+        }
+      ],
+      "registrationDate": "Sat Mar 01 2025"
     }
   ]
 }
