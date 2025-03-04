@@ -35,8 +35,13 @@
       "mail": "hi@mail.com",
       "password": "hi12345",
       "profilePicUrl": null,
-      "ecoPoints": 0,
-      "completedTasks": [],
+      "ecoPoints": 5,
+      "completedTasks": [
+        {
+          "id": 6,
+          "dateCompleted": "2025-03-04"
+        }
+      ],
       "registrationDate": "Thu Feb 27 2025"
     }
   ]
