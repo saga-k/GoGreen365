@@ -68,6 +68,7 @@ main {
 #headerWrapper {
   display: flex;
   gap: 2rem;
+  justify-content: space-between;
 }
 
 #profilePic {
@@ -90,4 +91,18 @@ main {
 #navBar {
   z-index: 2;
 }
+
+@media (min-width: 768px) {
+  main {
+    gap: 1.5rem;
+  }
+  #profilePic {
+    height: 200px;
+  }
+
+  #inviteButton {
+    height: 45px;
+  }
+}
+
 </style>

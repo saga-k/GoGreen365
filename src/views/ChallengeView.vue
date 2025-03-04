@@ -77,10 +77,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="challenge-container">
-    <!-- Visa header endast om utmaningen inte är avklarad -->
+  <main :class="{ 'confetti-bg': isChallengeCompleted }">
+<!-- Visa header endast om utmaningen inte är avklarad -->
     <div class="header" v-if="!isChallengeCompleted">
-      <h1 class="h1">Dagens utmaning</h1>
+      <h2 class="h2">Dagens utmaning</h2>
       <DateDisplay />
     </div>
 
@@ -88,27 +88,17 @@ onMounted(async () => {
     <div v-else-if="challengeStore.error">Error: {{ challengeStore.error }}</div>
 
     <div v-else>
-      <!-- Om utmaningen är slutfört visas skärmen "Bra jobbat" -->
       <div v-if="isChallengeCompleted" class="good-job">
-        <img
-          src="../assets/happyPlanet-transparent-bg.svg"
-          alt="Happy planet"
-          class="good-job-image"
-        />
+        <img src="../assets/happyPlanet-transparent-bg.svg" alt="Happy planet" class="good-job-image" />
         <h2 class="h2">Bra jobbat!</h2>
         <p class="p-medium">
           Belöningen har tilldelats!<br />
           Kom tillbaka imorgon för nya utmaningar!
         </p>
       </div>
-
       <div v-else>
         <div v-if="challengeStore.todaysChallenge" class="challenge">
-          <img
-            :src="challengeStore.todaysChallenge.image"
-            alt="Utmaningsbild"
-            class="challenge-image"
-          />
+          <img :src="challengeStore.todaysChallenge.image" alt="Utmaningsbild" class="challenge-image" />
           <h2 class="h2">{{ challengeStore.todaysChallenge.title }}</h2>
           <p class="p-medium">{{ challengeStore.todaysChallenge.description }}</p>
         </div>
@@ -117,7 +107,7 @@ onMounted(async () => {
         </div>
         <div class="points-container">
           <div class="points-left">
-            <div id="point-placeholder"></div>
+            <img src="/UiImages/ecoPoints.svg" alt="eco points" />
             <p class="p-small">Belöning: 5 Eco-points!</p>
           </div>
           <div class="points-right">
@@ -134,17 +124,11 @@ onMounted(async () => {
 main {
   background-color: var(--background-color);
   height: min-content;
+  width: 100%;
+  max-width: 500px;
   min-height: 100vh;
   padding: 50px 20px;
-  margin-bottom: 40px;
-}
-
-.challenge-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: left;
-  gap: 1rem;
+  margin: 0 auto 40px;
 }
 
 .header {
@@ -152,20 +136,14 @@ main {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 500px;
   margin-bottom: 1rem;
-}
-
-.header h1 {
-  font-size: 24px;
-  margin: 0;
 }
 
 .challenge {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 500px;
+  gap: 1.5rem;
+  width: 100%;
 }
 
 .challenge-image {
@@ -184,7 +162,6 @@ main {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 500px;
 }
 
 .points-left {
@@ -198,17 +175,14 @@ main {
 }
 
 .points-right .btn-primary {
-  width: 130px;
-  height: 35px;
   font-weight: 700;
   cursor: pointer;
 }
 
-#point-placeholder {
-  background-color: lightgray;
-  height: 35px;
-  width: 35px;
-  border-radius: 100%;
+.confetti-bg {
+  background-image: url('/UiImages/Confetti.svg');
+  background-repeat: repeat;
+  background-size: auto;
 }
 
 .good-job {
@@ -225,7 +199,6 @@ main {
 }
 
 .good-job h2 {
-  font-size: 28px;
   margin-top: 2rem;
 }
 
@@ -234,5 +207,29 @@ main {
   max-width: 70%;
   height: auto;
   object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  main {
+    max-width: 700px;
+  }
+  .challenge-image {
+    max-width: 700px;
+  }
+  .points-left img {
+    width: 45px;
+  }
+  .points-right .btn-primary {
+    width: 180px;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    max-width: 900px;
+  }
+  .challenge-image {
+    max-width: 900px;
+  }
 }
 </style>

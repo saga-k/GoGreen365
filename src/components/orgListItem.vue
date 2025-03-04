@@ -40,4 +40,11 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
 }
+
+@media (min-width: 768px) {
+  #imageContainer {
+    height: 60px;
+    width: 60px;
+  }
+}
 </style>
