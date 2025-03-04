@@ -12,31 +12,32 @@ const selectedDate = ref(null)
 const currentMonth = ref(today.getMonth())
 const currentYear = ref(today.getFullYear())
 
-// Handle date selection - Use `toLocaleDateString` to prevent timezone shift
+// Restore user from localStorage on refresh
+onMounted(async () => {
+  const storedUser = JSON.parse(localStorage.getItem('currentUser'))
+  if (storedUser) {
+    userStore.currentUser = storedUser
+  }
+
+  if (!challengeStore.challenges.length) {
+    await challengeStore.fetchChallenges()
+  }
+})
+
+// Handle date selection
 const selectDate = (date) => {
-  selectedDate.value = date.toLocaleDateString('sv-SE') // Format: YYYY-MM-DD (Swedish Locale)
+  selectedDate.value = date.toLocaleDateString('sv-SE')
 }
 
-// Get completed tasks filtered by selectedDate
+// Get completed tasks
 const completedTasks = computed(() => {
   if (!userStore.currentUser || !selectedDate.value) return []
 
   return userStore.currentUser.completedTasks
-    .filter((task) => task.dateCompleted === selectedDate.value) // ✅ Filter by date
-    .map((task) => challengeStore.getChallengeById(task.id)) // ✅ Convert ID to challenge
-    .filter((task) => task !== null) // ✅ Remove null values
+    .filter((task) => task.dateCompleted === selectedDate.value)
+    .map((task) => challengeStore.getChallengeById(task.id))
+    .filter((task) => task && task.id) // ✅ filter out undefined/null tasks
 })
-
-// Get completed tasks filtered by selectedDate
-// const completedTasks = computed(() => {
-//   if (!userStore.currentUser || !selectedDate.value) return []
-
-//   return userStore.currentUser.completedTasks
-//     .map((taskId) => challengeStore.getChallengeById(taskId)) // Convert task ID to full object
-//     .filter(
-//       (task) => task !== null && task.dateCompleted === selectedDate.value, // Ensure dateCompleted matches
-//     )
-// })
 
 // Change Month Logic
 const changeMonth = (step) => {
