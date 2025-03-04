@@ -31,6 +31,7 @@ onMounted(() => {
 })
 
 const handleClickSettings = () => router.push('/settings')
+const handleClickChallenge = () => router.push('/challenge')
 </script>
 
 <template>
@@ -45,7 +46,7 @@ const handleClickSettings = () => router.push('/settings')
     </div>
 
     <PointsBar :points="user.ecoPoints"></PointsBar>
-    <dailyChallengeDashboard></dailyChallengeDashboard>
+    <dailyChallengeDashboard @click = 'handleClickChallenge'></dailyChallengeDashboard>
 
     <weeklyProgress></weeklyProgress>
 

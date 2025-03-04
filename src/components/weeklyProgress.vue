@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useUserStore } from '@/stores/userStore';
-import { useChallengeStore } from '@/stores/challengeStore';
 
 const userStore = useUserStore()
 let user = ref(null)
