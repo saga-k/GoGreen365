@@ -40,7 +40,7 @@ const completedTasks = computed(() => {
   return userStore.currentUser.completedTasks
     .filter((task) => task.dateCompleted === selectedDate.value)
     .map((task) => challengeStore.getChallengeById(task.id))
-    .filter((task) => task && task.id) // ✅ filter out undefined/null tasks
+    .filter((task) => task && task.id)
 })
 
 // Change Month Logic
@@ -57,7 +57,6 @@ const changeMonth = (step) => {
 
 // Generate Days in Month
 const daysInMonth = computed(() => {
-  //   const firstDay = new Date(currentYear.value, currentMonth.value, 1)
   const lastDay = new Date(currentYear.value, currentMonth.value + 1, 0)
   return Array.from(
     { length: lastDay.getDate() },
@@ -73,6 +72,7 @@ const isToday = (date) => {
     date.getFullYear() === todayDate.getFullYear()
   )
 }
+
 // Responsive dateDisplay for mobile view
 const isMobile = ref(window.innerWidth <= 390)
 onMounted(() => {
@@ -80,6 +80,24 @@ onMounted(() => {
     isMobile.value = window.innerWidth <= 390
   })
 })
+
+  // Get the challenge that would have been available on the selected date
+  const taskForSelectedDate = computed(() => {
+    if (!selectedDate.value || !userStore.currentUser?.registrationDate) return null;
+
+    // Convert dates to JavaScript Date objects
+    const selectedDateObj = new Date(selectedDate.value.split('.').reverse().join('-'));
+    const regDate = new Date(userStore.currentUser.registrationDate);
+
+    // Calculate days between registration date and selected date
+    const diffTime = selectedDateObj - regDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1; // +1 as day 1 is registration day
+
+    if (diffDays <= 0 || diffDays > challengeStore.challenges.length) return null;
+
+    return challengeStore.challenges.find(c => c.date === diffDays);
+  });
+
 </script>
 
 <template>
