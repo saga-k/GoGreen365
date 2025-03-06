@@ -288,7 +288,6 @@ main {
 .calendar-container {
   max-width: 100%;
   margin: 40px auto;
-  border: 1px;
   border-radius: 20px;
   padding: 15px;
   background-color: white;
@@ -311,6 +310,7 @@ main {
 }
 
 .calendar-day {
+  position: relative;
   height: 50px;
   display: flex;
   align-items: center;
@@ -333,6 +333,32 @@ main {
   font-weight: 700;
 }
 
+.registration-day {
+  background-color: #c2e07a80;
+  border: 2px dashed var(--green);
+}
+
+.before-registration {
+  background-color: #f0f0f0;
+  color: #aaa;
+  cursor: default;
+  border: 1px solid #e0e0e0;
+}
+
+.completed-day {
+  border: 2px solid var(--green);
+}
+
+.missed-day {
+  background-color: var(--background-color);
+  border: 2px solid var(--peach);
+}
+
+.today.completed-day {
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px var(--green);
+}
+
 .selected-date {
   margin-top: 20px;
   padding: 15px;
@@ -347,25 +373,36 @@ main {
   padding: 0;
 }
 
-.selected-date li {
-  background: rgba(255, 255, 255, 0.2); /* Subtle white transparency */
+.completed-task, .missed-task {
   padding: 10px;
   margin: 8px 0;
   border-radius: 8px;
   font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
-.selected-date li strong {
+.completed-task {
+  background: rgba(194, 224, 122, 0.2);
+}
+
+.missed-task {
+  background: rgba(255, 188, 181, 0.2);
+}
+
+.selected-date li h3 {
+  display: block;
+  margin: 0 0 5px 0;
   font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .selected-date p {
   font-size: 1rem;
   margin-top: 10px;
   font-weight: 700;
+}
+
+.btn-primary {
+  background-color: var(--background-color);
 }
 
 /* Small animation when a new task is displayed */
@@ -383,10 +420,6 @@ main {
 .selected-date li,
 .selected-date p {
   animation: fadeIn 0.4s ease-in-out;
-}
-
-.btn-primary {
-  background-color: var(--background-color);
 }
 
 @media (min-width: 768px) {
