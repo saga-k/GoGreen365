@@ -4,9 +4,11 @@ import Navbar from '@/components/Navbar.vue'
 import DateDisplay from '@/components/dateDisplay.vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { useChallengeStore } from '@/stores/challengeStore.js'
+import { useRouter } from 'vue-router'
 
 const userStore = useUserStore()
 const challengeStore = useChallengeStore()
+const router = useRouter()
 const today = new Date()
 const selectedDate = ref(null)
 const currentMonth = ref(today.getMonth())
@@ -17,6 +19,8 @@ onMounted(async () => {
   const storedUser = JSON.parse(localStorage.getItem('currentUser'))
   if (storedUser) {
     userStore.currentUser = storedUser
+  } else if (storedUser === undefined || storedUser === null){
+    router.push('/')
   }
 
   if (!challengeStore.challenges.length) {
@@ -69,19 +73,26 @@ const isToday = (date) => {
     date.getFullYear() === todayDate.getFullYear()
   )
 }
+// Responsive dateDisplay for mobile view
+const isMobile = ref(window.innerWidth <= 390)
+onMounted(() => {
+  window.addEventListener('resize', () => {
+    isMobile.value = window.innerWidth <= 390
+  })
+})
 </script>
 
 <template>
-  <div class="archive-container">
+  <main class="archive-container">
     <div class="header">
-      <h1 class="h1">Arkiverad utmaning</h1>
-      <DateDisplay />
+      <h2 class="h2">Arkiverad utmaning</h2>
+      <DateDisplay class="date" :showPrefix="!isMobile"/>
     </div>
 
     <div class="calendar-container">
       <div class="calendar-header">
-        <button @click="changeMonth(-1)" class="btn btn-sm btn-outline-primary">❮</button>
-        <h3>
+        <button @click="changeMonth(-1)" class="btn-primary">❮</button>
+        <h3 class = "h3">
           {{
             new Date(currentYear, currentMonth).toLocaleString('default', {
               month: 'long',
@@ -89,7 +100,7 @@ const isToday = (date) => {
             })
           }}
         </h3>
-        <button @click="changeMonth(1)" class="btn btn-sm btn-outline-primary">❯</button>
+        <button @click="changeMonth(1)" class="btn-primary">❯</button>
       </div>
 
       <div class="calendar-grid">
@@ -106,39 +117,48 @@ const isToday = (date) => {
     </div>
 
     <div v-if="selectedDate" class="selected-date">
-      <h4>Utmaningar för: {{ selectedDate }}</h4>
+      <h3 class="h3">Utmaningar för: {{ selectedDate }}</h3>
       <ul v-if="completedTasks.length > 0">
         <li v-for="task in completedTasks" :key="task.id">
           <strong>{{ task.title }}</strong
           >: {{ task.description }}
         </li>
       </ul>
-      <p v-else>Inga utmaningar genomförda på detta datum.</p>
+      <p class="p-medium" v-else>Inga utmaningar genomförda på detta datum.</p>
     </div>
 
     <Navbar page="archive"></Navbar>
-  </div>
+  </main>
 </template>
 
 <style scoped>
-.archive-container {
-  text-align: center;
-  padding: 20px;
+main {
+    height: min-content;
+    width: 100%;
+    max-width: 500px;
+    min-height: 100vh;
+    padding: 50px 20px;
+    margin: 0 auto 40px;
+    font-family: Lato, sans-serif;
+    color: var(--text-color);
 }
 
 .header {
-  margin: 10px auto;
+  margin-bottom: 1rem;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .calendar-container {
   max-width: 100%;
   margin: 40px auto;
-  border: 1px solid #ddd;
-  border-radius: 12px;
+  border: 1px;
+  border-radius: 20px;
   padding: 15px;
-  background-color: #ffffff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .calendar-header {
@@ -157,7 +177,6 @@ const isToday = (date) => {
 }
 
 .calendar-day {
-  width: 35x;
   height: 50px;
   display: flex;
   align-items: center;
@@ -165,42 +184,28 @@ const isToday = (date) => {
   font-size: 1rem;
   font-weight: 600;
   background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-.calendar-day:hover {
-  background-color: #e0f7fa;
+.calendar-day:not(.today):hover {
+  background-color: var(--border-color);
 }
 
 .today {
-  background-color: #ffdd57 !important; /* Highlight today's date */
-  color: #fff;
-  font-weight: bold;
-  border: 2px solid #ffa500;
-  box-shadow: 0px 2px 6px rgba(255, 165, 0, 0.4);
-}
-.calendar-day:hover {
-  background-color: #d4edda;
+  background-color: var(--green);
+  font-weight: 700;
 }
 
 .selected-date {
   margin-top: 20px;
   padding: 15px;
   border-radius: 12px;
-  background: linear-gradient(to right, #232322, #514a2c); /* Warm gradient */
-  color: #fff;
-  text-align: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
-}
-
-.selected-date h4 {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .selected-date ul {
@@ -220,20 +225,13 @@ const isToday = (date) => {
 }
 
 .selected-date li strong {
-  color: #fff;
   font-size: 1.1rem;
 }
 
 .selected-date p {
   font-size: 1rem;
   margin-top: 10px;
-  font-weight: bold;
-  color: #fff;
-}
-
-.no-tasks {
-  font-style: italic;
-  opacity: 0.8;
+  font-weight: 700;
 }
 
 /* Small animation when a new task is displayed */
@@ -252,4 +250,35 @@ const isToday = (date) => {
 .selected-date p {
   animation: fadeIn 0.4s ease-in-out;
 }
+
+.btn-primary {
+  background-color: var(--background-color);
+}
+
+@media (min-width: 768px) {
+  main {
+    max-width: 700px;
+  }
+  .selected-date li,
+  .selected-date p {
+    font-size: 18px;
+  }
+
+  .calendar-grid {
+    gap: 10px;
+  }
+
+  .calendar-day {
+    height: 70px;
+    font-size: 1.2rem;
+  }
+
+}
+
+@media (min-width: 1024px) {
+  main {
+    max-width: 900px;
+  }
+}
+
 </style>

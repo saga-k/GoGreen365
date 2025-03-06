@@ -1,8 +1,15 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-const currentDate = ref('')
+// Add showPrefix prop with default value true
+defineProps({
+  showPrefix: {
+    type: Boolean,
+    default: true
+  }
+})
 
+const currentDate = ref('')
 onMounted(() => {
   const now = new Date()
   const day = now.getDate()
@@ -14,7 +21,9 @@ onMounted(() => {
 
 <template>
   <div class="date-display">
-    <p class="p-small">I dag {{ currentDate }}</p>
+    <p class="p-small">
+      <span v-if="showPrefix">I dag </span>{{ currentDate }}
+    </p>
   </div>
 </template>
 

@@ -12,6 +12,10 @@
   --text-color: #3F3D3D;
 }
 
+body {
+  background-color: var(--background-color);
+}
+
 .h1{
   font-family: "Comfortaa", serif;
   font-size: 36px;
@@ -56,8 +60,77 @@
   border-radius: 50px;
   border: none;
   padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:disabled{
     background-color: #CFCFCF;
+  }
+}
+
+.btn-secondary{
+  background-color: var(--peach);
+  color: var(--text-color);
+  font-family:"Lato", serif;
+  border-radius: 50px;
+  border: none;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:disabled{
+    background-color: #CFCFCF;
+  }
+}
+
+@media (min-width: 768px) {
+  main {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+  .h1 {
+    font-size: 44px;
+  }
+  .h2 {
+    font-size: 34px;
+  }
+  .p-medium {
+    font-size: 18px;
+  }
+  .p-small {
+    font-size: 16px;
+  }
+  .btn-primary {
+    padding: 1rem 1.5rem;
+    font-size: 16px;
+    height: 45px;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 100px 60px;
+  }
+  .h1 {
+    font-size: 48px;
+  }
+  .h2 {
+    font-size: 40px;
+  }
+  .p-medium {
+    font-size: 20px;
+  }
+  .p-small {
+    font-size: 18px;
+  }
+  .btn-primary {
+    padding: 1.2rem 2rem;
+    font-size: 18px;
   }
 }
