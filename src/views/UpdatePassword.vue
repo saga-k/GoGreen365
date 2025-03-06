@@ -20,7 +20,7 @@ const currentUser = computed(() => userStore.currentUser)
 
 onMounted(() => {
   const storedUser = JSON.parse(localStorage.getItem('currentUser'))
-  if (!currentUser.value || !storedUser) {
+  if (!currentUser.value && !storedUser) {
     router.push('/')
   }
 })
@@ -92,6 +92,10 @@ const savePassword = async () => {
   //   localStorage.setItem('currentUser', JSON.stringify(updatedUser))
   //   router.push('/settings')
 }
+
+  //Go back to settings
+  const goBack = () => router.push('/settings')
+
 </script>
 
 <template>
@@ -108,7 +112,8 @@ const savePassword = async () => {
     <label for="confirmNewPassword" class="label">Bekräfta nytt lösenord</label>
     <input type="password" v-model="confirmNewPassword" class="form-control" />
     <span v-if="passwordError" class="error-message">{{ passwordError }}</span>
-    <button @click="savePassword">Spara</button>
+    <button class="btn-primary" @click="savePassword">Spara</button>
+    <button class="btn-secondary" @click="goBack">Avbryt</button>
     <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   </div>
 </template>
@@ -160,8 +165,6 @@ input:focus {
 button {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #c2e07a;
-  color: #3f3d3d;
   border: none;
   border-radius: 39px;
   font-weight: bold;
