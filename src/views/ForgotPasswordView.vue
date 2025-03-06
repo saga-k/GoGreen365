@@ -147,7 +147,7 @@ async function updatePassword() {
   min-height: 100vh;
   background-color: #fef7ee;
   color: #3f3d3d;
-  font-family: 'Comfortaa', serif;
+  font-family: Lato, sans-serif;
 }
 
 /* Image - Logo */
@@ -158,8 +158,9 @@ async function updatePassword() {
 
 /* Font style */
 h1 {
+  font-family: 'Comfortaa', serif;
   text-align: center;
-  font-size: 36px;
+  font-size: 24px;
   color: #3f3d3d;
 }
 
@@ -176,7 +177,7 @@ h1 {
   margin-bottom: 0.25rem;
   margin-top: 1rem;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
   transition: color 0.2s ease;
 }
 
@@ -185,7 +186,7 @@ h1 {
   margin-bottom: 0.5rem;
   border: 1px solid #f4dec3;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
   transition:
     border-color 0.2s ease,
@@ -202,18 +203,17 @@ h1 {
 .link {
   display: block;
   margin-top: 1rem;
-  font-size: 14px;
+  font-size: 16px;
   color: #3f3d3d;
   text-decoration: underline;
 }
 
 /* Button */
 .confirm-button {
-  font-family: 'Comfortaa', serif;
+  font-family: Lato, sans-serif;
   background-color: #c2e07a;
   color: #3f3d3d;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 16px;
   border: none;
   border-radius: 39px;
   padding: 0.75rem;
@@ -229,15 +229,6 @@ h1 {
 /* Error */
 .label-error {
   color: red;
-}
-
-.input-error {
-  border-color: red;
-}
-
-.input-error:focus {
-  border-color: red !important;
-  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
 
 /* Error message */
@@ -281,7 +272,7 @@ h1 {
   }
 
   h1 {
-    font-size: 44px;
+    font-size: 40px;
   }
 
   .form-container {
@@ -289,7 +280,7 @@ h1 {
   }
 
   .confirm-button {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding: 1rem 1.5rem;
   }
 }

@@ -167,7 +167,7 @@ h1 {
   font-family: Lato, sans-serif;
   background-color: #c2e07a;
   color: #3f3d3d;
-  font-size: 1rem;
+  font-size: 16px;
   border: none;
   border-radius: 39px;
   padding: 0.75rem;
