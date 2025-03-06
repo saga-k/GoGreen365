@@ -13,13 +13,30 @@ const passwordError = ref('')
 const router = useRouter()
 const userStore = useUserStore()
 
+let user = ref(null)
+
 onMounted(async () => {
   await userStore.fetchUsers()
+  setCurrentUser()
 })
 
 // const navigateToUpdatePassword = () => {
 //   router.push('/updatePassword')
 // }
+
+const setCurrentUser = () => {
+  user.value = userStore.currentUser
+  //If userStore doesnt have a current user, get current user from local storage
+  if (user.value === null || user.value === undefined) {
+    user.value = JSON.parse(localStorage.getItem('currentUser'))
+    userStore.currentUser = user.value
+  }
+
+  //If there's no user in local storage, user is logged out and will be rerouted to login page
+  if (user.value === null || user.value === undefined) {
+    router.push('/')
+  }
+}
 
 const logout = () => {
   showLogoutPopup.value = true
@@ -51,8 +68,9 @@ const confirmDelete = async () => {
     Is only safe if passwords are stored in plain text (which is not recommended in real-world apps).
     If you later switch to hashed passwords, this logic will need to compare via backend verification instead.
   */
+
   if (passwordInput.value !== userStore.currentUser.password) {
-    passwordError.value = 'Felaktigt lösenord.'
+    passwordError.value = 'Felaktigt lösenord!'
     return
   }
 
@@ -109,8 +127,8 @@ const cancelDelete = () => {
 
     <!-- Modals (Logout, Delete) -->
     <div v-if="showLogoutPopup" class="modal-overlay">
-      <div class="modal">
-        <p>Är du säker på att du vill logga ut?</p>
+      <div class="modal-logout">
+        <p>Är du säker på att logga ut?</p>
         <div class="button-container">
           <button @click="confirmLogout" class="confirm-button">Ja</button>
           <button @click="cancelLogout" class="cancel-button">Nej</button>
@@ -120,13 +138,16 @@ const cancelDelete = () => {
 
     <div v-if="showDeletePopup" class="modal-overlay">
       <div class="modal">
-        <p>Är du säker på att du vill <strong>radera</strong> detta konto?</p>
+        <p>Är du säker på att <strong>radera</strong> ditt konto?</p>
+
+        <label for="password" class="label">(Ange lösenord för att radera)</label>
 
         <input
           type="password"
           v-model="passwordInput"
+          :class="{ 'input-error': passwordError }"
           placeholder="Ange ditt lösenord"
-          class="form-control"
+          class="control-password"
           autocomplete="current-password"
         />
 
@@ -162,7 +183,7 @@ const cancelDelete = () => {
   min-height: 100vh;
   background-color: #fef7ee;
   color: #3f3d3d;
-  font-family: 'Comfortaa', serif;
+  font-family: Lato, sans-serif;
 }
 
 .name-container,
@@ -183,6 +204,7 @@ const cancelDelete = () => {
 
 /* Font style */
 h1 {
+  font-family: 'Comfortaa', serif;
   font-size: 24px;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -191,27 +213,25 @@ h1 {
 
 h2 {
   font-size: 16px;
-  margin-bottom: 5rem;
+  margin-bottom: 3.5rem;
   color: #3f3d3d;
 }
 
 .delete-account {
-  font-size: 14px;
+  font-size: 16px;
   color: #3f3d3d;
   text-decoration: underline;
 }
 
 /* Buttons */
 .update-password-button {
-  font-size: 14px;
-  font-family: 'Comfortaa', serif;
-  font-weight: bold;
+  font-size: 16px;
   background-color: #c2e07a;
   color: #3f3d3d;
   border: none;
   border-radius: 39px;
   padding: 0.75rem;
-  margin-bottom: 5rem;
+  margin-bottom: 3.5rem;
   cursor: pointer;
   min-width: 200px;
   transition: background-color 0.3s ease;
@@ -222,9 +242,7 @@ h2 {
 }
 
 .logout-button {
-  font-size: 14px;
-  font-family: 'Comfortaa', serif;
-  font-weight: bold;
+  font-size: 16px;
   background-color: #ffbcb5;
   color: #3f3d3d;
   border: none;
@@ -251,45 +269,85 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 }
 
 .modal {
   background: #fef7ee;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  box-sizing: border-box;
+  width: 300px;
+  min-height: 250px;
+  z-index: 9999;
+}
+
+.modal-logout {
+  background: #fef7ee;
+  padding: 15px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  width: 300px;
+  min-height: 250px;
+  z-index: 9999;
+}
+
+.modal-logout p {
+  font-size: 16px;
 }
 
 .modal p {
-  margin-bottom: 3rem;
-  margin-top: 3rem;
+  font-size: 16px;
+}
+
+.modal label {
+  font-size: 16px;
+  margin-bottom: 0.25rem;
 }
 .modal input {
-  margin: 10px 0;
+  margin: 0.5rem 0 0.75rem;
+  margin-bottom: 0;
   padding: 10px;
   width: 100%;
   max-width: 250px;
   border: 1px solid #f4dec3;
   border-radius: 6px;
+  outline: none;
+}
+
+.modal input:focus {
+  border-color: #c2e07a;
+  box-shadow: 0 0 0 2px rgba(194, 224, 122, 0.3);
 }
 
 .error-message {
+  font-size: 16px;
   color: #e74c3c;
-  margin-top: 0.5rem;
+}
+
+.input-error {
+  border-color: #ff6b6b !important;
 }
 
 /* Buttons in modal or popup */
 .confirm-button {
-  font-size: 14px;
-  font-family: 'Comfortaa', serif;
-  font-weight: bold;
+  font-size: 16px;
   background-color: #c2e07a;
   color: #3f3d3d;
   border: none;
   border-radius: 20px;
   padding: 0.75rem;
   cursor: pointer;
-  margin-bottom: 3rem;
   transition: background-color 0.3s ease;
   min-width: 80px;
 }
@@ -299,32 +357,103 @@ h2 {
 }
 
 .cancel-button {
-  font-size: 14px;
-  font-family: 'Comfortaa', serif;
-  font-weight: bold;
+  font-size: 16px;
   background-color: #fbb3ab;
   color: #3f3d3d;
   border: none;
   border-radius: 20px;
   padding: 0.75rem;
-  margin-bottom: 3rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
   min-width: 80px;
 }
 
 .cancel-button:hover {
-  background-color: #fbb3ab;
+  background-color: #e79a91;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
   gap: 20px;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
 }
 
 /* Img */
 .setting-mark-img {
   width: 18px;
+}
+
+@media (min-width: 768px) {
+  .setting-container {
+    padding: 2rem;
+  }
+
+  .earth-image {
+    width: 220px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+
+  .update-password-button,
+  .logout-button {
+    font-size: 1rem;
+    padding: 0.9rem 1.2rem;
+  }
+
+  .modal,
+  .modal-logout {
+    width: 350px;
+    min-height: 280px;
+  }
+
+  .modal p,
+  .modal-logout p {
+    font-size: 18px;
+    margin: 1rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .setting-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .earth-image {
+    width: 200px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .update-password-button,
+  .logout-button {
+    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .modal,
+  .modal-logout {
+    width: 400px;
+    min-height: 300px;
+    padding: 20px;
+  }
+
+  .modal p,
+  .modal-logout p {
+    font-size: 20px;
+  }
 }
 </style>
