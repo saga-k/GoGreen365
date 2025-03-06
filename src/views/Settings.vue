@@ -440,7 +440,7 @@ h2 {
 
   .update-password-button,
   .logout-button {
-    font-size: 1.1rem;
+    font-size: 1rem;
     padding: 1rem 1.5rem;
   }
 
