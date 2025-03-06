@@ -127,7 +127,7 @@ async function updatePassword() {
         Ändra lösenord
       </button>
     </div>
-    <RouterLink to="/" class="links">Har du redan konto? Logga in</RouterLink>
+    <RouterLink to="/" class="link">Har du redan konto? Logga in</RouterLink>
   </div>
 </template>
 
@@ -152,6 +152,7 @@ async function updatePassword() {
 
 /* Font style */
 h1 {
+  text-align: center;
   font-size: 36px;
   color: #3f3d3d;
 }
@@ -160,7 +161,7 @@ h1 {
 .form-container {
   width: 100%;
   max-width: 300px;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
 }
@@ -192,9 +193,9 @@ h1 {
 }
 
 /* Underline for link paeg */
-.links {
+.link {
   display: block;
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: 14px;
   color: #3f3d3d;
   text-decoration: underline;
@@ -238,5 +239,52 @@ h1 {
   color: red;
   font-size: 14px;
   margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .forgot-app {
+    padding: 2rem;
+  }
+
+  .earth-image {
+    width: 220px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .form-container {
+    max-width: 350px;
+  }
+
+  .confirm-button {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .forgot-app {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .earth-image {
+    width: 200px;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  .form-container {
+    max-width: 400px;
+  }
+
+  .confirm-button {
+    font-size: 1.2rem;
+    padding: 1rem 1.5rem;
+  }
 }
 </style>
