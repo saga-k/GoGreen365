@@ -85,7 +85,7 @@ const login = () => {
   min-height: 100vh;
   background-color: #fef7ee;
   color: #3f3d3d;
-  font-family: 'Comfortaa', serif;
+  font-family: Lato, sans-serif;
 }
 
 /* Image - Logo */
@@ -96,14 +96,15 @@ const login = () => {
 
 /* Font style */
 h1 {
-  font-size: 36px;
+  font-family: 'Comfortaa', serif;
+  font-size: 24px;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: #3f3d3d;
 }
 
 .subtitle {
-  font-size: 14px;
+  font-size: 16px;
   color: #3f3d3d;
   text-align: center;
   margin-bottom: 1.5rem;
@@ -121,7 +122,7 @@ h1 {
   margin-bottom: 0.25rem;
   margin-top: 1rem;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
   transition: color 0.2s ease;
 }
 
@@ -130,7 +131,7 @@ h1 {
   margin-bottom: 0.5rem;
   border: 1px solid #f4dec3;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
   transition:
     border-color 0.2s ease,
@@ -146,7 +147,7 @@ h1 {
 /* Underline for every link paegs */
 .forgot-link {
   text-align: right;
-  font-size: 14px;
+  font-size: 16px;
   color: #3f3d3d;
   text-decoration: underline;
   margin-bottom: 1rem;
@@ -156,18 +157,17 @@ h1 {
 .create-account-link {
   display: block;
   margin-top: 1rem;
-  font-size: 14px;
+  font-size: 16px;
   color: #3f3d3d;
   text-decoration: underline;
 }
 
 /* Loin button */
 .login-button {
-  font-family: 'Comfortaa', serif;
+  font-family: Lato, sans-serif;
   background-color: #c2e07a;
   color: #3f3d3d;
   font-size: 1rem;
-  font-weight: 600;
   border: none;
   border-radius: 39px;
   padding: 0.75rem;
@@ -189,7 +189,7 @@ h1 {
 }
 
 .error-message {
-  font-size: 14px;
+  font-size: 16px;
   color: #e74c3c;
   margin-top: -0.25rem;
   margin-bottom: -0.25rem;
@@ -237,7 +237,7 @@ h1 {
   }
 
   .login-button {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding: 1rem 1.5rem;
   }
 }
