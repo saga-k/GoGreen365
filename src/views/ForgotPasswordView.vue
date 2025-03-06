@@ -42,6 +42,12 @@ watch([userEmail, newPassword, confirmPassword], ([email, password, confirm]) =>
 
 // Update password in JSON server
 async function updatePassword() {
+  if (!userEmail.value || !newPassword.value || !confirmPassword.value) {
+    if (!errorMessages.value.includes('Vänligen fyll i alla rutor')) {
+      errorMessages.value.push('Vänligen fyll i alla rutor')
+    }
+    return
+  }
   if (errorMessages.value.length > 0) return
 
   try {
