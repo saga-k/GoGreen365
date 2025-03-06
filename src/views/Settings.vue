@@ -51,8 +51,9 @@ const confirmDelete = async () => {
     Is only safe if passwords are stored in plain text (which is not recommended in real-world apps).
     If you later switch to hashed passwords, this logic will need to compare via backend verification instead.
   */
+
   if (passwordInput.value !== userStore.currentUser.password) {
-    passwordError.value = 'Felaktigt lösenord.'
+    passwordError.value = 'Felaktigt lösenord!'
     return
   }
 
@@ -109,8 +110,8 @@ const cancelDelete = () => {
 
     <!-- Modals (Logout, Delete) -->
     <div v-if="showLogoutPopup" class="modal-overlay">
-      <div class="modal">
-        <p>Är du säker på att du vill logga ut?</p>
+      <div class="modal-logout">
+        <p>Är du säker på att logga ut?</p>
         <div class="button-container">
           <button @click="confirmLogout" class="confirm-button">Ja</button>
           <button @click="cancelLogout" class="cancel-button">Nej</button>
@@ -120,13 +121,16 @@ const cancelDelete = () => {
 
     <div v-if="showDeletePopup" class="modal-overlay">
       <div class="modal">
-        <p>Är du säker på att du vill <strong>radera</strong> detta konto?</p>
+        <p>Är du säker på att <strong>radera</strong> ditt konto?</p>
+
+        <label for="password" class="label">(Ange lösenord för att radera)</label>
 
         <input
           type="password"
           v-model="passwordInput"
+          :class="{ 'input-error': passwordError }"
           placeholder="Ange ditt lösenord"
-          class="form-control"
+          class="control-password"
           autocomplete="current-password"
         />
 
@@ -251,31 +255,75 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 }
 
 .modal {
   background: #fef7ee;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  box-sizing: border-box;
+  width: 300px;
+  min-height: 250px;
+  z-index: 9999;
+}
+
+.modal-logout {
+  background: #fef7ee;
+  padding: 15px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  width: 300px;
+  min-height: 250px;
+  z-index: 9999;
+}
+
+.modal-logout p {
+  font-size: 14px;
 }
 
 .modal p {
-  margin-bottom: 3rem;
-  margin-top: 3rem;
+  font-size: 14px;
+  margin: 0.5rem 0;
+}
+
+.modal label {
+  font-size: 14px;
+  margin-bottom: 0.25rem;
 }
 .modal input {
-  margin: 10px 0;
+  margin: 0.5rem 0 0.75rem;
+  margin-bottom: 0;
   padding: 10px;
   width: 100%;
   max-width: 250px;
   border: 1px solid #f4dec3;
   border-radius: 6px;
+  outline: none;
+}
+
+.modal input:focus {
+  border-color: #c2e07a;
+  box-shadow: 0 0 0 2px rgba(194, 224, 122, 0.3);
 }
 
 .error-message {
+  font-size: 14px;
   color: #e74c3c;
-  margin-top: 0.5rem;
+}
+
+.input-error {
+  border-color: #ff6b6b !important;
 }
 
 /* Buttons in modal or popup */
@@ -289,7 +337,6 @@ h2 {
   border-radius: 20px;
   padding: 0.75rem;
   cursor: pointer;
-  margin-bottom: 3rem;
   transition: background-color 0.3s ease;
   min-width: 80px;
 }
@@ -307,20 +354,21 @@ h2 {
   border: none;
   border-radius: 20px;
   padding: 0.75rem;
-  margin-bottom: 3rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
   min-width: 80px;
 }
 
 .cancel-button:hover {
-  background-color: #fbb3ab;
+  background-color: #e79a91;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
   gap: 20px;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
 }
 
 /* Img */
