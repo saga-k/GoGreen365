@@ -230,26 +230,34 @@ onMounted(() => {
           <p class="p-medium">Du var inte registrerad detta datum.</p>
         </div>
         <div v-else>
-          <h3 class="h3">Utmaningar för: {{ selectedDate }}</h3>
+          <h3 class="h3">{{ selectedDate }}</h3>
 
           <!-- Completed challenges -->
           <div v-if="completedTasks.length > 0">
-            <h4 class="completed-header">Slutförda utmaningar:</h4>
+            <h4 class="completed-header">Grattis!</h4>
+            <p class="p-medium">Du klarade denna utmaning.</p>
             <ul>
               <li v-for="task in completedTasks" :key="task.id" class="completed-task">
-                <h3>{{ task.title }}</h3>
-                <p>{{ task.description }}</p>
+                <div class="task-content">
+                  <h3>{{ task.title }}</h3>
+                  <p>{{ task.description }}</p>
+                </div>
+                <img :src="task.image" alt="Utmaningsbild" class="task-image" />
               </li>
             </ul>
           </div>
 
           <!-- Missed challenges -->
           <div v-if="wasTaskMissed" class="missed-tasks">
-            <h4 class="missed-header">Missade utmaningar:</h4>
+            <h4 class="missed-header">Ajdå!</h4>
+            <p class="p-medium">Du klarade inte denna utmaning.</p>
             <ul>
               <li class="missed-task">
-                <h3>{{ taskForSelectedDate.title }}</h3>
-                <p>{{ taskForSelectedDate.description }}</p>
+                <div class="task-content">
+                  <h3>{{ taskForSelectedDate.title }}</h3>
+                  <p>{{ taskForSelectedDate.description }}</p>
+                </div>
+                <img :src="taskForSelectedDate.image" alt="Utmaningsbild" class="task-image" />
               </li>
             </ul>
           </div>
@@ -362,7 +370,7 @@ main {
 .selected-date {
   margin-top: 20px;
   padding: 15px;
-  border-radius: 12px;
+  border-radius: 20px;
   background-color: white;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
@@ -374,9 +382,12 @@ main {
 }
 
 .completed-task, .missed-task {
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 14px;
   font-size: 1rem;
 }
 
@@ -388,17 +399,27 @@ main {
   background: rgba(255, 188, 181, 0.2);
 }
 
+.task-image {
+  height: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+  order: -1;
+}
+
 .selected-date li h3 {
+  font-family: 'Lato', serif;
   display: block;
-  margin: 0 0 5px 0;
-  font-size: 1.1rem;
+  margin: 0 0 16px 0;
+  font-size: 1.2rem;
   font-weight: 600;
+  line-height: 140%;
 }
 
 .selected-date p {
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-top: 10px;
-  font-weight: 700;
+  font-weight: 500;
+  line-height: 140%;
 }
 
 .btn-primary {
@@ -422,13 +443,25 @@ main {
   animation: fadeIn 0.4s ease-in-out;
 }
 
+.completed-header, .missed-header {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 24px;
+  text-align: center;
+  margin: 10px;
+}
+
+.p-medium {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 @media (min-width: 768px) {
   main {
     max-width: 700px;
   }
   .selected-date li,
   .selected-date p {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .calendar-grid {
@@ -440,11 +473,44 @@ main {
     font-size: 1.2rem;
   }
 
+  .completed-header, .missed-header {
+    font-size: 32px;
+  }
+
+  .completed-task, .missed-task {
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .task-content {
+    order: 1;
+    flex: 1;
+  }
+
+  .selected-date li h3 {
+    font-size: 1.6rem;
+  }
+
+  .selected-date li p {
+    font-size: 1.2rem;
+  }
+
+  .task-image {
+    width: 300px;
+    height: auto;
+    order: 2;
+  }
 }
 
 @media (min-width: 1024px) {
   main {
     max-width: 900px;
+  }
+
+  .task-image {
+    width: 400px;
+    height: auto;
   }
 }
 
