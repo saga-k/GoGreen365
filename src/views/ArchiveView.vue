@@ -98,6 +98,85 @@ onMounted(() => {
     return challengeStore.challenges.find(c => c.date === diffDays);
   });
 
+  // Check if the task for the selected date was missed
+  const wasTaskMissed = computed(() => {
+    if (!taskForSelectedDate.value || !selectedDate.value) return false;
+    const isCompleted = completedTasks.value.some(task => task.id === taskForSelectedDate.value.id);
+    return !isCompleted;
+  });
+
+  // Check if a date is the registration day
+  const isRegistrationDay = (date) => {
+    if (!userStore.currentUser?.registrationDate) return false;
+    const regDate = new Date(userStore.currentUser.registrationDate);
+    return (
+      date.getDate() === regDate.getDate() &&
+      date.getMonth() === regDate.getMonth() &&
+      date.getFullYear() === regDate.getFullYear()
+    );
+  };
+
+  // Check if a date is before registration
+  const isBeforeRegistration = (date) => {
+    if (!userStore.currentUser?.registrationDate) return false;
+    const regDate = new Date(userStore.currentUser.registrationDate);
+    return date < regDate;
+  };
+
+  // Check if a date is in the future
+  const isFutureDay = (date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date > today;
+  };
+
+  // Check if a day has completed challenges
+  const isDayCompleted = (date) => {
+    if (!userStore.currentUser?.completedTasks) return false;
+    return userStore.currentUser.completedTasks.some(task => task.dateCompleted === date.toLocaleDateString('sv-SE'));
+  };
+
+  // Check if a day has missed challenges
+  const isDayMissed = (date) => {
+    if (!userStore.currentUser?.registrationDate) return false;
+    if (isFutureDay(date) || isBeforeRegistration(date)) return false;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // If the day is in the past with no completed tasks
+    if (date < today && !isDayCompleted(date)) {
+      const regDate = new Date(userStore.currentUser.registrationDate);
+      const diffDays = Math.floor((date - regDate) / (1000 * 60 * 60 * 24)) + 1;
+      return diffDays > 0 && diffDays <= challengeStore.challenges.length;
+    }
+    return false;
+  };
+
+  // Determine if a date can be selected
+  const canSelectDate = () => {
+    return true;
+  };
+
+  // Check if selected date is in future
+  const isSelectedDateInFuture = computed(() => {
+    if (!selectedDate.value) return false;
+    const selectedDateObj = new Date(selectedDate.value.split('.').reverse().join('-'));
+    const today = new Date();
+
+    // Reset time on both dates for accurate comparison
+    selectedDateObj.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    return selectedDateObj > today;
+  });
+
+  const isSelectedDateBeforeRegistration = computed(() => {
+    if (!selectedDate.value || !userStore.currentUser?.registrationDate) return false;
+    const selectedDateObj = new Date(selectedDate.value.split('.').reverse().join('-'));
+    const regDate = new Date(userStore.currentUser.registrationDate);
+    return selectedDateObj < regDate;
+  });
 </script>
 
 <template>
