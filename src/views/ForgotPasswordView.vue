@@ -239,7 +239,7 @@ h1 {
 .error-message {
   color: red;
   font-size: 16px;
-  margin-top: 0.5rem;
+  margin-top: -0.2rem;
 }
 
 @media (min-width: 768px) {
