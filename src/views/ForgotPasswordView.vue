@@ -231,10 +231,14 @@ h1 {
   color: red;
 }
 
+.input-error {
+  border-color: #ff6b6b !important;
+}
+
 /* Error message */
 .error-message {
   color: red;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 0.5rem;
 }
 
