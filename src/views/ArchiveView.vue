@@ -205,24 +205,61 @@ onMounted(() => {
           v-for="day in daysInMonth"
           :key="day.toDateString()"
           class="calendar-day"
-          :class="{ today: isToday(day) }"
-          @click="selectDate(day)"
-        >
+          :class="{
+              'today': isToday(day),
+              'registration-day': isRegistrationDay(day),
+              'before-registration': isBeforeRegistration(day),
+              'future-day': isFutureDay(day),
+              'completed-day': isDayCompleted(day),
+              'missed-day': isDayMissed(day)
+            }"
+            @click="canSelectDate(day) ? selectDate(day) : null"
+          >
           {{ day.getDate() }}
         </div>
       </div>
     </div>
 
     <div v-if="selectedDate" class="selected-date">
-      <h3 class="h3">Utmaningar för: {{ selectedDate }}</h3>
-      <ul v-if="completedTasks.length > 0">
-        <li v-for="task in completedTasks" :key="task.id">
-          <strong>{{ task.title }}</strong
-          >: {{ task.description }}
-        </li>
-      </ul>
-      <p class="p-medium" v-else>Inga utmaningar genomförda på detta datum.</p>
-    </div>
+      <div v-if="isSelectedDateInFuture">
+          <h3 class="h3">{{ selectedDate }}</h3>
+          <p class="p-medium">Utmaningar blir tillgängliga på dagen de gäller.</p>
+        </div>
+        <div v-else-if="isSelectedDateBeforeRegistration">
+          <h3 class="h3">{{ selectedDate }}</h3>
+          <p class="p-medium">Du var inte registrerad detta datum.</p>
+        </div>
+        <div v-else>
+          <h3 class="h3">Utmaningar för: {{ selectedDate }}</h3>
+
+          <!-- Completed challenges -->
+          <div v-if="completedTasks.length > 0">
+            <h4 class="completed-header">Slutförda utmaningar:</h4>
+            <ul>
+              <li v-for="task in completedTasks" :key="task.id" class="completed-task">
+                <h3>{{ task.title }}</h3>
+                <p>{{ task.description }}</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Missed challenges -->
+          <div v-if="wasTaskMissed" class="missed-tasks">
+            <h4 class="missed-header">Missade utmaningar:</h4>
+            <ul>
+              <li class="missed-task">
+                <h3>{{ taskForSelectedDate.title }}</h3>
+                <p>{{ taskForSelectedDate.description }}</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- No challenges available -->
+          <p class="p-medium" v-if="!completedTasks.length && !wasTaskMissed">
+            Inga utmaningar tillgängliga för detta datum.
+          </p>
+        </div>
+      </div>
 
     <Navbar page="archive"></Navbar>
   </main>
