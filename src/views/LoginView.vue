@@ -53,7 +53,6 @@ const login = () => {
       />
 
       <!-- Get the alert error message when fail  -->
-      <span v-if="emailError" class="error-message">{{ emailError }}</span>
 
       <label :class="{ 'label-error': passwordError }" for="password">Lösenord</label>
       <input
