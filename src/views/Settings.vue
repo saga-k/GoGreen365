@@ -233,7 +233,7 @@ h2 {
   padding: 0.75rem;
   margin-bottom: 3.5rem;
   cursor: pointer;
-  min-width: 200px;
+  min-width: 250px;
   transition: background-color 0.3s ease;
 }
 
@@ -250,7 +250,7 @@ h2 {
   padding: 0.75rem;
   margin-bottom: 1.5rem;
   cursor: pointer;
-  min-width: 200px;
+  min-width: 250px;
   transition: background-color 0.3s ease;
 }
 
@@ -395,15 +395,15 @@ h2 {
   }
 
   h1 {
-    font-size: 26px;
+    font-size: 40px;
   }
   h2 {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .update-password-button,
   .logout-button {
-    font-size: 1rem;
+    font-size: 16px;
     padding: 0.9rem 1.2rem;
   }
 
@@ -415,7 +415,7 @@ h2 {
 
   .modal p,
   .modal-logout p {
-    font-size: 18px;
+    font-size: 16px;
     margin: 1rem 0;
   }
 }
@@ -431,7 +431,7 @@ h2 {
   }
 
   h1 {
-    font-size: 30px;
+    font-size: 40px;
   }
 
   h2 {
