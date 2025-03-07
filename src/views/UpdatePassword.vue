@@ -251,7 +251,7 @@ h1 {
 .error-message {
   color: #e74c3c;
   font-size: 16px;
-  margin-top: 0.5rem;
+  margin-top: -0.2rem;
 }
 
 /* Buttons */
