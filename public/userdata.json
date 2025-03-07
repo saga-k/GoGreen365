@@ -75,11 +75,15 @@
       "mail": "shifu@gmail.com",
       "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 5,
+      "ecoPoints": 10,
       "completedTasks": [
         {
           "id": 1,
           "dateCompleted": "2025-03-04"
+        },
+        {
+          "id": 3,
+          "dateCompleted": "2025-03-06"
         }
       ],
       "registrationDate": "Tue Mar 04 2025"
