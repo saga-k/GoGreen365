@@ -75,7 +75,7 @@
       "mail": "shifu@gmail.com",
       "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 10,
+      "ecoPoints": 15,
       "completedTasks": [
         {
           "id": 1,
@@ -84,6 +84,10 @@
         {
           "id": 3,
           "dateCompleted": "2025-03-06"
+        },
+        {
+          "id": 7,
+          "dateCompleted": "2025-03-10"
         }
       ],
       "registrationDate": "Tue Mar 04 2025"
@@ -93,6 +97,17 @@
       "firstName": "Saga",
       "lastName": "Test",
       "mail": "saga@mail.com",
+      "password": "sagasaga",
+      "profilePicUrl": null,
+      "ecoPoints": 0,
+      "completedTasks": [],
+      "registrationDate": "Mon Mar 10 2025"
+    },
+    {
+      "id": "d38b",
+      "firstName": "test",
+      "lastName": "test",
+      "mail": "test@gmail.com",
       "password": "123456",
       "profilePicUrl": null,
       "ecoPoints": 0,

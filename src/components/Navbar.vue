@@ -28,7 +28,7 @@ const props = defineProps({
 
     <RouterLink class="link" to="points" :class="{ isActive: props.page === 'points' }">
       <img src="../assets/icons/gift-box.svg" />
-      <p class="p-small">Påäng</p>
+      <p class="p-small">Poäng</p>
     </RouterLink>
   </nav>
 </template>
