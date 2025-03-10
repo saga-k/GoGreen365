@@ -183,7 +183,7 @@ const cancelDelete = () => {
   min-height: 100vh;
   background-color: #fef7ee;
   color: #3f3d3d;
-  font-family: 'Comfortaa', serif;
+  font-family: Lato, sans-serif;
 }
 
 .name-container,
@@ -204,6 +204,7 @@ const cancelDelete = () => {
 
 /* Font style */
 h1 {
+  font-family: 'Comfortaa', serif;
   font-size: 24px;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -212,29 +213,27 @@ h1 {
 
 h2 {
   font-size: 16px;
-  margin-bottom: 5rem;
+  margin-bottom: 3.5rem;
   color: #3f3d3d;
 }
 
 .delete-account {
-  font-size: 14px;
+  font-size: 16px;
   color: #3f3d3d;
   text-decoration: underline;
 }
 
 /* Buttons */
 .update-password-button {
-  font-size: 14px;
-  font-family: 'Comfortaa', serif;
-  font-weight: bold;
+  font-size: 16px;
   background-color: #c2e07a;
   color: #3f3d3d;
   border: none;
   border-radius: 39px;
   padding: 0.75rem;
-  margin-bottom: 5rem;
+  margin-bottom: 3.5rem;
   cursor: pointer;
-  min-width: 200px;
+  min-width: 250px;
   transition: background-color 0.3s ease;
 }
 
@@ -243,9 +242,7 @@ h2 {
 }
 
 .logout-button {
-  font-size: 14px;
-  font-family: 'Comfortaa', serif;
-  font-weight: bold;
+  font-size: 16px;
   background-color: #ffbcb5;
   color: #3f3d3d;
   border: none;
@@ -253,7 +250,7 @@ h2 {
   padding: 0.75rem;
   margin-bottom: 1.5rem;
   cursor: pointer;
-  min-width: 200px;
+  min-width: 250px;
   transition: background-color 0.3s ease;
 }
 
@@ -306,18 +303,18 @@ h2 {
 }
 
 .modal-logout p {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .modal p {
-  font-size: 14px;
-  margin: 0.5rem 0;
+  font-size: 16px;
 }
 
 .modal label {
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 0.25rem;
 }
+
 .modal input {
   margin: 0.5rem 0 0.75rem;
   margin-bottom: 0;
@@ -335,7 +332,7 @@ h2 {
 }
 
 .error-message {
-  font-size: 14px;
+  font-size: 16px;
   color: #e74c3c;
 }
 
@@ -345,9 +342,7 @@ h2 {
 
 /* Buttons in modal or popup */
 .confirm-button {
-  font-size: 14px;
-  font-family: 'Comfortaa', serif;
-  font-weight: bold;
+  font-size: 16px;
   background-color: #c2e07a;
   color: #3f3d3d;
   border: none;
@@ -363,9 +358,7 @@ h2 {
 }
 
 .cancel-button {
-  font-size: 14px;
-  font-family: 'Comfortaa', serif;
-  font-weight: bold;
+  font-size: 16px;
   background-color: #fbb3ab;
   color: #3f3d3d;
   border: none;
@@ -391,5 +384,77 @@ h2 {
 /* Img */
 .setting-mark-img {
   width: 18px;
+}
+
+@media (min-width: 768px) {
+  .setting-container {
+    padding: 2rem;
+  }
+
+  .earth-image {
+    width: 220px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 16px;
+  }
+
+  .update-password-button,
+  .logout-button {
+    font-size: 16px;
+    padding: 0.9rem 1.2rem;
+  }
+
+  .modal,
+  .modal-logout {
+    width: 350px;
+    min-height: 280px;
+  }
+
+  .modal p,
+  .modal-logout p {
+    font-size: 16px;
+    margin: 1rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .setting-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .earth-image {
+    width: 200px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .update-password-button,
+  .logout-button {
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .modal,
+  .modal-logout {
+    width: 400px;
+    min-height: 300px;
+    padding: 20px;
+  }
+
+  .modal p,
+  .modal-logout p {
+    font-size: 20px;
+  }
 }
 </style>
