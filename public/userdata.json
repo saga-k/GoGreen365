@@ -87,6 +87,17 @@
         }
       ],
       "registrationDate": "Tue Mar 04 2025"
+    },
+    {
+      "id": "a825",
+      "firstName": "Saga",
+      "lastName": "Test",
+      "mail": "saga@mail.com",
+      "password": "123456",
+      "profilePicUrl": null,
+      "ecoPoints": 0,
+      "completedTasks": [],
+      "registrationDate": "Mon Mar 10 2025"
     }
   ]
 }
