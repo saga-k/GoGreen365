@@ -42,6 +42,12 @@ watch([userEmail, newPassword, confirmPassword], ([email, password, confirm]) =>
 
 // Update password in JSON server
 async function updatePassword() {
+  if (!userEmail.value || !newPassword.value || !confirmPassword.value) {
+    if (!errorMessages.value.includes('Vänligen fyll i alla rutor')) {
+      errorMessages.value.push('Vänligen fyll i alla rutor')
+    }
+    return
+  }
   if (errorMessages.value.length > 0) return
 
   try {
@@ -127,7 +133,7 @@ async function updatePassword() {
         Ändra lösenord
       </button>
     </div>
-    <RouterLink to="/" class="links">Har du redan konto? Logga in</RouterLink>
+    <RouterLink to="/" class="link">Har du redan konto? Logga in</RouterLink>
   </div>
 </template>
 
@@ -141,7 +147,7 @@ async function updatePassword() {
   min-height: 100vh;
   background-color: #fef7ee;
   color: #3f3d3d;
-  font-family: 'Comfortaa', serif;
+  font-family: Lato, sans-serif;
 }
 
 /* Image - Logo */
@@ -152,7 +158,9 @@ async function updatePassword() {
 
 /* Font style */
 h1 {
-  font-size: 36px;
+  font-family: 'Comfortaa', serif;
+  text-align: center;
+  font-size: 24px;
   color: #3f3d3d;
 }
 
@@ -160,7 +168,7 @@ h1 {
 .form-container {
   width: 100%;
   max-width: 300px;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
 }
@@ -169,7 +177,7 @@ h1 {
   margin-bottom: 0.25rem;
   margin-top: 1rem;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
   transition: color 0.2s ease;
 }
 
@@ -178,7 +186,7 @@ h1 {
   margin-bottom: 0.5rem;
   border: 1px solid #f4dec3;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
   transition:
     border-color 0.2s ease,
@@ -192,21 +200,20 @@ h1 {
 }
 
 /* Underline for link paeg */
-.links {
+.link {
   display: block;
-  margin-top: 2rem;
-  font-size: 14px;
+  margin-top: 1rem;
+  font-size: 16px;
   color: #3f3d3d;
   text-decoration: underline;
 }
 
 /* Button */
 .confirm-button {
-  font-family: 'Comfortaa', serif;
+  font-family: Lato, sans-serif;
   background-color: #c2e07a;
   color: #3f3d3d;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 16px;
   border: none;
   border-radius: 39px;
   padding: 0.75rem;
@@ -225,18 +232,60 @@ h1 {
 }
 
 .input-error {
-  border-color: red;
-}
-
-.input-error:focus {
-  border-color: red !important;
-  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  border-color: #ff6b6b !important;
 }
 
 /* Error message */
 .error-message {
   color: red;
-  font-size: 14px;
-  margin-top: 0.5rem;
+  font-size: 16px;
+  margin-top: -0.2rem;
+}
+
+@media (min-width: 768px) {
+  .forgot-app {
+    padding: 2rem;
+  }
+
+  .earth-image {
+    width: 220px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .form-container {
+    max-width: 350px;
+  }
+
+  .confirm-button {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .forgot-app {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .earth-image {
+    width: 200px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .form-container {
+    max-width: 400px;
+  }
+
+  .confirm-button {
+    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
+  }
 }
 </style>

@@ -83,6 +83,10 @@ let imageUrl = ref()
 
 const asignProgressValue = () => {
   switch (daysDone.value) {
+    case 0: circleFill.value = progressValues.value.oneDay;
+      imageUrl.value = deadUrl.value;
+      break;
+
     case 1: circleFill.value = progressValues.value.oneDay;
       imageUrl.value = deadUrl.value;
       break;
