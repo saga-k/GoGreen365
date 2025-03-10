@@ -39,11 +39,15 @@
       "mail": "arif@gmail.com",
       "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 5,
+      "ecoPoints": 10,
       "completedTasks": [
         {
           "id": 6,
           "dateCompleted": "2025-03-04"
+        },
+        {
+          "id": 7,
+          "dateCompleted": "2025-03-05"
         }
       ],
       "registrationDate": "Thu Feb 27 2025"
@@ -71,14 +75,29 @@
       "mail": "shifu@gmail.com",
       "password": "123456",
       "profilePicUrl": null,
-      "ecoPoints": 5,
+      "ecoPoints": 10,
       "completedTasks": [
         {
           "id": 1,
           "dateCompleted": "2025-03-04"
+        },
+        {
+          "id": 3,
+          "dateCompleted": "2025-03-06"
         }
       ],
       "registrationDate": "Tue Mar 04 2025"
+    },
+    {
+      "id": "a825",
+      "firstName": "Saga",
+      "lastName": "Test",
+      "mail": "saga@mail.com",
+      "password": "123456",
+      "profilePicUrl": null,
+      "ecoPoints": 0,
+      "completedTasks": [],
+      "registrationDate": "Mon Mar 10 2025"
     }
   ]
 }

@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useUserStore } from '@/stores/userStore';
-import { useChallengeStore } from '@/stores/challengeStore';
 
 const userStore = useUserStore()
 let user = ref(null)
@@ -84,6 +83,10 @@ let imageUrl = ref()
 
 const asignProgressValue = () => {
   switch (daysDone.value) {
+    case 0: circleFill.value = progressValues.value.oneDay;
+      imageUrl.value = deadUrl.value;
+      break;
+
     case 1: circleFill.value = progressValues.value.oneDay;
       imageUrl.value = deadUrl.value;
       break;

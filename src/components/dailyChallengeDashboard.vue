@@ -1,16 +1,55 @@
 <script setup>
 import dateDisplay from './dateDisplay.vue';
-//need to get daily challenge from json and pinia
+import { useUserStore } from '@/stores/userStore';
+import { useChallengeStore } from '@/stores/challengeStore';
+import { onMounted, ref } from 'vue';
+
+const userStore = useUserStore()
+const challengeStore = useChallengeStore()
+let challenge = ref(null)
+let isLoading = ref(true)
+
+onMounted( () => {
+  getChallenge()
+})
+
+const getChallenge = async () => {
+  try {
+    // Vänta på att både users och challenges laddas
+    await Promise.all([userStore.fetchUsers(), challengeStore.fetchChallenges()])
+
+    // Hämta inloggad användare från userStore (eller från localStorage om ej satt)
+    let currentUser = userStore.currentUser
+    if (!currentUser) {
+      const stored = localStorage.getItem('currentUser')
+      if (stored) {
+        currentUser = JSON.parse(stored)
+        userStore.currentUser = currentUser
+      }
+    }
+    if (currentUser) {
+      challengeStore.setCurrentUser(currentUser.id)
+    }
+
+    challenge.value = challengeStore.todaysChallenge
+  } catch (error) {
+    console.error('Error:', error)
+  } finally {
+    isLoading.value = false
+  }
+}
 
 </script>
 
 <template>
   <div id="wrapper">
     <div id="left">
-      <h3 class="h3">Dagens utmaning</h3>
+      <h3 class="h3">Dagens utmaning - {{ challenge?.title }}</h3>
       <dateDisplay id="dateDisplay" />
     </div>
-    <div id="placeHolder"></div>
+
+    <img id="placeHolder" :src="challenge?.image">
+
   </div>
 
 </template>
@@ -43,9 +82,7 @@ import dateDisplay from './dateDisplay.vue';
 }
 
 #placeHolder {
-  background-color: lightgray;
   height: 100%;
-  width: 7rem;
   border-radius: 8px;
 }
 
@@ -58,7 +95,6 @@ import dateDisplay from './dateDisplay.vue';
     padding: 2rem;
   }
   #placeHolder {
-    width: 10rem;
     height: 100%;
   }
 }

@@ -17,6 +17,7 @@ const next = () => {
     <h1>Lösenordet ändrat</h1>
     <p>Logga in igen med ditt nya lösenord</p>
     <button @click="next" class="success-button">Tillbaka till logga in</button>
+    <img src="/UiImages/Confetti.svg" alt="Confetti" />
   </div>
 </template>
 

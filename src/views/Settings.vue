@@ -314,6 +314,7 @@ h2 {
   font-size: 16px;
   margin-bottom: 0.25rem;
 }
+
 .modal input {
   margin: 0.5rem 0 0.75rem;
   margin-bottom: 0;

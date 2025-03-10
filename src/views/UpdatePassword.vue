@@ -16,7 +16,6 @@ const errorMessages = ref([])
 // Password must be at least 6 characters
 const passwordPattern = /^[a-zA-Z0-9]{6,}$/
 
-// Current user
 const currentUser = computed(() => userStore.currentUser)
 
 const oldPasswordLabelError = ref(false)
@@ -77,8 +76,8 @@ watch([oldPassword, newPassword, confirmNewPassword], ([oldVal, newVal, confirmV
       )
       newPasswordLabelError.value = true
       newPasswordInputError.value = true
-    }
 
+  // Check if the user wants to change the password
     if (newVal && confirmVal && newVal !== confirmVal) {
       errorMessages.value.push('Nya lösenorden matchar inte!')
       confirmNewPasswordLabelError.value = true
@@ -127,12 +126,15 @@ async function savePassword() {
 function goBack() {
   router.push('/settings')
 }
+
+  //Go back to settings
+  const goBack = () => router.push('/settings')
+
 </script>
 
 <template>
   <div class="update-password-container">
     <h1>Uppdatera lösenord</h1>
-
     <div class="form-container">
       <!-- Old Password -->
       <label for="oldPassword" :class="{ 'label-error': oldPasswordLabelError }">
