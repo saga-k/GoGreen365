@@ -104,7 +104,7 @@ const handleCloseModal = () => {
 
   <main v-if="isFetched && !modalIsOpen">
     <div id="listView">
-      <h2 class="h2">Påäng</h2>
+      <h2 class="h2">Poäng</h2>
       <p class="p-medium">Du har {{ user.ecoPoints }} Eco-points. Tjäna hundra så donerar vi 100 sek till valfri
         organisation.
       </p>
