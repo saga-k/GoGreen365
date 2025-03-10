@@ -76,8 +76,9 @@ watch([oldPassword, newPassword, confirmNewPassword], ([oldVal, newVal, confirmV
       )
       newPasswordLabelError.value = true
       newPasswordInputError.value = true
+    }
 
-  // Check if the user wants to change the password
+    // Check if the user wants to change the password
     if (newVal && confirmVal && newVal !== confirmVal) {
       errorMessages.value.push('Nya lösenorden matchar inte!')
       confirmNewPasswordLabelError.value = true
@@ -126,10 +127,6 @@ async function savePassword() {
 function goBack() {
   router.push('/settings')
 }
-
-  //Go back to settings
-  const goBack = () => router.push('/settings')
-
 </script>
 
 <template>
