@@ -64,6 +64,7 @@ const calculateProgress = () => {
 }
 
 const progressValues = ref({
+  zeroDays: {filled: 0, empty: 314.16},
   oneDay: { filled: 44.88, empty: 269.28 },
   twoDays: { filled: 89.76, empty: 224.4 },
   threeDays: { filled: 134.64, empty: 179.52 },
@@ -83,7 +84,7 @@ let imageUrl = ref()
 
 const asignProgressValue = () => {
   switch (daysDone.value) {
-    case 0: circleFill.value = progressValues.value.oneDay;
+    case 0: circleFill.value = progressValues.value.zeroDays;
       imageUrl.value = deadUrl.value;
       break;
 
