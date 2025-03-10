@@ -69,6 +69,22 @@ body {
   }
 }
 
+.btn-secondary{
+  background-color: var(--peach);
+  color: var(--text-color);
+  font-family:"Lato", serif;
+  border-radius: 50px;
+  border: none;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:disabled{
+    background-color: #CFCFCF;
+  }
+}
+
 @media (min-width: 768px) {
   main {
     max-width: 700px;

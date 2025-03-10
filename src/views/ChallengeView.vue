@@ -2,9 +2,11 @@
 import { onMounted, ref, computed } from 'vue'
 import { useChallengeStore } from '@/stores/challengeStore'
 import { useUserStore } from '@/stores/userStore'
+import { useRouter } from 'vue-router'
 import Navbar from '@/components/Navbar.vue'
 import DateDisplay from '@/components/dateDisplay.vue'
 
+const router = useRouter()
 const challengeStore = useChallengeStore()
 const userStore = useUserStore()
 const isLoading = ref(true)
@@ -65,6 +67,8 @@ onMounted(async () => {
     }
     if (currentUser) {
       challengeStore.setCurrentUser(currentUser.id)
+    } else if (currentUser === undefined || currentUser === null){
+      router.push('/')
     }
 
     console.log("Today's challenge:", challengeStore.todaysChallenge)

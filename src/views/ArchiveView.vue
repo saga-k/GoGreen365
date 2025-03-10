@@ -4,9 +4,11 @@ import Navbar from '@/components/Navbar.vue'
 import DateDisplay from '@/components/dateDisplay.vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { useChallengeStore } from '@/stores/challengeStore.js'
+import { useRouter } from 'vue-router'
 
 const userStore = useUserStore()
 const challengeStore = useChallengeStore()
+const router = useRouter()
 const today = new Date()
 const selectedDate = ref(null)
 const currentMonth = ref(today.getMonth())
@@ -17,6 +19,8 @@ onMounted(async () => {
   const storedUser = JSON.parse(localStorage.getItem('currentUser'))
   if (storedUser) {
     userStore.currentUser = storedUser
+  } else if (storedUser === undefined || storedUser === null){
+    router.push('/')
   }
 
   if (!challengeStore.challenges.length) {
@@ -36,7 +40,7 @@ const completedTasks = computed(() => {
   return userStore.currentUser.completedTasks
     .filter((task) => task.dateCompleted === selectedDate.value)
     .map((task) => challengeStore.getChallengeById(task.id))
-    .filter((task) => task && task.id) // ✅ filter out undefined/null tasks
+    .filter((task) => task && task.id)
 })
 
 // Change Month Logic
@@ -53,7 +57,6 @@ const changeMonth = (step) => {
 
 // Generate Days in Month
 const daysInMonth = computed(() => {
-  //   const firstDay = new Date(currentYear.value, currentMonth.value, 1)
   const lastDay = new Date(currentYear.value, currentMonth.value + 1, 0)
   return Array.from(
     { length: lastDay.getDate() },
@@ -69,6 +72,7 @@ const isToday = (date) => {
     date.getFullYear() === todayDate.getFullYear()
   )
 }
+
 // Responsive dateDisplay for mobile view
 const isMobile = ref(window.innerWidth <= 390)
 onMounted(() => {
@@ -76,6 +80,103 @@ onMounted(() => {
     isMobile.value = window.innerWidth <= 390
   })
 })
+
+  // Get the challenge that would have been available on the selected date
+  const taskForSelectedDate = computed(() => {
+    if (!selectedDate.value || !userStore.currentUser?.registrationDate) return null;
+
+    // Convert dates to JavaScript Date objects
+    const selectedDateObj = new Date(selectedDate.value.split('.').reverse().join('-'));
+    const regDate = new Date(userStore.currentUser.registrationDate);
+
+    // Calculate days between registration date and selected date
+    const diffTime = selectedDateObj - regDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1; // +1 as day 1 is registration day
+
+    if (diffDays <= 0 || diffDays > challengeStore.challenges.length) return null;
+
+    return challengeStore.challenges.find(c => c.date === diffDays);
+  });
+
+  // Check if the task for the selected date was missed
+  const wasTaskMissed = computed(() => {
+    if (!taskForSelectedDate.value || !selectedDate.value) return false;
+    const isCompleted = completedTasks.value.some(task => task.id === taskForSelectedDate.value.id);
+    return !isCompleted;
+  });
+
+  // Check if a date is the registration day
+  const isRegistrationDay = (date) => {
+    if (!userStore.currentUser?.registrationDate) return false;
+    const regDate = new Date(userStore.currentUser.registrationDate);
+    return (
+      date.getDate() === regDate.getDate() &&
+      date.getMonth() === regDate.getMonth() &&
+      date.getFullYear() === regDate.getFullYear()
+    );
+  };
+
+  // Check if a date is before registration
+  const isBeforeRegistration = (date) => {
+    if (!userStore.currentUser?.registrationDate) return false;
+    const regDate = new Date(userStore.currentUser.registrationDate);
+    return date < regDate;
+  };
+
+  // Check if a date is in the future
+  const isFutureDay = (date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date > today;
+  };
+
+  // Check if a day has completed challenges
+  const isDayCompleted = (date) => {
+    if (!userStore.currentUser?.completedTasks) return false;
+    return userStore.currentUser.completedTasks.some(task => task.dateCompleted === date.toLocaleDateString('sv-SE'));
+  };
+
+  // Check if a day has missed challenges
+  const isDayMissed = (date) => {
+    if (!userStore.currentUser?.registrationDate) return false;
+    if (isFutureDay(date) || isBeforeRegistration(date)) return false;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // If the day is in the past with no completed tasks
+    if (date < today && !isDayCompleted(date)) {
+      const regDate = new Date(userStore.currentUser.registrationDate);
+      const diffDays = Math.floor((date - regDate) / (1000 * 60 * 60 * 24)) + 1;
+      return diffDays > 0 && diffDays <= challengeStore.challenges.length;
+    }
+    return false;
+  };
+
+  // Determine if a date can be selected
+  const canSelectDate = () => {
+    return true;
+  };
+
+  // Check if selected date is in future
+  const isSelectedDateInFuture = computed(() => {
+    if (!selectedDate.value) return false;
+    const selectedDateObj = new Date(selectedDate.value.split('.').reverse().join('-'));
+    const today = new Date();
+
+    // Reset time on both dates for accurate comparison
+    selectedDateObj.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    return selectedDateObj > today;
+  });
+
+  const isSelectedDateBeforeRegistration = computed(() => {
+    if (!selectedDate.value || !userStore.currentUser?.registrationDate) return false;
+    const selectedDateObj = new Date(selectedDate.value.split('.').reverse().join('-'));
+    const regDate = new Date(userStore.currentUser.registrationDate);
+    return selectedDateObj < regDate;
+  });
 </script>
 
 <template>
@@ -104,24 +205,69 @@ onMounted(() => {
           v-for="day in daysInMonth"
           :key="day.toDateString()"
           class="calendar-day"
-          :class="{ today: isToday(day) }"
-          @click="selectDate(day)"
-        >
+          :class="{
+              'today': isToday(day),
+              'registration-day': isRegistrationDay(day),
+              'before-registration': isBeforeRegistration(day),
+              'future-day': isFutureDay(day),
+              'completed-day': isDayCompleted(day),
+              'missed-day': isDayMissed(day)
+            }"
+            @click="canSelectDate(day) ? selectDate(day) : null"
+          >
           {{ day.getDate() }}
         </div>
       </div>
     </div>
 
     <div v-if="selectedDate" class="selected-date">
-      <h3 class="h3">Utmaningar för: {{ selectedDate }}</h3>
-      <ul v-if="completedTasks.length > 0">
-        <li v-for="task in completedTasks" :key="task.id">
-          <strong>{{ task.title }}</strong
-          >: {{ task.description }}
-        </li>
-      </ul>
-      <p class="p-medium" v-else>Inga utmaningar genomförda på detta datum.</p>
-    </div>
+      <div v-if="isSelectedDateInFuture">
+          <h3 class="h3">{{ selectedDate }}</h3>
+          <p class="p-medium">Utmaningar blir tillgängliga på dagen de gäller.</p>
+        </div>
+        <div v-else-if="isSelectedDateBeforeRegistration">
+          <h3 class="h3">{{ selectedDate }}</h3>
+          <p class="p-medium">Du var inte registrerad detta datum.</p>
+        </div>
+        <div v-else>
+          <h3 class="h3">{{ selectedDate }}</h3>
+
+          <!-- Completed challenges -->
+          <div v-if="completedTasks.length > 0">
+            <h4 class="completed-header">Grattis!</h4>
+            <p class="p-medium">Du klarade denna utmaning.</p>
+            <ul>
+              <li v-for="task in completedTasks" :key="task.id" class="completed-task">
+                <div class="task-content">
+                  <h3>{{ task.title }}</h3>
+                  <p>{{ task.description }}</p>
+                </div>
+                <img :src="task.image" alt="Utmaningsbild" class="task-image" />
+              </li>
+            </ul>
+          </div>
+
+          <!-- Missed challenges -->
+          <div v-if="wasTaskMissed" class="missed-tasks">
+            <h4 class="missed-header">Ajdå!</h4>
+            <p class="p-medium">Du klarade inte denna utmaning.</p>
+            <ul>
+              <li class="missed-task">
+                <div class="task-content">
+                  <h3>{{ taskForSelectedDate.title }}</h3>
+                  <p>{{ taskForSelectedDate.description }}</p>
+                </div>
+                <img :src="taskForSelectedDate.image" alt="Utmaningsbild" class="task-image" />
+              </li>
+            </ul>
+          </div>
+
+          <!-- No challenges available -->
+          <p class="p-medium" v-if="!completedTasks.length && !wasTaskMissed">
+            Inga utmaningar tillgängliga för detta datum.
+          </p>
+        </div>
+      </div>
 
     <Navbar page="archive"></Navbar>
   </main>
@@ -150,7 +296,6 @@ main {
 .calendar-container {
   max-width: 100%;
   margin: 40px auto;
-  border: 1px;
   border-radius: 20px;
   padding: 15px;
   background-color: white;
@@ -173,6 +318,7 @@ main {
 }
 
 .calendar-day {
+  position: relative;
   height: 50px;
   display: flex;
   align-items: center;
@@ -195,10 +341,36 @@ main {
   font-weight: 700;
 }
 
+.registration-day {
+  background-color: #c2e07a80;
+  border: 2px dashed var(--green);
+}
+
+.before-registration {
+  background-color: #f0f0f0;
+  color: #aaa;
+  cursor: default;
+  border: 1px solid #e0e0e0;
+}
+
+.completed-day {
+  border: 2px solid var(--green);
+}
+
+.missed-day {
+  background-color: var(--background-color);
+  border: 2px solid var(--peach);
+}
+
+.today.completed-day {
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px var(--green);
+}
+
 .selected-date {
   margin-top: 20px;
   padding: 15px;
-  border-radius: 12px;
+  border-radius: 20px;
   background-color: white;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
@@ -209,25 +381,49 @@ main {
   padding: 0;
 }
 
-.selected-date li {
-  background: rgba(255, 255, 255, 0.2); /* Subtle white transparency */
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 8px;
-  font-size: 1rem;
+.completed-task, .missed-task {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 30px;
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 14px;
+  font-size: 1rem;
 }
 
-.selected-date li strong {
-  font-size: 1.1rem;
+.completed-task {
+  background: rgba(194, 224, 122, 0.2);
+}
+
+.missed-task {
+  background: rgba(255, 188, 181, 0.2);
+}
+
+.task-image {
+  height: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+  order: -1;
+}
+
+.selected-date li h3 {
+  font-family: 'Lato', serif;
+  display: block;
+  margin: 0 0 16px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 140%;
 }
 
 .selected-date p {
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-top: 10px;
-  font-weight: 700;
+  font-weight: 500;
+  line-height: 140%;
+}
+
+.btn-primary {
+  background-color: var(--background-color);
 }
 
 /* Small animation when a new task is displayed */
@@ -247,8 +443,16 @@ main {
   animation: fadeIn 0.4s ease-in-out;
 }
 
-.btn-primary {
-  background-color: var(--background-color);
+.completed-header, .missed-header {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 24px;
+  text-align: center;
+  margin: 10px;
+}
+
+.p-medium {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 @media (min-width: 768px) {
@@ -257,7 +461,7 @@ main {
   }
   .selected-date li,
   .selected-date p {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .calendar-grid {
@@ -269,11 +473,44 @@ main {
     font-size: 1.2rem;
   }
 
+  .completed-header, .missed-header {
+    font-size: 32px;
+  }
+
+  .completed-task, .missed-task {
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .task-content {
+    order: 1;
+    flex: 1;
+  }
+
+  .selected-date li h3 {
+    font-size: 1.6rem;
+  }
+
+  .selected-date li p {
+    font-size: 1.2rem;
+  }
+
+  .task-image {
+    width: 300px;
+    height: auto;
+    order: 2;
+  }
 }
 
 @media (min-width: 1024px) {
   main {
     max-width: 900px;
+  }
+
+  .task-image {
+    width: 400px;
+    height: auto;
   }
 }
 
