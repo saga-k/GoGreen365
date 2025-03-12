@@ -1,94 +1,77 @@
-# Projektbeskrivning: Daily Eco-Challenges
+# **Project Description: Daily Eco-Challenges**
 
-## Vad är det?
+## **What is it?**  
+A web app where users receive a new environmental challenge every day. By completing challenges, they earn Eco-Points, compete on a leaderboard, and collect badges that showcase their progress.  
 
-En webbapp där användare får en ny miljöutmaning varje dag. Genom att genomföra utmaningar samlar de Eco-Points, kan tävla på en leaderboard och få badges som visar deras framsteg.
+## **Target Audience**  
+- Environmentally conscious individuals who want to make a difference in their daily lives.  
+- Gamification enthusiasts who enjoy challenges and rewards.  
+- Companies or schools looking to engage employees/students in sustainability.  
 
-## Målgrupp
+## **Features**  
 
-- **Miljömedvetna personer** som vill göra skillnad i vardagen.
-- **Gamifiering-entusiaster** som gillar utmaningar och belöningar.
-- **Företag eller skolor** som vill engagera sina anställda/elever i hållbarhet.
+### 🌱 **Daily Challenges**  
+- Every day, users receive a new environmental challenge (e.g., “Bike to work” or “Use a reusable bag instead of plastic”).  
+- The challenge is displayed on the homepage and can be marked as completed by the user.  
 
----
+**User Stories:**  
+- As a user, I want to see a new environmental challenge every day so that I continuously find new ways to engage in sustainability.  
+- As a user, I want to mark a challenge as completed so that I can track my progress and earn Eco-Points.  
 
-## Funktionalitet
+### 🎖 **Eco-Points**  
+- Users earn points for each completed challenge.  
+- Points are recorded in the user's profile and can be used to unlock badges or compare with others.  
 
-### 🌱 Dagliga utmaningar
+**User Stories:**  
+- As a user, I want to earn points when I complete a challenge so that I can measure my achievements.  
+- As a user, I want to see my total Eco-Points in my profile so that I can track my progress over time.  
 
-- Varje dag får användaren en ny miljöutmaning (exempel: _“Cykla till jobbet”_ eller _“Använd en tygkasse istället för plast”_).
-- Utmaningen visas på startsidan och kan slutföras genom att användaren markerar den som genomförd.
+### 🏆 **Badges & Profile**  
+- Users can collect different badges based on their achievements (e.g., “5 challenges completed,” “1 week streak”).  
+- A profile page provides an overview of the user’s progress, total points, and earned badges.  
 
-#### User Stories
+**User Stories:**  
+- As a user, I want to collect badges based on my achievements so that I can showcase my progress.  
+- As a user, I want a profile page that gives me an overview of my challenges, Eco-Points, and badges so that I can track my activity.  
 
-- **Som en** användare, **vill jag** se en ny miljöutmaning varje dag, **så att** jag ständigt får nya sätt att engagera mig i hållbarhet.
-- **Som en** användare, **vill jag** kunna markera en utmaning som genomförd, **så att** jag kan följa mina framsteg och tjäna Eco-Points.
+### 📊 **Leaderboard (Optional)**  
+- A global or friend-based ranking list where users can see their position compared to others.  
+- Points and badges influence the leaderboard ranking.  
 
-### 🎖 Eco-Points
+**User Stories:**  
+- As a user, I want to see a ranking list with my Eco-Points and badges so that I can compare my performance with others.  
+- As a user, I want to filter the leaderboard between global and friend-based ranking so that I can compete with my friends or the entire community.  
 
-- Användaren får poäng för varje genomförd utmaning.
-- Poängen registreras i användarens profil och kan användas för att låsa upp badges eller jämföras med andra.
+### 📂 **Challenge Archive**  
+- Users can view past challenges.  
+- Option to complete old challenges if they are still relevant.  
 
-#### User Stories
+**User Stories:**  
+- As a user, I want to see past challenges so that I can track my history.  
+- As a user, I want to complete old challenges if they are still relevant so that I can earn extra Eco-Points.  
 
-- **Som en** användare, **vill jag** få poäng när jag genomför en utmaning, **så att** jag kan mäta min prestation.
-- **Som en** användare, **vill jag** se mina totala Eco-Points i min profil, **så att** jag kan följa min utveckling över tid.
+### 🔑 **Login & Profile Management**  
+- Users can sign up and log in via email or social media (Google/Facebook).  
+- Option to edit the profile, change avatar, and manage notification settings.  
 
-### 🏆 Badges & Profil
+**User Stories:**  
+- As a new user, I want to sign up via email or social media so that I can get started quickly.  
+- As a registered user, I want to log in and edit my profile so that I can update my information and avatar.  
+- As a user, I want to manage my notification settings so that I receive relevant information without being spammed.  
 
-- Användare kan samla olika badges baserat på deras prestationer (exempel: _“5 utmaningar genomförda”_, _“1 vecka i rad”_).
-- En profilsida visar en översikt av användarens framsteg, totala poäng och insamlade badges.
+### 💚 **Donations to Charities**  
+- Option to donate money to eco-friendly organizations directly through the app.  
+- Ability to convert Eco-Points into donations (e.g., “1000 points = $10 to an organization”).  
+- A list of approved organizations users can choose to support (e.g., WWF, Greenpeace, Nature Conservation Associations).  
+- Integration of payment systems like Swish, PayPal, or Stripe for easy donations.  
+- Statistics showing how much the user and the entire community have donated.  
 
-#### User Stories
+**User Stories:**  
+- As a user, I want to donate money directly through the app so that I can support eco-friendly organizations.  
+- As a user, I want to convert my Eco-Points into donations so that my achievements also contribute financially to a good cause.  
+- As a user, I want to see a list of approved organizations so that I can choose one to support.  
+- As a user, I want to see statistics on my and the community’s donations so that I can understand our collective impact.  
 
-- **Som en** användare, **vill jag** samla badges baserat på mina prestationer, **så att** jag kan visa mina framsteg.
-- **Som en** användare, **vill jag** ha en profilsida med en översikt över mina utmaningar, Eco-Points och badges, **så att** jag kan hålla koll på min aktivitet.
-
-### 📊 Leaderboard _(valfritt)_
-
-- En global eller vänbaserad rankinglista där användare kan se sin position jämfört med andra.
-- Poäng och badges kan påverka positionen på leaderboarden.
-
-#### User Stories
-
-- **Som en** användare, **vill jag** se en rankinglista med mina Eco-Points och badges, **så att** jag kan jämföra mina prestationer med andra.
-- **Som en** användare, **vill jag** kunna filtrera leaderboarden mellan global och vänbaserad ranking, **så att** jag kan tävla med mina vänner eller med hela communityn.
-
-### 📂 Arkiv
-
-- Användaren kan se tidigare utmaningar.
-- Möjlighet att slutföra gamla utmaningar om de fortfarande är relevanta.
-
-#### User Stories
-
-- **Som en** användare, **vill jag** kunna se tidigare utmaningar, **så att** jag kan följa min historik.
-- **Som en** användare, **vill jag** kunna slutföra gamla utmaningar om de fortfarande är relevanta, **så att** jag kan samla extra Eco-Points.
-
-### 🔑 Login & Profilhantering
-
-- Användare kan registrera sig och logga in via e-post eller sociala medier (_Google/Facebook_).
-- Möjlighet att redigera sin profil, ändra avatar och hantera notifikationsinställningar.
-
-#### User Stories
-
-- **Som en** ny användare, **vill jag** kunna registrera mig via e-post eller sociala medier, **så att** jag snabbt kan komma igång.
-- **Som en** registrerad användare, **vill jag** kunna logga in och redigera min profil, **så att** jag kan uppdatera min information och avatar.
-- **Som en** användare, **vill jag** kunna hantera mina notifikationsinställningar, **så att** jag får relevant information utan att bli spamad.
-
-### 💚 Donationer till välgörenhetsorganisationer
-
-- Möjlighet att donera pengar till miljövänliga organisationer direkt via appen.
-- Alternativ att konvertera Eco-Points till donationer (_exempel: “1000 poäng = 10 kr till en organisation”_).
-- Lista med godkända organisationer som användaren kan välja att stödja (_exempel: WWF, Greenpeace, Naturskyddsföreningen_).
-- Integrering av betalsystem som **Swish, PayPal eller Stripe** för snabba donationer.
-- Statistik över hur mycket användaren och hela communityn har donerat.
-
-#### User Stories
-
-- **Som en** användare, **vill jag** kunna donera pengar direkt via appen, **så att** jag kan stödja miljövänliga organisationer.
-- **Som en** användare, **vill jag** kunna konvertera mina Eco-Points till donationer, **så att** mina prestationer också bidrar ekonomiskt till en god sak.
-- **Som en** användare, **vill jag** se en lista med godkända organisationer, **så att** jag kan välja en organisation att stödja.
-- **Som en** användare, **vill jag** se statistik över mina och communityns donationer, **så att** jag kan se vår gemensamma påverkan.
 
 # Tech stack and installation instructions
 
